@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2116bc4951a151540811d47d430d06de, type: 3}
+  m_Name: Straight Sword
+  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponMeleeItem
+  Name: Straight Sword
+  Description: That's a straight sword
+  ID: 1
+  Icon: {fileID: 21300000, guid: ad2ce71010986cc47916e656fdf7aa32, type: 3}
+  ModelPrefub: {fileID: 667837401097958796, guid: b484b834d526ad740a5a0fd392523691, type: 3}
+  physicalDamage: 45
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  lightAttack01DamageModifier: 1
+  lightAttack02DamageModifier: 1.2
+  heavyAttack01DamageModifier: 1.4
+  heavyAttack02DamageModifier: 1.6
+  chargedAttack01DamageModifier: 2
+  chargedAttack02DamageModifier: 2.2
+  poiseDamage: 10
+  strengthReq: 3
+  intelligenceReq: 0
+  dexteriteReq: 1
+  baseStaminaCost: 15
+  lightAttackStaminaCostModifier: 1
+  heavyAttackStaminaCostModifier: 1.3
+  OH_RB_Action: {fileID: 11400000, guid: 272f43987e0310547bf9d29358222958, type: 2}
+  OH_RT_Action: {fileID: 11400000, guid: bfbf4d1d01f850249bc44f232e402657, type: 2}
+  whooshes:
+  - {fileID: 8300000, guid: 39bf8f00a4006964e92e75d2c449ecde, type: 3}
+  - {fileID: 8300000, guid: 8d1d10ec0d227c546aa614b5c6a8d4db, type: 3}
+  - {fileID: 8300000, guid: 6def074e51404d0459516961e986a195, type: 3}
+  - {fileID: 8300000, guid: 84e429dbb07c2704c9a853662397aa12, type: 3}
+  - {fileID: 8300000, guid: 863bcd5b722d0d5489f42d4decbff1ce, type: 3}

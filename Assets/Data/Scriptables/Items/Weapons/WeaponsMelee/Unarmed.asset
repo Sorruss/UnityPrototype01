@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2116bc4951a151540811d47d430d06de, type: 3}
+  m_Name: Unarmed
+  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponMeleeItem
+  Name: Unarmed
+  Description: Hands.
+  ID: 0
+  Icon: {fileID: 0}
+  ModelPrefub: {fileID: 667837401097958796, guid: ad6112e59d5e0304a8c87f6af93a4f90, type: 3}
+  physicalDamage: 10
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  lightAttack01DamageModifier: 1
+  heavyAttack01DamageModifier: 1.4
+  chargedAttack01DamageModifier: 2
+  poiseDamage: 5
+  strengthReq: 0
+  intelligenceReq: 0
+  dexteriteReq: 0
+  baseStaminaCost: 5
+  lightAttackStaminaCostModifier: 1
+  heavyAttackStaminaCostModifier: 1.3
+  OH_RB_Action: {fileID: 11400000, guid: 4a295cbc7de09a94991b4ddb510bb6e5, type: 2}
+  OH_RT_Action: {fileID: 11400000, guid: 4a295cbc7de09a94991b4ddb510bb6e5, type: 2}

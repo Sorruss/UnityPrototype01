@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ee25eec838d5c44b77699fa790101a, type: 3}
+  m_Name: Dummy Attack 01
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterAttackAction
+  animationName: main_light_attack_01
+  attackType: 1
+  attackWeight: 25
+  actionRecoveryTime: 2
+  nextComboAttack: {fileID: 11400000, guid: e0220b2f685f5a444a6649fe566c4ac3, type: 2}
+  minimumAttackDistance: 1
+  maximumAttackDistance: 2
+  minimumFOVNeeded: -30
+  maximumFOVNeeded: 30
