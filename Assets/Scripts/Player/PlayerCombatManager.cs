@@ -44,7 +44,11 @@ namespace FG
         // WEAPON ACTIONS
         public void TryToPerformWeaponAction(WeaponAction weaponAction, WeaponItem weapon)
         {
-            player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverrider);
+            // SET CORRECT WEAPON ANIMATOR OVERRIDER CONTROLLER
+            if (player.playerNetwork.networkIsTwoHanding.Value)
+                player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderTH);
+            else
+                player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderOH);
 
             // PERFORM ACTION ON THIS CLIENT.
             weaponAction.TryToPerformAction(player, weapon);

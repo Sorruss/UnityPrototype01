@@ -11,7 +11,8 @@ namespace FG
         public WeaponType weaponType = WeaponType.WEAPON;
 
         [Header("Overrider")]
-        public AnimatorOverrideController animatorOverrider;
+        public AnimatorOverrideController animatorOverriderOH;
+        public AnimatorOverrideController animatorOverriderTH;
 
         [Header("Damage")]
         public int physicalDamage;

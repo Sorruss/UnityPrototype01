@@ -155,6 +155,9 @@ namespace FG
 
         public void UpdateAnimatorOverrider(AnimatorOverrideController animatorOverrider)
         {
+            if (animatorOverrider == null)
+                return;
+
             character.animator.runtimeAnimatorController = animatorOverrider;
         }
 

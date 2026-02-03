@@ -302,10 +302,20 @@ namespace FG
                 // INFORM THAT CLIENT IS USING RIGHT HAND WEAPON ACTION.
                 player.playerNetwork.SetCurrentActiveHand(true);
 
-                // DO RIGHT HAND WEAPON ACTION.
-                player.playerCombatManager.TryToPerformWeaponAction(
-                    player.playerInventoryManager.RightHandWeaponScriptable.OH_RB_Action,
-                    player.playerInventoryManager.RightHandWeaponScriptable);
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    // DO TWO HANDING WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.TwoHandedWeaponScriptable.OH_RB_Action,
+                        player.playerInventoryManager.TwoHandedWeaponScriptable);
+                }
+                else
+                {
+                    // DO RIGHT HAND WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.RightHandWeaponScriptable.OH_RB_Action,
+                        player.playerInventoryManager.RightHandWeaponScriptable);
+                }
             }
         }
 
@@ -315,9 +325,20 @@ namespace FG
             {
                 isRTActionActive = false;
                 player.playerNetwork.SetCurrentActiveHand(true);
-                player.playerCombatManager.TryToPerformWeaponAction(
-                    player.playerInventoryManager.RightHandWeaponScriptable.OH_RT_Action,
-                    player.playerInventoryManager.RightHandWeaponScriptable);
+
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    // DO TWO HANDING WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.TwoHandedWeaponScriptable.OH_RT_Action,
+                        player.playerInventoryManager.TwoHandedWeaponScriptable);
+                }
+                else
+                {
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.RightHandWeaponScriptable.OH_RT_Action,
+                        player.playerInventoryManager.RightHandWeaponScriptable);
+                }
             }
         }
 
@@ -325,7 +346,8 @@ namespace FG
         {
             if (player.isPerfomingAction)
             {
-                if (player.playerNetwork.networkIsUsingRightHand.Value)
+                if (player.playerNetwork.networkIsUsingRightHand.Value
+                    || player.playerNetwork.networkIsTwoHanding.Value)
                 {
                     player.playerNetwork.networkIsChargingAttack.Value = isHoldingRT;
                 }
@@ -339,13 +361,25 @@ namespace FG
                 // DISABLE LOOPING.
                 isLBActionActive = false;
 
-                // INFORM THAT CLIENT IS USING LEFT HAND WEAPON ACTION.
-                player.playerNetwork.SetCurrentActiveHand(false);
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    player.playerNetwork.SetCurrentActiveHand(true);
 
-                // DO LEFT HAND WEAPON ACTION.
-                player.playerCombatManager.TryToPerformWeaponAction(
-                    player.playerInventoryManager.LeftHandWeaponScriptable.OH_LB_Action,
-                    player.playerInventoryManager.LeftHandWeaponScriptable);
+                    // DO TWO HANDING WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.TwoHandedWeaponScriptable.OH_LB_Action,
+                        player.playerInventoryManager.TwoHandedWeaponScriptable);
+                }
+                else
+                {
+                    // INFORM THAT CLIENT IS USING LEFT HAND WEAPON ACTION.
+                    player.playerNetwork.SetCurrentActiveHand(false);
+
+                    // DO LEFT HAND WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.LeftHandWeaponScriptable.OH_LB_Action,
+                        player.playerInventoryManager.LeftHandWeaponScriptable);
+                }
             }
         }
 
@@ -434,6 +468,9 @@ namespace FG
                 if (isTryingToTwoHandWeapon)
                     return;
 
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                    player.playerNetwork.networkIsTwoHanding.Value = false;
+
                 isDPadLeftActionActive = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
             }
@@ -445,6 +482,9 @@ namespace FG
             {
                 if (isTryingToTwoHandWeapon)
                     return;
+
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                    player.playerNetwork.networkIsTwoHanding.Value = false;
 
                 isDPadRightActionActive = false;
                 player.playerEquipmentManager.SwitchRightWeapon();

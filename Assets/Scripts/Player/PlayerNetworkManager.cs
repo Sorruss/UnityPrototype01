@@ -114,7 +114,7 @@ namespace FG
             if (player.IsOwner)
                 return;
 
-            player.playerAnimatorManager.UpdateAnimatorOverrider(newWeapon.animatorOverrider);
+            player.playerAnimatorManager.UpdateAnimatorOverrider(newWeapon.animatorOverriderOH);
         }
 
         // FLAGS
@@ -147,16 +147,14 @@ namespace FG
         {
             if (newValue)
                 return;
-         
+
+            player.playerEquipmentManager.UnTwoHandWeapon();        // ORDER IS IMPORTANT
+
             if (player.IsOwner)
             {
                 networkIsTwoHandingLeftWeapon.Value = false;
                 networkIsTwoHandingRightWeapon.Value = false;
-                networkTwoHandWeaponID.Value = -1;
             }
-
-            player.playerInventoryManager.TwoHandedWeaponScriptable = null;
-            player.playerEquipmentManager.UnTwoHandWeapon();
         }
 
         public void OnIsTwoHandingLeftWeaponChanged(bool oldValue, bool newValue)
@@ -231,7 +229,7 @@ namespace FG
             WeaponItem weapon = ItemDatabase.instance.GetWeaponItemByID(weaponId);
             WeaponAction action = ActionDatabase.instance.GetWeaponActionByID(actionId);
 
-            player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverrider);
+            player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderOH);
             action.TryToPerformAction(player, weapon);
         }
     }

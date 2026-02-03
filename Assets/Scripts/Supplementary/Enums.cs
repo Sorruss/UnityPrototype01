@@ -20,6 +20,7 @@ namespace FG
         RIGHT_HAND,
         LEFT_HAND_SHIELD,
         BACK,
+        BACK_SHIELD,
     }
 
     public enum WeaponMeleeAttackType       // WEAPON ACTION ATTACK TYPES

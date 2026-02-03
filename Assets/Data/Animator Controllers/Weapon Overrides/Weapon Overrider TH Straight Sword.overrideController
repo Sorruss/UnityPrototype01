@@ -7,5 +7,43 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Weapon Overrider TH Straight Sword
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 782919ba607e2dc469e804460ff386fa, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -5558953238165532788, guid: abf01787ed2b55941bcef26fd57d6b4d, type: 3}
+    m_OverrideClip: {fileID: -5055672320915123569, guid: ee2d09eaedd7178458a8370d5ecddf91, type: 3}
+  - m_OriginalClip: {fileID: -8877471859203270713, guid: 9120504f73d4ba94db8f8ab5fe5ff594, type: 3}
+    m_OverrideClip: {fileID: 1236013202271922635, guid: 89af3e77ab84cc54ba8a51174dc1c7ca, type: 3}
+  - m_OriginalClip: {fileID: -7158667424894168324, guid: fcff8b91f20726e4794e592b28c22aae, type: 3}
+    m_OverrideClip: {fileID: -8520811278153660269, guid: 2a051ac7f5465004fa53c1c88558665e, type: 3}
+  - m_OriginalClip: {fileID: 960575040774971555, guid: 06382f6544ed5044ca3c820160d9fcd0, type: 3}
+    m_OverrideClip: {fileID: 2549489289504483816, guid: a53b08de5abacfd4fa2cfde72587cc4a, type: 3}
+  - m_OriginalClip: {fileID: -7536146537415446483, guid: 29c159e7b3bc0844aa4ad3c5c64e25b3, type: 3}
+    m_OverrideClip: {fileID: -7074790177980639238, guid: 076052ead48b723468b0c623ba5c7988, type: 3}
+  - m_OriginalClip: {fileID: -7703653358708714, guid: 08adab7c77fbd4c43b1d72c5746cb700, type: 3}
+    m_OverrideClip: {fileID: -2415318556175087697, guid: 6ea230b422378044d8fbb3664c69cb9d, type: 3}
+  - m_OriginalClip: {fileID: 6212206780038780846, guid: 30473028572d35e4db9ecfe25eaadad0, type: 3}
+    m_OverrideClip: {fileID: -6590449702031860172, guid: 43b215bad1836594b863b44593882e15, type: 3}
+  - m_OriginalClip: {fileID: 3558724557970962925, guid: aad9e9812bca4f04b81bc379d7b78411, type: 3}
+    m_OverrideClip: {fileID: -5780564054456537443, guid: 56d80a5f8716982409eee914fccdba20, type: 3}
+  - m_OriginalClip: {fileID: 2211200744456600243, guid: 71a45824067415144b83a89f924f3fc6, type: 3}
+    m_OverrideClip: {fileID: -5963623502854497957, guid: e6fe71be27324f543a218a68340baec1, type: 3}
+  - m_OriginalClip: {fileID: 5727089098040894955, guid: ca0ae863ccee2c040a2eaca65ace070c, type: 3}
+    m_OverrideClip: {fileID: -28693466598476245, guid: 34e9a9264e410374aaf5a9b634258c03, type: 3}
+  - m_OriginalClip: {fileID: -2357311216784244441, guid: 43a3a58a5e2ad7d429231f397a38299b, type: 3}
+    m_OverrideClip: {fileID: -919929085296881444, guid: 5b0bcf878186e704ca90863e0cc0387a, type: 3}
+  - m_OriginalClip: {fileID: 673659374932735726, guid: dd9cfcbe7727bc34a86f44b0286807fb, type: 3}
+    m_OverrideClip: {fileID: -2476186774619786600, guid: a648123a36347e247beaf368cc6a3bbd, type: 3}
+  - m_OriginalClip: {fileID: -2746501166638713497, guid: c1c5face3c1b2db42977a318b1641a60, type: 3}
+    m_OverrideClip: {fileID: -6978093718252760216, guid: 2714090768e59384c835996e1c5eb804, type: 3}
+  - m_OriginalClip: {fileID: 6201974159233468888, guid: 2facd665600b13044b29879678039b81, type: 3}
+    m_OverrideClip: {fileID: 7238353343972087051, guid: e19ce61ec99ccd0418993561d6c9fcfe, type: 3}
+  - m_OriginalClip: {fileID: 5319088248113807286, guid: 033453d683940be45970377da1823c81, type: 3}
+    m_OverrideClip: {fileID: -4674181149331628230, guid: e5fe2ccded240c241b614de203e00dd6, type: 3}
+  - m_OriginalClip: {fileID: 800205213175602759, guid: 4d5727973c75b7e4cb55b232a8a1a8dc, type: 3}
+    m_OverrideClip: {fileID: 540012376106351485, guid: b0d2b3ceac7b1c245bd78d9eb34c27ae, type: 3}
+  - m_OriginalClip: {fileID: 5252732915974851826, guid: df645a104d1546746bbd5a704f98a8d9, type: 3}
+    m_OverrideClip: {fileID: -2964549410791991528, guid: 642369730d7f6094a91212eae90dfd00, type: 3}
+  - m_OriginalClip: {fileID: -3430896052944527108, guid: baff794c7855ef44db0701f2c2f1390d, type: 3}
+    m_OverrideClip: {fileID: 5305798061947213112, guid: 884e8bc2f11bffd4499521d9f9bcf6fe, type: 3}
+  - m_OriginalClip: {fileID: -5896614293526990620, guid: a61d35a555ef7264a859a5175ed364a7, type: 3}
+    m_OverrideClip: {fileID: -2363476121145191689, guid: c1d6dbaf4a03f4d4ba6e1c1b298fd1b9, type: 3}
