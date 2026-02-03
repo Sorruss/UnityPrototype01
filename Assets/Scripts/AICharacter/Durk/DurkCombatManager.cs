@@ -10,7 +10,8 @@ namespace FG
         private DurkCharacterManager aiDurk;
 
         [Header("Damage")]
-        public float baseDamage = 30.0f;
+        public int baseDamage = 30;
+        public int basePoiseDamage = 40;
 
         [Header("Multipliers")]
         [SerializeField] private float attack_01_modifier = 1.0f;
@@ -20,7 +21,7 @@ namespace FG
         [Header("Stomp")]
         public float stompRadius = 2.5f;
         public float attack_stomp_modifier = 1.1f;
-        public int stompPoiseDamage = 15;
+        public int stompPoiseDamage = 60;
         public GameObject stompVFX;
 
         [Header("Weapon Collider")]
@@ -47,7 +48,8 @@ namespace FG
         {
             base.DisableAllDamageColliders();
 
-            damageCollider.DisableCollider();
+            if (damageCollider != null)
+                damageCollider.DisableCollider();
         }
 
         // ----------------
@@ -71,19 +73,23 @@ namespace FG
         public void ApplyAttack01Modifier()
         {
             aiDurk.durkSFXManager.PlayAttackGruntSoundFX();
+
             damageCollider.physicalDamage = (int)(baseDamage * attack_01_modifier);
+            damageCollider.poiseDamage = (int)(basePoiseDamage * attack_01_modifier);
         }
 
         public void ApplyAttack02Modifier()
         {
             aiDurk.durkSFXManager.PlayAttackGruntSoundFX();
             damageCollider.physicalDamage = (int)(baseDamage * attack_02_modifier);
+            damageCollider.poiseDamage = (int)(basePoiseDamage * attack_02_modifier);
         }
 
         public void ApplyAttack03Modifier()
         {
             aiDurk.durkSFXManager.PlayAttackGruntSoundFX();
             damageCollider.physicalDamage = (int)(baseDamage * attack_03_modifier);
+            damageCollider.poiseDamage = (int)(basePoiseDamage * attack_03_modifier);
         }
     }
 }

@@ -25,18 +25,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Button_East",
+                    "name": "RightStick",
                     "type": "Button",
-                    "id": "3f6784c7-b959-4946-92ec-1718f467c42d",
+                    "id": "f9ef3315-8aa7-4d2a-8216-d8e17840ca7c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightStick",
+                    "name": "RightStickLeft",
                     "type": "Button",
-                    "id": "f9ef3315-8aa7-4d2a-8216-d8e17840ca7c",
+                    "id": "5634ba9b-10fe-461a-865d-f6cee6104a13",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightStickRight",
+                    "type": "Button",
+                    "id": "a4a4cdde-2766-463c-ac05-590587514c8b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -52,6 +61,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Button_East",
+                    "type": "Button",
+                    "id": "3f6784c7-b959-4946-92ec-1718f467c42d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Button_North",
                     "type": "Value",
                     "id": "fcdb14bd-c873-4500-a1fe-f21045dda33b",
@@ -59,6 +77,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Button_North_Hold",
+                    "type": "PassThrough",
+                    "id": "330a1dfc-5e61-4a26-80d9-b620c8236e51",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Button_South",
+                    "type": "Button",
+                    "id": "2097c515-e51a-4cc5-b7ae-9e4fdf72315b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "RightBumper",
@@ -115,33 +151,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightStickLeft",
-                    "type": "Button",
-                    "id": "5634ba9b-10fe-461a-865d-f6cee6104a13",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RightStickRight",
-                    "type": "Button",
-                    "id": "a4a4cdde-2766-463c-ac05-590587514c8b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button_South",
-                    "type": "Button",
-                    "id": "2097c515-e51a-4cc5-b7ae-9e4fdf72315b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "DPadLeft",
                     "type": "Button",
                     "id": "8715f23e-22c1-45ca-8744-9a4ab2967781",
@@ -151,9 +160,36 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "DPadLeftTwoHandWeapon",
+                    "type": "Button",
+                    "id": "5aa59179-3efd-4e54-8b0b-ca9c5eca6dc2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DPadRight",
                     "type": "Button",
                     "id": "3c3a00dd-1993-41e2-99c3-be8cc39827f6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DPadRightTwoHandWeapon",
+                    "type": "Button",
+                    "id": "c924b4d9-613f-40cb-9562-db9e7733ac1f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CapsLock",
+                    "type": "Button",
+                    "id": "7d12f11d-19a5-4277-9ddb-112315c626de",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -647,6 +683,28 @@
                 },
                 {
                     "name": "",
+                    "id": "66b17994-ba97-498f-81e1-7ed627943429",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "DPadLeftTwoHandWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62762d98-c959-4842-bd55-04240c84061b",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "DPadLeftTwoHandWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8ed427ac-778d-4021-a0e6-6cae7eb84af9",
                     "path": "<Keyboard>/2",
                     "interactions": "",
@@ -664,6 +722,61 @@
                     "processors": "",
                     "groups": ";Controller",
                     "action": "DPadRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13bef112-2456-4cba-a13b-2759e31740f3",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "CapsLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e6b8171-8d81-449e-b79a-87bbf994c0e0",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "DPadRightTwoHandWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51d2d6e6-d474-41dd-9a9a-e6bc115bc87e",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "DPadRightTwoHandWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f0e5fae-0f4a-4f5a-9ed2-39c1417261f0",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Button_North_Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "91ed9a22-c800-45ce-b1c8-1bfff2c73342",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "Button_North_Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

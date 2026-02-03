@@ -26,13 +26,13 @@ namespace FG
         {
             base.Awake();
 
-            damageCollider.enabled = false;
+            DisableCollider();
         }
 
         protected override void OnTriggerEnter(Collider other)
         {
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
-            
+
             // STOPS.
             if (damageTarget == null)
                 return;
@@ -58,9 +58,9 @@ namespace FG
             if (hitAngle > 45.0f || hitAngle < -45)
                 return;
 
-            if (collidedIDs.Contains(target.characterNetwork.OwnerClientId))
+            if (collidedIDs.Contains(target.NetworkObjectId))
                 return;
-
+            
             // TEMPORARY INSTANTEFFECT INSTANCE JUST TO MODIFY VALUES WITHOUT CHANGING COLLIDER'S ONES
             TakeHealthDamageBlockedEffect damageEffect = Instantiate(EffectsManager.instance.healthDamageBlockedEffect);
             damageEffect.physicalDamage = physicalDamage;
@@ -68,7 +68,9 @@ namespace FG
             damageEffect.fireDamage = fireDamage;
             damageEffect.lightningDamage = lightningDamage;
             damageEffect.holyDamage = holyDamage;
+
             damageEffect.poiseDamage = poiseDamage;
+            damageEffect.staminaDamage = poiseDamage;
 
             // APPLY MODIFIER BASED ON ATTACK TYPE
             switch (damageDealer.characterCombatManager.currentAttackTypeBeingUsed)
@@ -105,6 +107,7 @@ namespace FG
                     break;
             }
 
+            // RPC
             if (damageDealer.IsOwner)
             // WE CHECK THIS TO PREVENT SENDING 2 DAMAGE REQUESTS TO DAMAGERECEIVER
             {
@@ -112,12 +115,14 @@ namespace FG
                 target.characterNetwork.NotifyClientOfBlockedDamageTakenServerRpc(
                     damageDealer.NetworkObjectId,           // PLAYER'S IDs
                     target.NetworkObjectId,
+                    
                     damageEffect.physicalDamage,            // DAMAGE VALUES INFO
                     damageEffect.magicDamage,
                     damageEffect.fireDamage,
                     damageEffect.lightningDamage,
                     damageEffect.holyDamage,
                     damageEffect.poiseDamage,
+
                     hitAngle,                               // DAMAGE HIT ANGLE
                     contactPoint.x,                         // DAMAGE CONTACT POINT
                     contactPoint.y,
@@ -125,7 +130,7 @@ namespace FG
             }
 
             // ADD TARGET TO COLLIDED IDs TO PREVENT MULTIPLE HITS IN 1 ATTACK
-            collidedIDs.Add(target.characterNetwork.NetworkObjectId);
+            collidedIDs.Add(target.NetworkObjectId);
         }
 
         private void ApplyAttackModifier(TakeHealthDamageEffect effect, float modifier)
@@ -135,7 +140,7 @@ namespace FG
             effect.fireDamage *= modifier;
             effect.lightningDamage *= modifier;
             effect.holyDamage *= modifier;
-            effect.poiseDamage *= modifier;
+            effect.poiseDamage = (int)(effect.poiseDamage * modifier);
         }
 
         private void ApplyAttackModifier(TakeHealthDamageBlockedEffect effect, float modifier)
@@ -145,12 +150,12 @@ namespace FG
             effect.fireDamage *= modifier;
             effect.lightningDamage *= modifier;
             effect.holyDamage *= modifier;
-            effect.poiseDamage *= modifier;
+            effect.poiseDamage = (int)(effect.poiseDamage * modifier);
         }
 
         protected override void DamageTarget(ref CharacterManager target)
         {
-            if (collidedIDs.Contains(target.characterNetwork.NetworkObjectId))
+            if (collidedIDs.Contains(target.NetworkObjectId))
                 return;
 
             // TEMPORARY INSTANTEFFECT INSTANCE JUST TO MODIFY VALUES WITHOUT CHANGING COLLIDER'S ONES
@@ -217,7 +222,7 @@ namespace FG
             }
 
             // ADD TARGET TO COLLIDED IDs TO PREVENT MULTIPLE HITS IN 1 ATTACK
-            collidedIDs.Add(target.characterNetwork.NetworkObjectId);
+            collidedIDs.Add(target.NetworkObjectId);
         }
     }
 }

@@ -29,9 +29,7 @@ namespace FG
         protected virtual void Awake()
         {
             if (damageCollider == null)
-            {
                 damageCollider = GetComponent<Collider>();
-            }
         }
 
         private void Start()
@@ -61,9 +59,7 @@ namespace FG
         {
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
             if (damageTarget == null)
-            {
                 return;
-            }
 
             collidedIDs.Remove(damageTarget.characterNetwork.OwnerClientId);
         }
@@ -76,36 +72,40 @@ namespace FG
             if (hitAngle > 45.0f || hitAngle < -45)
                 return;
 
-            if (collidedIDs.Contains(target.characterNetwork.OwnerClientId))
+            if (collidedIDs.Contains(target.NetworkObjectId))
                 return;
 
             TakeHealthDamageBlockedEffect healthDamageBlockedEffect = Instantiate(EffectsManager.instance.healthDamageBlockedEffect);
+            
             healthDamageBlockedEffect.physicalDamage = physicalDamage;
-            healthDamageBlockedEffect.holyDamage = holyDamage;
-            healthDamageBlockedEffect.fireDamage = fireDamage;
             healthDamageBlockedEffect.magicDamage = magicDamage;
+            healthDamageBlockedEffect.fireDamage = fireDamage;
             healthDamageBlockedEffect.lightningDamage = lightningDamage;
+            healthDamageBlockedEffect.holyDamage = holyDamage;
+
             healthDamageBlockedEffect.poiseDamage = poiseDamage;
+            healthDamageBlockedEffect.staminaDamage = poiseDamage;
+            
             target.characterEffectsManager.ApplyInstantEffect(healthDamageBlockedEffect);
 
-            collidedIDs.Add(target.characterNetwork.OwnerClientId);
+            collidedIDs.Add(target.NetworkObjectId);
         }
 
         protected virtual void DamageTarget(ref CharacterManager target)
         {
-            if (collidedIDs.Contains(target.characterNetwork.OwnerClientId))
+            if (collidedIDs.Contains(target.NetworkObjectId))
                 return;
 
             TakeHealthDamageEffect healthDamageEffect = Instantiate(EffectsManager.instance.healthDamageEffect);
             healthDamageEffect.physicalDamage = physicalDamage;
-            healthDamageEffect.holyDamage = holyDamage;
-            healthDamageEffect.fireDamage = fireDamage;
             healthDamageEffect.magicDamage = magicDamage;
+            healthDamageEffect.fireDamage = fireDamage;
             healthDamageEffect.lightningDamage = lightningDamage;
+            healthDamageEffect.holyDamage = holyDamage;
             healthDamageEffect.poiseDamage = poiseDamage;
             target.characterEffectsManager.ApplyInstantEffect(healthDamageEffect);
         
-            collidedIDs.Add(target.characterNetwork.OwnerClientId);
+            collidedIDs.Add(target.NetworkObjectId);
         }
 
         public void EnableCollider()

@@ -70,6 +70,10 @@ namespace FG
                 return;
 
             // HEALTH
+            characterNetwork.networkMaxHealth.Value = 
+                characterStatsManager.GetMaxHealthOfVitalityLevel(characterNetwork.networkVitality.Value);
+            characterNetwork.networkCurrentHealth.Value = characterNetwork.networkMaxHealth.Value;
+
             CheckHealth(0.0f, characterNetwork.networkCurrentHealth.Value);
             characterNetwork.networkCurrentHealth.OnValueChanged += CheckHealth;
 

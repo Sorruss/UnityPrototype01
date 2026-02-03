@@ -9,20 +9,20 @@ namespace FG
         [SerializeField] private float totalDamage;
 
         [Header("Damage")]
-        [SerializeField] public float physicalDamage;
-        [SerializeField] public float holyDamage;
-        [SerializeField] public float fireDamage;
-        [SerializeField] public float magicDamage;
-        [SerializeField] public float lightningDamage;
+        public float physicalDamage;
+        public float holyDamage;
+        public float fireDamage;
+        public float magicDamage;
+        public float lightningDamage;
 
         [Header("Poise Damage")]
-        [SerializeField] public float poiseDamage;
-        [SerializeField] public bool poiseIsBroken = false;
+        public int poiseDamage;
+        public bool poiseIsBroken = false;
 
         [Header("Hit Info")]
-        [SerializeField] public CharacterManager damageCauser;
-        [SerializeField] public Vector3 contactPoint;
-        [SerializeField] public float hitAngle;
+        public CharacterManager damageCauser;
+        public Vector3 contactPoint;
+        public float hitAngle;
 
         [Header("Animation")]
         [SerializeField] private bool playDamageAnimation = true;
@@ -31,7 +31,6 @@ namespace FG
 
         [Header("Sound FX")]
         [SerializeField] private bool toPlaySFX = true;
-        [SerializeField] private AudioClip elementalDamageSFX;
 
         public override void ApplyEffect(ref CharacterManager character)
         {
@@ -56,10 +55,12 @@ namespace FG
             if (!character.IsOwner)
                 return;
 
-            DecreaseHealth(ref character);  // Calculate all damages;
+            DecreaseHealth(ref character);  // DEDUCT HEALTH
 
             if (character.characterNetwork.networkIsDead.Value) // IF DIED -> NO NEED TO DO ANY OTHER STUFF BELOW
                 return;
+
+            DecreasePoise(ref character);
 
             if (playDamageAnimation)        // DAMAGE ANIMATION
             {
@@ -85,12 +86,20 @@ namespace FG
             
             totalDamage = physicalDamage + holyDamage + fireDamage + magicDamage + lightningDamage;
             if (totalDamage <= 0.0f)
-            {
                 totalDamage = 1.0f;
-            }
 
             DebugManager.instance.DamageReceiveLog(totalDamage);
             character.characterNetwork.networkCurrentHealth.Value -= totalDamage;
+        }
+
+        private void DecreasePoise(ref CharacterManager character)
+        {
+            // DEDUCT POISE
+            character.characterStatsManager.DeductPoise(poiseDamage);
+
+            // DETERMINE IF POISE WAS BROKEN
+            if (character.characterStatsManager.GetPoiseLeft() <= 0)
+                poiseIsBroken = true;
         }
 
         private void PlayVFX(ref CharacterManager character)
@@ -111,40 +120,93 @@ namespace FG
 
         private void PlayDamageAnimation(ref CharacterManager character)
         {
-            poiseIsBroken = true;
+            HitDirection hitDirection = HitDirection.FRONT;
 
+            #region DETERMINE THE SIDE HIT WAS TAKEN FROM
             if (hitAngle >= 145 && hitAngle <= 180 ||
-                hitAngle <= -145 && hitAngle >= -180)    // HIT FROM FRONT
+                hitAngle <= -145 && hitAngle >= -180)
             {
-                damageAnimationName = 
-                    character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
-                    ref character.characterAnimatorManager.HitFrontMedium);
+                hitDirection = HitDirection.BEHIND;
             }
-            else if (hitAngle <= 45 && hitAngle >= -45) // HIT FROM BEHIND
+            else if (hitAngle <= 45 && hitAngle >= -45)
             {
-                damageAnimationName =
-                    character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
-                    ref character.characterAnimatorManager.HitBackMedium);
+                hitDirection = HitDirection.FRONT;
             }
-            else if (hitAngle > 45 && hitAngle < 145)   // HIT FROM LEFT SIDE
+            else if (hitAngle < -45 && hitAngle > -145)
             {
-                damageAnimationName =
-                    character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
-                    ref character.characterAnimatorManager.HitLeftMedium);
+                hitDirection = HitDirection.LEFT;
             }
-            else if (hitAngle < -45 && hitAngle > -145) // HIT FROM RIGHT SIDE
+            else if (hitAngle > 45 && hitAngle < 145)
             {
-                damageAnimationName =
-                    character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
-                    ref character.characterAnimatorManager.HitRightMedium);
+                hitDirection = HitDirection.RIGHT;
             }
+            #endregion
 
-            if (poiseIsBroken)
+            #region TO PLAY STUN ANIMATION OR JUST A FLINCH
+            if (poiseIsBroken)  // POISE WAS BROKEN SO WE ARE STUNNED
             {
+                switch (hitDirection)
+                {
+                    case HitDirection.LEFT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitLeftMedium);
+                        break;
+                    case HitDirection.RIGHT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitRightMedium);
+                        break;
+                    case HitDirection.FRONT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitFrontMedium);
+                        break;
+                    case HitDirection.BEHIND:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitBackMedium);
+                        break;
+                    default:
+                        break;
+                }
+
                 character.characterAnimatorManager.PerformAnimationAction(damageAnimationName, true);
-                character.characterAnimatorManager.lastUsedDamageAnimation = damageAnimationName;
                 poiseIsBroken = false;
             }
+            else   // POISE WAS NOT BROKEN SO WE JUST PLAY FLINCH ANIMATION
+            {
+                switch (hitDirection)
+                {
+                    case HitDirection.LEFT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitLeftPing);
+                        break;
+                    case HitDirection.RIGHT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitRightPing);
+                        break;
+                    case HitDirection.FRONT:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitFrontPing);
+                        break;
+                    case HitDirection.BEHIND:
+                        damageAnimationName =
+                            character.characterAnimatorManager.GetNextRandomDamageAnimationFromList(
+                            ref character.characterAnimatorManager.HitBackPing);
+                        break;
+                    default:
+                        break;
+                }
+
+                character.characterAnimatorManager.PerformAnimationAction(damageAnimationName, false, false, true, true);
+            }
+            #endregion
+
+            character.characterAnimatorManager.lastUsedDamageAnimation = damageAnimationName;
         }
     }
 }

@@ -18,6 +18,8 @@ namespace FG
     {
         LEFT_HAND = 1,
         RIGHT_HAND,
+        LEFT_HAND_SHIELD,
+        BACK,
     }
 
     public enum WeaponMeleeAttackType       // WEAPON ACTION ATTACK TYPES
@@ -39,17 +41,31 @@ namespace FG
         Team02,     // FRIENDLY
     }
 
-    public enum BossID
+    public enum BossID                      // TO SET BOSS'S ID
     {
         DURK = 1,
     }
 
-    public enum DamageIntensity
+    public enum DamageIntensity             // DETERMINE BLOCK REACTION FROM GETTING DAMAGE
     {
         Ping = 1,
         Light,
         Medium,
         Heavy,
         Colossal
+    }
+
+    public enum WeaponType                  // FOR INSTANTIOTION SLOTS
+    {
+        WEAPON,
+        SHIELD
+    }
+
+    public enum HitDirection                // DIRECTION OF HIT (IN PERSPECTIVE OF TARGET)
+    {
+        LEFT = 1,
+        RIGHT,
+        FRONT,
+        BEHIND
     }
 }

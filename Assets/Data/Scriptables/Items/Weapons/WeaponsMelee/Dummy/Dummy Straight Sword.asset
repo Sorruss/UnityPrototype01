@@ -17,29 +17,45 @@ MonoBehaviour:
   ID: 1
   Icon: {fileID: 21300000, guid: ad2ce71010986cc47916e656fdf7aa32, type: 3}
   ModelPrefub: {fileID: 667837401097958796, guid: 6f23bf0e4a53ebe49ad22897e054438b, type: 3}
+  weaponType: 0
+  animatorOverrider: {fileID: 0}
   physicalDamage: 45
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 40
+  physicalDamageAbsorbtion: 0
+  magicDamageAbsorbtion: 0
+  fireDamageAbsorbtion: 0
+  lightningDamageAbsorbtion: 0
+  holyDamageAbsorbtion: 0
+  stability: 0.5
   lightAttack01DamageModifier: 1
   lightAttack02DamageModifier: 1.2
   heavyAttack01DamageModifier: 1.4
   heavyAttack02DamageModifier: 1.6
   chargedAttack01DamageModifier: 2
   chargedAttack02DamageModifier: 2.2
-  poiseDamage: 10
+  runAttack01DamageModifier: 1.2
+  rollAttack01DamageModifier: 1.1
+  backstepAttack01DamageModifier: 1.1
   strengthReq: 3
   intelligenceReq: 0
   dexteriteReq: 1
   baseStaminaCost: 15
   lightAttackStaminaCostModifier: 1
   heavyAttackStaminaCostModifier: 1.3
+  runAttackStaminaCostModifier: 0.9
+  rollAttackStaminaCostModifier: 0.8
+  backstepAttackStaminaCostModifier: 0.8
   OH_RB_Action: {fileID: 11400000, guid: 272f43987e0310547bf9d29358222958, type: 2}
+  OH_LB_Action: {fileID: 0}
   OH_RT_Action: {fileID: 11400000, guid: bfbf4d1d01f850249bc44f232e402657, type: 2}
-  whooshes:
+  whooshesSoundFX:
   - {fileID: 8300000, guid: 39bf8f00a4006964e92e75d2c449ecde, type: 3}
   - {fileID: 8300000, guid: 8d1d10ec0d227c546aa614b5c6a8d4db, type: 3}
   - {fileID: 8300000, guid: 6def074e51404d0459516961e986a195, type: 3}
   - {fileID: 8300000, guid: 84e429dbb07c2704c9a853662397aa12, type: 3}
   - {fileID: 8300000, guid: 863bcd5b722d0d5489f42d4decbff1ce, type: 3}
+  blocksSoundFX: []

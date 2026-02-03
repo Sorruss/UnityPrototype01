@@ -19,12 +19,22 @@ namespace FG
         private float staminaRecoverTimer = 0.0f;
         private float staminaDelayTimer = 0.0f;
 
-        [Header("Damage Absorbtion (0.0f - 1.0f)")]
+        [Header("Damage Absorbtion (0.0f - 1.0f) (Debug)")]
         public float damageAbsorbtionPhysical = 0.0f;
         public float damageAbsorbtionMagic = 0.0f;
         public float damageAbsorbtionFire = 0.0f;
         public float damageAbsorbtionLightning = 0.0f;
         public float damageAbsorbtionHoly = 0.0f;
+
+        [Header("Damage Absorbtion Stability (0.0 - 1.0) (Debug)")]
+        public float stability = 0.0f;
+
+        [Header("Poise")]
+        [SerializeField] float poiseResetTimer;
+        [SerializeField] float poiseResetTime = 8.0f;
+        public int totalPoiseDamage;
+        public int basePoiseOffense = 50;
+        public int bonusAttackingPoiseOffense;
 
         protected virtual void Awake()
         {
@@ -86,9 +96,7 @@ namespace FG
         public bool TryDecreaseStamina(float stamina)
         {
             if (!IsEnoughStamina(stamina))
-            {
                 return false;
-            }
 
             float currStamina = character.characterNetwork.networkCurrentStamina.Value;
             currStamina -= stamina;
@@ -103,6 +111,33 @@ namespace FG
             return character.characterNetwork.networkCurrentStamina.Value >= stamina;
         }
     
+        // -----------
+        // POISE LOGIC
+        public void HandlePoiseReset()
+        {
+            if (poiseResetTimer > 0.0f)
+            {
+                poiseResetTimer -= Time.deltaTime;
+            }
+            else
+            {
+                poiseResetTimer = 0.0f;
+                totalPoiseDamage = 0;
+            }
+        }
+
+        public void DeductPoise(int poiseToDeduct)
+        {
+            totalPoiseDamage -= poiseToDeduct;
+            poiseResetTimer = poiseResetTime;
+        }
+
+        public int GetPoiseLeft()
+        {
+            int characterPoise = basePoiseOffense + bonusAttackingPoiseOffense; // how much poise we have
+            return characterPoise + totalPoiseDamage; // totalPoiseDamage is negative value
+        }
+
         // --------
         // RECOVERS
         public void FullHealthRecover()

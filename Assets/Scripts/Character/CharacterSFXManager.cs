@@ -61,6 +61,13 @@ namespace FG
             PlayAudioClip(SFXManager.instance.GetRandomSFX(ref attackGrunts));
         }
 
+        // --------------
+        // WEAPON RELATED
+        public virtual void PlayWeaponBlockFX()
+        {
+
+        }
+
         // -----
         // STEPS
         public virtual void PlayStepSoundFX()

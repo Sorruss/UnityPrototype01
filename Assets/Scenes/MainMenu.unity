@@ -5322,6 +5322,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 303852569976434664, guid: a514818a06cedfc4ab17b095d8142df7, type: 3}
+      propertyPath: weaponItems.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 303852569976434664, guid: a514818a06cedfc4ab17b095d8142df7, type: 3}
+      propertyPath: 'weaponItems.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
     - target: {fileID: 1606535322779686278, guid: a514818a06cedfc4ab17b095d8142df7, type: 3}
       propertyPath: m_Name
       value: Item Database

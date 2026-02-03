@@ -6,8 +6,8 @@ namespace FG
     public class WeaponActionHeavyAttack : WeaponAction
     {
         [Header("Animations")]
-        public string MainHeavyAttack01Anim = "main_heavy_attack_01_start";
-        public string MainHeavyAttack02Anim = "main_heavy_attack_02_start";
+        [SerializeField] private string MainHeavyAttack01Anim = "main_heavy_attack_01_start";
+        [SerializeField] private string MainHeavyAttack02Anim = "main_heavy_attack_02_start";
 
         public override void TryToPerformAction(PlayerManager player, WeaponItem weapon)
         {
@@ -22,6 +22,9 @@ namespace FG
 
             if (!player.characterLocomotionManager.isGrounded)
                 return;
+
+            // AT THIS POINT WE WILL DO ATTACK SO
+            player.playerNetwork.networkIsAttacking.Value = true;
 
             DoHeavyAttack(player, weapon);
         }

@@ -113,18 +113,27 @@ namespace FG
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Button_East"",
+                    ""name"": ""RightStick"",
                     ""type"": ""Button"",
-                    ""id"": ""3f6784c7-b959-4946-92ec-1718f467c42d"",
+                    ""id"": ""f9ef3315-8aa7-4d2a-8216-d8e17840ca7c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RightStick"",
+                    ""name"": ""RightStickLeft"",
                     ""type"": ""Button"",
-                    ""id"": ""f9ef3315-8aa7-4d2a-8216-d8e17840ca7c"",
+                    ""id"": ""5634ba9b-10fe-461a-865d-f6cee6104a13"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightStickRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4a4cdde-2766-463c-ac05-590587514c8b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -140,6 +149,15 @@ namespace FG
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Button_East"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f6784c7-b959-4946-92ec-1718f467c42d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Button_North"",
                     ""type"": ""Value"",
                     ""id"": ""fcdb14bd-c873-4500-a1fe-f21045dda33b"",
@@ -147,6 +165,24 @@ namespace FG
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Button_North_Hold"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""330a1dfc-5e61-4a26-80d9-b620c8236e51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Button_South"",
+                    ""type"": ""Button"",
+                    ""id"": ""2097c515-e51a-4cc5-b7ae-9e4fdf72315b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""RightBumper"",
@@ -203,33 +239,6 @@ namespace FG
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RightStickLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""5634ba9b-10fe-461a-865d-f6cee6104a13"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightStickRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""a4a4cdde-2766-463c-ac05-590587514c8b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button_South"",
-                    ""type"": ""Button"",
-                    ""id"": ""2097c515-e51a-4cc5-b7ae-9e4fdf72315b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""DPadLeft"",
                     ""type"": ""Button"",
                     ""id"": ""8715f23e-22c1-45ca-8744-9a4ab2967781"",
@@ -239,9 +248,36 @@ namespace FG
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""DPadLeftTwoHandWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""5aa59179-3efd-4e54-8b0b-ca9c5eca6dc2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""DPadRight"",
                     ""type"": ""Button"",
                     ""id"": ""3c3a00dd-1993-41e2-99c3-be8cc39827f6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DPadRightTwoHandWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c924b4d9-613f-40cb-9562-db9e7733ac1f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CapsLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d12f11d-19a5-4277-9ddb-112315c626de"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -735,6 +771,28 @@ namespace FG
                 },
                 {
                     ""name"": """",
+                    ""id"": ""66b17994-ba97-498f-81e1-7ed627943429"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""DPadLeftTwoHandWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62762d98-c959-4842-bd55-04240c84061b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""DPadLeftTwoHandWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8ed427ac-778d-4021-a0e6-6cae7eb84af9"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
@@ -752,6 +810,61 @@ namespace FG
                     ""processors"": """",
                     ""groups"": "";Controller"",
                     ""action"": ""DPadRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13bef112-2456-4cba-a13b-2759e31740f3"",
+                    ""path"": ""<Keyboard>/capsLock"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""CapsLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e6b8171-8d81-449e-b79a-87bbf994c0e0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""DPadRightTwoHandWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51d2d6e6-d474-41dd-9a9a-e6bc115bc87e"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""DPadRightTwoHandWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f0e5fae-0f4a-4f5a-9ed2-39c1417261f0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Button_North_Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91ed9a22-c800-45ce-b1c8-1bfff2c73342"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""Button_North_Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -831,21 +944,25 @@ namespace FG
             m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
             m_Default_Movement = m_Default.FindAction("Movement", throwIfNotFound: true);
             m_Default_LookAround = m_Default.FindAction("LookAround", throwIfNotFound: true);
-            m_Default_Button_East = m_Default.FindAction("Button_East", throwIfNotFound: true);
             m_Default_RightStick = m_Default.FindAction("RightStick", throwIfNotFound: true);
+            m_Default_RightStickLeft = m_Default.FindAction("RightStickLeft", throwIfNotFound: true);
+            m_Default_RightStickRight = m_Default.FindAction("RightStickRight", throwIfNotFound: true);
             m_Default_Button_West = m_Default.FindAction("Button_West", throwIfNotFound: true);
+            m_Default_Button_East = m_Default.FindAction("Button_East", throwIfNotFound: true);
             m_Default_Button_North = m_Default.FindAction("Button_North", throwIfNotFound: true);
+            m_Default_Button_North_Hold = m_Default.FindAction("Button_North_Hold", throwIfNotFound: true);
+            m_Default_Button_South = m_Default.FindAction("Button_South", throwIfNotFound: true);
             m_Default_RightBumper = m_Default.FindAction("RightBumper", throwIfNotFound: true);
             m_Default_RightBumperQueue = m_Default.FindAction("RightBumperQueue", throwIfNotFound: true);
             m_Default_LeftBumper = m_Default.FindAction("LeftBumper", throwIfNotFound: true);
             m_Default_RightTrigger = m_Default.FindAction("RightTrigger", throwIfNotFound: true);
             m_Default_RightTriggerQueue = m_Default.FindAction("RightTriggerQueue", throwIfNotFound: true);
             m_Default_RightTriggerHold = m_Default.FindAction("RightTriggerHold", throwIfNotFound: true);
-            m_Default_RightStickLeft = m_Default.FindAction("RightStickLeft", throwIfNotFound: true);
-            m_Default_RightStickRight = m_Default.FindAction("RightStickRight", throwIfNotFound: true);
-            m_Default_Button_South = m_Default.FindAction("Button_South", throwIfNotFound: true);
             m_Default_DPadLeft = m_Default.FindAction("DPadLeft", throwIfNotFound: true);
+            m_Default_DPadLeftTwoHandWeapon = m_Default.FindAction("DPadLeftTwoHandWeapon", throwIfNotFound: true);
             m_Default_DPadRight = m_Default.FindAction("DPadRight", throwIfNotFound: true);
+            m_Default_DPadRightTwoHandWeapon = m_Default.FindAction("DPadRightTwoHandWeapon", throwIfNotFound: true);
+            m_Default_CapsLock = m_Default.FindAction("CapsLock", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Backspace = m_UI.FindAction("Backspace", throwIfNotFound: true);
@@ -932,21 +1049,25 @@ namespace FG
         private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
         private readonly InputAction m_Default_Movement;
         private readonly InputAction m_Default_LookAround;
-        private readonly InputAction m_Default_Button_East;
         private readonly InputAction m_Default_RightStick;
+        private readonly InputAction m_Default_RightStickLeft;
+        private readonly InputAction m_Default_RightStickRight;
         private readonly InputAction m_Default_Button_West;
+        private readonly InputAction m_Default_Button_East;
         private readonly InputAction m_Default_Button_North;
+        private readonly InputAction m_Default_Button_North_Hold;
+        private readonly InputAction m_Default_Button_South;
         private readonly InputAction m_Default_RightBumper;
         private readonly InputAction m_Default_RightBumperQueue;
         private readonly InputAction m_Default_LeftBumper;
         private readonly InputAction m_Default_RightTrigger;
         private readonly InputAction m_Default_RightTriggerQueue;
         private readonly InputAction m_Default_RightTriggerHold;
-        private readonly InputAction m_Default_RightStickLeft;
-        private readonly InputAction m_Default_RightStickRight;
-        private readonly InputAction m_Default_Button_South;
         private readonly InputAction m_Default_DPadLeft;
+        private readonly InputAction m_Default_DPadLeftTwoHandWeapon;
         private readonly InputAction m_Default_DPadRight;
+        private readonly InputAction m_Default_DPadRightTwoHandWeapon;
+        private readonly InputAction m_Default_CapsLock;
         /// <summary>
         /// Provides access to input actions defined in input action map "Default".
         /// </summary>
@@ -967,21 +1088,37 @@ namespace FG
             /// </summary>
             public InputAction @LookAround => m_Wrapper.m_Default_LookAround;
             /// <summary>
-            /// Provides access to the underlying input action "Default/Button_East".
-            /// </summary>
-            public InputAction @Button_East => m_Wrapper.m_Default_Button_East;
-            /// <summary>
             /// Provides access to the underlying input action "Default/RightStick".
             /// </summary>
             public InputAction @RightStick => m_Wrapper.m_Default_RightStick;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/RightStickLeft".
+            /// </summary>
+            public InputAction @RightStickLeft => m_Wrapper.m_Default_RightStickLeft;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/RightStickRight".
+            /// </summary>
+            public InputAction @RightStickRight => m_Wrapper.m_Default_RightStickRight;
             /// <summary>
             /// Provides access to the underlying input action "Default/Button_West".
             /// </summary>
             public InputAction @Button_West => m_Wrapper.m_Default_Button_West;
             /// <summary>
+            /// Provides access to the underlying input action "Default/Button_East".
+            /// </summary>
+            public InputAction @Button_East => m_Wrapper.m_Default_Button_East;
+            /// <summary>
             /// Provides access to the underlying input action "Default/Button_North".
             /// </summary>
             public InputAction @Button_North => m_Wrapper.m_Default_Button_North;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/Button_North_Hold".
+            /// </summary>
+            public InputAction @Button_North_Hold => m_Wrapper.m_Default_Button_North_Hold;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/Button_South".
+            /// </summary>
+            public InputAction @Button_South => m_Wrapper.m_Default_Button_South;
             /// <summary>
             /// Provides access to the underlying input action "Default/RightBumper".
             /// </summary>
@@ -1007,25 +1144,25 @@ namespace FG
             /// </summary>
             public InputAction @RightTriggerHold => m_Wrapper.m_Default_RightTriggerHold;
             /// <summary>
-            /// Provides access to the underlying input action "Default/RightStickLeft".
-            /// </summary>
-            public InputAction @RightStickLeft => m_Wrapper.m_Default_RightStickLeft;
-            /// <summary>
-            /// Provides access to the underlying input action "Default/RightStickRight".
-            /// </summary>
-            public InputAction @RightStickRight => m_Wrapper.m_Default_RightStickRight;
-            /// <summary>
-            /// Provides access to the underlying input action "Default/Button_South".
-            /// </summary>
-            public InputAction @Button_South => m_Wrapper.m_Default_Button_South;
-            /// <summary>
             /// Provides access to the underlying input action "Default/DPadLeft".
             /// </summary>
             public InputAction @DPadLeft => m_Wrapper.m_Default_DPadLeft;
             /// <summary>
+            /// Provides access to the underlying input action "Default/DPadLeftTwoHandWeapon".
+            /// </summary>
+            public InputAction @DPadLeftTwoHandWeapon => m_Wrapper.m_Default_DPadLeftTwoHandWeapon;
+            /// <summary>
             /// Provides access to the underlying input action "Default/DPadRight".
             /// </summary>
             public InputAction @DPadRight => m_Wrapper.m_Default_DPadRight;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/DPadRightTwoHandWeapon".
+            /// </summary>
+            public InputAction @DPadRightTwoHandWeapon => m_Wrapper.m_Default_DPadRightTwoHandWeapon;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/CapsLock".
+            /// </summary>
+            public InputAction @CapsLock => m_Wrapper.m_Default_CapsLock;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1058,18 +1195,30 @@ namespace FG
                 @LookAround.started += instance.OnLookAround;
                 @LookAround.performed += instance.OnLookAround;
                 @LookAround.canceled += instance.OnLookAround;
-                @Button_East.started += instance.OnButton_East;
-                @Button_East.performed += instance.OnButton_East;
-                @Button_East.canceled += instance.OnButton_East;
                 @RightStick.started += instance.OnRightStick;
                 @RightStick.performed += instance.OnRightStick;
                 @RightStick.canceled += instance.OnRightStick;
+                @RightStickLeft.started += instance.OnRightStickLeft;
+                @RightStickLeft.performed += instance.OnRightStickLeft;
+                @RightStickLeft.canceled += instance.OnRightStickLeft;
+                @RightStickRight.started += instance.OnRightStickRight;
+                @RightStickRight.performed += instance.OnRightStickRight;
+                @RightStickRight.canceled += instance.OnRightStickRight;
                 @Button_West.started += instance.OnButton_West;
                 @Button_West.performed += instance.OnButton_West;
                 @Button_West.canceled += instance.OnButton_West;
+                @Button_East.started += instance.OnButton_East;
+                @Button_East.performed += instance.OnButton_East;
+                @Button_East.canceled += instance.OnButton_East;
                 @Button_North.started += instance.OnButton_North;
                 @Button_North.performed += instance.OnButton_North;
                 @Button_North.canceled += instance.OnButton_North;
+                @Button_North_Hold.started += instance.OnButton_North_Hold;
+                @Button_North_Hold.performed += instance.OnButton_North_Hold;
+                @Button_North_Hold.canceled += instance.OnButton_North_Hold;
+                @Button_South.started += instance.OnButton_South;
+                @Button_South.performed += instance.OnButton_South;
+                @Button_South.canceled += instance.OnButton_South;
                 @RightBumper.started += instance.OnRightBumper;
                 @RightBumper.performed += instance.OnRightBumper;
                 @RightBumper.canceled += instance.OnRightBumper;
@@ -1088,21 +1237,21 @@ namespace FG
                 @RightTriggerHold.started += instance.OnRightTriggerHold;
                 @RightTriggerHold.performed += instance.OnRightTriggerHold;
                 @RightTriggerHold.canceled += instance.OnRightTriggerHold;
-                @RightStickLeft.started += instance.OnRightStickLeft;
-                @RightStickLeft.performed += instance.OnRightStickLeft;
-                @RightStickLeft.canceled += instance.OnRightStickLeft;
-                @RightStickRight.started += instance.OnRightStickRight;
-                @RightStickRight.performed += instance.OnRightStickRight;
-                @RightStickRight.canceled += instance.OnRightStickRight;
-                @Button_South.started += instance.OnButton_South;
-                @Button_South.performed += instance.OnButton_South;
-                @Button_South.canceled += instance.OnButton_South;
                 @DPadLeft.started += instance.OnDPadLeft;
                 @DPadLeft.performed += instance.OnDPadLeft;
                 @DPadLeft.canceled += instance.OnDPadLeft;
+                @DPadLeftTwoHandWeapon.started += instance.OnDPadLeftTwoHandWeapon;
+                @DPadLeftTwoHandWeapon.performed += instance.OnDPadLeftTwoHandWeapon;
+                @DPadLeftTwoHandWeapon.canceled += instance.OnDPadLeftTwoHandWeapon;
                 @DPadRight.started += instance.OnDPadRight;
                 @DPadRight.performed += instance.OnDPadRight;
                 @DPadRight.canceled += instance.OnDPadRight;
+                @DPadRightTwoHandWeapon.started += instance.OnDPadRightTwoHandWeapon;
+                @DPadRightTwoHandWeapon.performed += instance.OnDPadRightTwoHandWeapon;
+                @DPadRightTwoHandWeapon.canceled += instance.OnDPadRightTwoHandWeapon;
+                @CapsLock.started += instance.OnCapsLock;
+                @CapsLock.performed += instance.OnCapsLock;
+                @CapsLock.canceled += instance.OnCapsLock;
             }
 
             /// <summary>
@@ -1120,18 +1269,30 @@ namespace FG
                 @LookAround.started -= instance.OnLookAround;
                 @LookAround.performed -= instance.OnLookAround;
                 @LookAround.canceled -= instance.OnLookAround;
-                @Button_East.started -= instance.OnButton_East;
-                @Button_East.performed -= instance.OnButton_East;
-                @Button_East.canceled -= instance.OnButton_East;
                 @RightStick.started -= instance.OnRightStick;
                 @RightStick.performed -= instance.OnRightStick;
                 @RightStick.canceled -= instance.OnRightStick;
+                @RightStickLeft.started -= instance.OnRightStickLeft;
+                @RightStickLeft.performed -= instance.OnRightStickLeft;
+                @RightStickLeft.canceled -= instance.OnRightStickLeft;
+                @RightStickRight.started -= instance.OnRightStickRight;
+                @RightStickRight.performed -= instance.OnRightStickRight;
+                @RightStickRight.canceled -= instance.OnRightStickRight;
                 @Button_West.started -= instance.OnButton_West;
                 @Button_West.performed -= instance.OnButton_West;
                 @Button_West.canceled -= instance.OnButton_West;
+                @Button_East.started -= instance.OnButton_East;
+                @Button_East.performed -= instance.OnButton_East;
+                @Button_East.canceled -= instance.OnButton_East;
                 @Button_North.started -= instance.OnButton_North;
                 @Button_North.performed -= instance.OnButton_North;
                 @Button_North.canceled -= instance.OnButton_North;
+                @Button_North_Hold.started -= instance.OnButton_North_Hold;
+                @Button_North_Hold.performed -= instance.OnButton_North_Hold;
+                @Button_North_Hold.canceled -= instance.OnButton_North_Hold;
+                @Button_South.started -= instance.OnButton_South;
+                @Button_South.performed -= instance.OnButton_South;
+                @Button_South.canceled -= instance.OnButton_South;
                 @RightBumper.started -= instance.OnRightBumper;
                 @RightBumper.performed -= instance.OnRightBumper;
                 @RightBumper.canceled -= instance.OnRightBumper;
@@ -1150,21 +1311,21 @@ namespace FG
                 @RightTriggerHold.started -= instance.OnRightTriggerHold;
                 @RightTriggerHold.performed -= instance.OnRightTriggerHold;
                 @RightTriggerHold.canceled -= instance.OnRightTriggerHold;
-                @RightStickLeft.started -= instance.OnRightStickLeft;
-                @RightStickLeft.performed -= instance.OnRightStickLeft;
-                @RightStickLeft.canceled -= instance.OnRightStickLeft;
-                @RightStickRight.started -= instance.OnRightStickRight;
-                @RightStickRight.performed -= instance.OnRightStickRight;
-                @RightStickRight.canceled -= instance.OnRightStickRight;
-                @Button_South.started -= instance.OnButton_South;
-                @Button_South.performed -= instance.OnButton_South;
-                @Button_South.canceled -= instance.OnButton_South;
                 @DPadLeft.started -= instance.OnDPadLeft;
                 @DPadLeft.performed -= instance.OnDPadLeft;
                 @DPadLeft.canceled -= instance.OnDPadLeft;
+                @DPadLeftTwoHandWeapon.started -= instance.OnDPadLeftTwoHandWeapon;
+                @DPadLeftTwoHandWeapon.performed -= instance.OnDPadLeftTwoHandWeapon;
+                @DPadLeftTwoHandWeapon.canceled -= instance.OnDPadLeftTwoHandWeapon;
                 @DPadRight.started -= instance.OnDPadRight;
                 @DPadRight.performed -= instance.OnDPadRight;
                 @DPadRight.canceled -= instance.OnDPadRight;
+                @DPadRightTwoHandWeapon.started -= instance.OnDPadRightTwoHandWeapon;
+                @DPadRightTwoHandWeapon.performed -= instance.OnDPadRightTwoHandWeapon;
+                @DPadRightTwoHandWeapon.canceled -= instance.OnDPadRightTwoHandWeapon;
+                @CapsLock.started -= instance.OnCapsLock;
+                @CapsLock.performed -= instance.OnCapsLock;
+                @CapsLock.canceled -= instance.OnCapsLock;
             }
 
             /// <summary>
@@ -1342,19 +1503,26 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnLookAround(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Button_East" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnButton_East(InputAction.CallbackContext context);
-            /// <summary>
             /// Method invoked when associated input action "RightStick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnRightStick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightStickLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightStickLeft(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightStickRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightStickRight(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Button_West" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
@@ -1363,12 +1531,33 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnButton_West(InputAction.CallbackContext context);
             /// <summary>
+            /// Method invoked when associated input action "Button_East" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnButton_East(InputAction.CallbackContext context);
+            /// <summary>
             /// Method invoked when associated input action "Button_North" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnButton_North(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Button_North_Hold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnButton_North_Hold(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Button_South" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnButton_South(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "RightBumper" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
@@ -1412,27 +1601,6 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnRightTriggerHold(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "RightStickLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnRightStickLeft(InputAction.CallbackContext context);
-            /// <summary>
-            /// Method invoked when associated input action "RightStickRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnRightStickRight(InputAction.CallbackContext context);
-            /// <summary>
-            /// Method invoked when associated input action "Button_South" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnButton_South(InputAction.CallbackContext context);
-            /// <summary>
             /// Method invoked when associated input action "DPadLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1440,12 +1608,33 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnDPadLeft(InputAction.CallbackContext context);
             /// <summary>
+            /// Method invoked when associated input action "DPadLeftTwoHandWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnDPadLeftTwoHandWeapon(InputAction.CallbackContext context);
+            /// <summary>
             /// Method invoked when associated input action "DPadRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnDPadRight(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "DPadRightTwoHandWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnDPadRightTwoHandWeapon(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "CapsLock" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnCapsLock(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

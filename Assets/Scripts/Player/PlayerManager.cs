@@ -38,12 +38,11 @@ namespace FG
             base.Update();
 
             if (!IsOwner)
-            {
                 return;
-            }
 
             playerLocomotion.HandleAllMovement();
             playerStatsManager.RecoverStamina();
+            playerStatsManager.HandlePoiseReset();
         }
 
         protected override void LateUpdate()
@@ -72,7 +71,7 @@ namespace FG
                 characterNetwork.networkCurrentHealth.OnValueChanged += characterUIManager.UpdateHealthBar;
             }
 
-            // SETUP SINGLETONS.
+            // SETUP SINGLETONS
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
@@ -80,24 +79,29 @@ namespace FG
                 SaveGameManager.instance.player = this;
             }
 
-            // SETUP STATS.
+            // SETUP STATS
             SetupUI_Stamina();
             SetupUI_Health();
 
-            // CHANGE WIELDING WEAPON UPON ID CHANGE.
+            // CHANGE WIELDING WEAPON UPON ID CHANGE
             playerNetwork.networkLeftHandWeaponID.OnValueChanged += playerNetwork.OnLeftHandWeaponIDChanged;
             playerNetwork.networkRightHandWeaponID.OnValueChanged += playerNetwork.OnRightHandWeaponIDChanged;
 
-            // LOCK ON.
+            // LOCK ON
             playerNetwork.networkIsLockedOn.OnValueChanged += playerNetwork.OnIsLockedOnChanged;
 
-            // STATES.
+            // STATES
             playerNetwork.networkIsChargingAttack.OnValueChanged += playerNetwork.OnIsChargingAttackChanged;
 
-            // WEAPON ACTIONS STUFF.
+            // WEAPON ACTIONS STUFF
             playerNetwork.networkCurrentWeaponInUseID.OnValueChanged += playerNetwork.OnCurrentWeaponInUseIDChanged;
 
-            // TODO: IF THE OWNER IS A CLIENT (NOT A SERVER), WE NEED TO LOAD HIS DATA.
+            // TWO HANDING
+            playerNetwork.networkIsTwoHanding.OnValueChanged += playerNetwork.OnIsTwoHandingChanged;
+            playerNetwork.networkIsTwoHandingLeftWeapon.OnValueChanged += playerNetwork.OnIsTwoHandingLeftWeaponChanged;
+            playerNetwork.networkIsTwoHandingRightWeapon.OnValueChanged += playerNetwork.OnIsTwoHandingRightWeaponChanged;
+
+            // TODO: IF THE OWNER IS A CLIENT (NOT A SERVER), WE NEED TO LOAD HIS DATA
             if (IsOwner && !IsServer)
             {
                 //ImportSaveData(SaveGameManager.instance.GetCurrentCharacterData());
@@ -115,7 +119,7 @@ namespace FG
                 characterNetwork.networkCurrentHealth.OnValueChanged -= characterUIManager.UpdateHealthBar;
             }
 
-            // SETUP STATS.
+            // SETUP STATS
             if (IsOwner)
             {
                 characterNetwork.networkEndurance.OnValueChanged -= playerNetwork.OnEnduranceValueChanged;
@@ -128,18 +132,23 @@ namespace FG
             }
             characterNetwork.networkCurrentHealth.OnValueChanged -= CheckHealth;
 
-            // CHANGE WIELDING WEAPON UPON ID CHANGE.
+            // CHANGE WIELDING WEAPON UPON ID CHANGE
             playerNetwork.networkLeftHandWeaponID.OnValueChanged -= playerNetwork.OnLeftHandWeaponIDChanged;
             playerNetwork.networkRightHandWeaponID.OnValueChanged -= playerNetwork.OnRightHandWeaponIDChanged;
 
-            // LOCK ON.
+            // LOCK ON
             playerNetwork.networkIsLockedOn.OnValueChanged -= playerNetwork.OnIsLockedOnChanged;
 
-            // STATES.
+            // STATES
             playerNetwork.networkIsChargingAttack.OnValueChanged -= playerNetwork.OnIsChargingAttackChanged;
 
-            // WEAPON ACTIONS STUFF.
+            // WEAPON ACTIONS STUFF
             playerNetwork.networkCurrentWeaponInUseID.OnValueChanged -= playerNetwork.OnCurrentWeaponInUseIDChanged;
+
+            // TWO HANDING
+            playerNetwork.networkIsTwoHanding.OnValueChanged -= playerNetwork.OnIsTwoHandingChanged;
+            playerNetwork.networkIsTwoHandingLeftWeapon.OnValueChanged -= playerNetwork.OnIsTwoHandingLeftWeaponChanged;
+            playerNetwork.networkIsTwoHandingRightWeapon.OnValueChanged -= playerNetwork.OnIsTwoHandingRightWeaponChanged;
         }
 
         // NETWORK CALLBACKS
@@ -148,15 +157,15 @@ namespace FG
             GameSessionManager.instance.AddPlayerToList(this);
 
             // LOAD OTHER CLIENT'S LOADOUT. DO NOT LOAD FOR SERVER
-            if (!IsServer && IsOwner)
+            if (IsServer || !IsOwner)
+                return;
+
+            foreach (PlayerManager player in GameSessionManager.instance.players)
             {
-                foreach (PlayerManager player in GameSessionManager.instance.players)
-                {
-                    if (player != this)
-                    {
-                        player.UpdateThisPlayerNetworkValues();
-                    }
-                }
+                if (player == this)
+                    continue;
+                
+                player.UpdateThisPlayerNetworkValues();
             }
         }
 
@@ -172,13 +181,14 @@ namespace FG
             playerNetwork.OnLeftHandWeaponIDChanged(0, playerNetwork.networkLeftHandWeaponID.Value);
             playerNetwork.OnRightHandWeaponIDChanged(0, playerNetwork.networkRightHandWeaponID.Value);
 
-            // ARMOR
+            // TWO HANDING
+            playerNetwork.OnIsTwoHandingChanged(false, playerNetwork.networkIsTwoHanding.Value);
+            playerNetwork.OnIsTwoHandingLeftWeaponChanged(false, playerNetwork.networkIsTwoHandingLeftWeapon.Value);
+            playerNetwork.OnIsTwoHandingRightWeaponChanged(false, playerNetwork.networkIsTwoHandingRightWeapon.Value);
 
             // LOCK ON
             if (playerNetwork.networkIsLockedOn.Value)
-            {
                 playerNetwork.OnTargetNetworkObjectIDChanged(0, playerNetwork.networkTargetNetworkObejectID.Value);
-            }
         }
 
         private void SetupUI_Stamina()

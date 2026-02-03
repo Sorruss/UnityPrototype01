@@ -21,15 +21,22 @@ namespace FG
         [Header("Flags")]
         [SerializeField] public bool isDodging = false;
         [SerializeField] public bool isSprinting = false;
+        [SerializeField] public bool isWalking = false;
         [SerializeField] private bool isJumping = false;
         [SerializeField] private bool isInteracting = false;
 
-        [Header("Action Flags")]
-        [SerializeField] private bool isRBActionActive = false;
+        [Header("Action Flags - Bumpers")]
         [SerializeField] private bool isRTActionActive = false;
         [SerializeField] private bool isHoldingRT = false;
 
+        [Header("Action Flags - Triggers")]
+        [SerializeField] private bool isRBActionActive = false;
         [SerializeField] private bool isLBActionActive = false;
+
+        [Header("Action Flags - Two Handing")]
+        [SerializeField] private bool isTryingToTwoHandWeapon = false;
+        [SerializeField] private bool isTryingToTwoHandLeftWeapon = false;
+        [SerializeField] private bool isTryingToTwoHandRightWeapon = false;
 
         [Header("Lock On Flag")]
         [SerializeField] private bool isTryingToLockOn = false;
@@ -87,6 +94,7 @@ namespace FG
             // MOVEMENT ACTIONS
             HandleDodgeInput();
             HandleSprintInput();
+            HandleWalkInput();
             HandleJumpInput();
             // INTERACTION
             HandleInteractionInput();
@@ -95,6 +103,8 @@ namespace FG
             HandleRTActionInput();
             HandleRTHoldActionInput();
             HandleLBActionInput();
+            // TWO HANDING
+            HandleTwoHandingWeaponInput();
             // LOCK ON STUFF
             HandleLockOnInput();
             HandleSwitchLockOnInput();
@@ -110,9 +120,7 @@ namespace FG
         {
             // SAFERY MEASURE
             if (player == null)
-            {
                 return;
-            }
 
             // GET ALL THE VALUES WE NEED
             verticalMovement = MovementInput.y;
@@ -121,13 +129,9 @@ namespace FG
             
             // CLIP THE MOVE_AMOUNT VALUE SO THE MOVEMENT IS NICER
             if (moveAmount > 0.0f && moveAmount <= 0.5f)
-            {
                 moveAmount = 0.5f;
-            }
             else if (moveAmount > 0.5f && moveAmount <= 1.0f)
-            {
                 moveAmount = 1.0f;
-            }
 
             // SET THE IS_MOVING VALUE DEPENDING OF THE MOVE_AMOUNT VALUE
             // SO ANIMATOR KNOWS TO APPLY IDLE ANIMATION OR WHOLE LOCOMOTION
@@ -136,11 +140,19 @@ namespace FG
             // LOCKED ON/OFF MOVEMENT
             if (!player.playerNetwork.networkIsLockedOn.Value)
             {   // NOT LOCKED ON MOVEMENT (ONE DIRECTIONAL)
-                player.playerAnimatorManager.UpdateMovementValues(0.0f, moveAmount, player.characterNetwork.networkIsSprinting.Value);
+                player.playerAnimatorManager.UpdateMovementValues(
+                    0.0f, 
+                    moveAmount, 
+                    player.characterNetwork.networkIsSprinting.Value,
+                    player.characterNetwork.networkIsWalking.Value);
             }
             else
             {   // LOCKED ON MOVEMENT (8 DIRECTIONAL)
-                player.playerAnimatorManager.UpdateMovementValues(horizontalMovement, verticalMovement, player.characterNetwork.networkIsSprinting.Value);
+                player.playerAnimatorManager.UpdateMovementValues(
+                    horizontalMovement, 
+                    verticalMovement, 
+                    player.characterNetwork.networkIsSprinting.Value,
+                    player.characterNetwork.networkIsWalking.Value);
             }
         }
 
@@ -185,22 +197,36 @@ namespace FG
             playerInput.Default.Button_West.performed += _ => isSprinting = true;
             playerInput.Default.Button_West.canceled += OnSprintActionEnd;
 
+            playerInput.Default.CapsLock.performed += _ => isWalking = !isWalking;
+
             playerInput.Default.Button_South.performed += _ => isJumping = true;
 
             // INTERACTING
             playerInput.Default.Button_North.performed += _ => isInteracting = true;
 
-            // ACTIONS
+            // BUMPERS
             playerInput.Default.RightBumper.performed += _ => isRBActionActive = true;
             playerInput.Default.RightBumperQueue.performed += _ => EnableInputQueue(ref isRBQueueActive);
+
+            playerInput.Default.LeftBumper.performed += _ => isLBActionActive = true;
+            playerInput.Default.LeftBumper.canceled += _ => player.playerNetwork.networkIsBlocking.Value = false;
+
+            // TRIGGERS
             playerInput.Default.RightTrigger.performed += _ => isRTActionActive = true;
             playerInput.Default.RightTriggerQueue.performed += _ => EnableInputQueue(ref isRTQueueActive);
 
             playerInput.Default.RightTriggerHold.performed += _ => isHoldingRT = true;
             playerInput.Default.RightTriggerHold.canceled += _ => isHoldingRT = false;
 
-            playerInput.Default.LeftBumper.performed += _ => isLBActionActive = true;
-            playerInput.Default.LeftBumper.canceled += _ => isLBActionActive = false;
+            // TWO HANDING
+            playerInput.Default.Button_North_Hold.performed += _ => isTryingToTwoHandWeapon = true;
+            playerInput.Default.Button_North_Hold.canceled += _ => isTryingToTwoHandWeapon = false;
+
+            playerInput.Default.DPadLeftTwoHandWeapon.performed += _ => isTryingToTwoHandLeftWeapon = true;
+            playerInput.Default.DPadLeftTwoHandWeapon.canceled += _ => isTryingToTwoHandLeftWeapon = false;
+
+            playerInput.Default.DPadRightTwoHandWeapon.performed += _ => isTryingToTwoHandRightWeapon = true;
+            playerInput.Default.DPadRightTwoHandWeapon.canceled += _ => isTryingToTwoHandRightWeapon = false;
 
             // LOCK ON INPUTS
             playerInput.Default.RightStick.performed += _ => isTryingToLockOn = true;
@@ -213,7 +239,7 @@ namespace FG
         }
 
         // --------------------
-        // "ON"/"OFF" FUNCTIONS.
+        // "ON"/"OFF" FUNCTIONS
         private void OnSprintActionEnd(InputAction.CallbackContext obj)
         {
             isSprinting = false;
@@ -221,7 +247,7 @@ namespace FG
         }
 
         // ---------------------------------
-        // MOVEMENT ACTION HANDLER FUNCTIONS.
+        // MOVEMENT ACTION HANDLER FUNCTIONS
         private void HandleJumpInput()
         {
             if (isJumping)
@@ -233,10 +259,15 @@ namespace FG
 
         private void HandleSprintInput()
         {
-            if (isSprinting)
+            if (isSprinting && !isLBActionActive)
             {
                 player.playerLocomotion.HandleSprinting();
             }
+        }
+
+        private void HandleWalkInput()
+        {
+            player.playerNetwork.networkIsWalking.Value = isWalking;
         }
 
         private void HandleDodgeInput()
@@ -273,8 +304,8 @@ namespace FG
 
                 // DO RIGHT HAND WEAPON ACTION.
                 player.playerCombatManager.TryToPerformWeaponAction(
-                    player.playerInventoryManager.RightHandWeaponSciptable.OH_RB_Action,
-                    player.playerInventoryManager.RightHandWeaponSciptable);
+                    player.playerInventoryManager.RightHandWeaponScriptable.OH_RB_Action,
+                    player.playerInventoryManager.RightHandWeaponScriptable);
             }
         }
 
@@ -285,8 +316,8 @@ namespace FG
                 isRTActionActive = false;
                 player.playerNetwork.SetCurrentActiveHand(true);
                 player.playerCombatManager.TryToPerformWeaponAction(
-                    player.playerInventoryManager.RightHandWeaponSciptable.OH_RT_Action,
-                    player.playerInventoryManager.RightHandWeaponSciptable);
+                    player.playerInventoryManager.RightHandWeaponScriptable.OH_RT_Action,
+                    player.playerInventoryManager.RightHandWeaponScriptable);
             }
         }
 
@@ -303,15 +334,19 @@ namespace FG
 
         private void HandleLBActionInput()
         {
-            if (!isLBActionActive ||
-                player.isPerfomingAction ||
-                player.playerNetwork.networkLeftHandWeaponID.Value == 0)
+            if (isLBActionActive)
             {
-                player.playerNetwork.networkIsBlocking.Value = false;
-                return;
-            }
+                // DISABLE LOOPING.
+                isLBActionActive = false;
 
-            player.playerNetwork.networkIsBlocking.Value = true;
+                // INFORM THAT CLIENT IS USING LEFT HAND WEAPON ACTION.
+                player.playerNetwork.SetCurrentActiveHand(false);
+
+                // DO LEFT HAND WEAPON ACTION.
+                player.playerCombatManager.TryToPerformWeaponAction(
+                    player.playerInventoryManager.LeftHandWeaponScriptable.OH_LB_Action,
+                    player.playerInventoryManager.LeftHandWeaponScriptable);
+            }
         }
 
         // ---------------
@@ -396,6 +431,9 @@ namespace FG
         {
             if (isDPadLeftActionActive)
             {
+                if (isTryingToTwoHandWeapon)
+                    return;
+
                 isDPadLeftActionActive = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
             }
@@ -405,6 +443,9 @@ namespace FG
         {
             if (isDPadRightActionActive)
             {
+                if (isTryingToTwoHandWeapon)
+                    return;
+
                 isDPadRightActionActive = false;
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
@@ -462,8 +503,52 @@ namespace FG
             isRBQueueActive = false;
         }
 
+        // ------------------
+        // TWO HANDING WEAPON
+        private void HandleTwoHandingWeaponInput()
+        {
+            if (!isTryingToTwoHandWeapon)
+                return;
+
+            if (isTryingToTwoHandLeftWeapon)
+            {
+                // FLAGS
+                isDPadLeftActionActive = false;
+                isTryingToTwoHandLeftWeapon = false;
+                player.playerNetwork.networkIsBlocking.Value = false;
+
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    // UN TWO HAND
+                    player.playerNetwork.networkIsTwoHanding.Value = false;
+                    return;
+                }
+
+                // LOGIC
+                player.playerNetwork.networkIsTwoHandingLeftWeapon.Value = true;
+            }
+
+            if (isTryingToTwoHandRightWeapon)
+            {
+                // FLAGS
+                isDPadRightActionActive = false;
+                isTryingToTwoHandRightWeapon = false;
+                player.playerNetwork.networkIsBlocking.Value = false;
+
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    // UN TWO HAND
+                    player.playerNetwork.networkIsTwoHanding.Value = false;
+                    return;
+                }
+
+                // LOGIC
+                player.playerNetwork.networkIsTwoHandingRightWeapon.Value = true;
+            }
+        }
+
         // ---------------
-        // EVERYTHING ELSE.
+        // EVERYTHING ELSE
         private void OnApplicationFocus(bool focus)
         {
             if (enabled)

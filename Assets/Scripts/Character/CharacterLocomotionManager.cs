@@ -12,17 +12,19 @@ namespace FG
         [SerializeField] private float startingFallingForce = -5.0f;    // Force at which fall stars getting bigger with gravityForce.
         [SerializeField] private float fallingForceMultiplier = 5.0f;
 
-        protected Vector3 yVelocity;
-        private bool fallingVelocityHasBeenSet = false;
-        private float inAirTime = 0.0f;
-        
-        private int InAirTimeString;
-        private int IsGroundedString;
-
         [Header("Flags")]
         public bool isGrounded = false;
         public bool canRotate = true;
         public bool canMove = true;
+
+        // CALCULATION VARIABLES
+        protected Vector3 yVelocity;
+        private bool fallingVelocityHasBeenSet = false;
+        private float inAirTime = 0.0f;
+        
+        // ANIMATOR STRINGS
+        private int InAirTimeString;
+        private int IsGroundedString;
 
         protected virtual void Awake()
         {

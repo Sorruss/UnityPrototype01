@@ -725,3 +725,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 228817
+  packageName: Shield Animation Set
+  packageVersion: 3.0
+  assetPath: Assets/Addons/Nephilite Studios/Straight Sword Animation Set/Models/Md_Char_Low_Poly_Man.fbx
+  uploadId: 753929

@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &198619584696982765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674204875013643131}
+  - component: {fileID: 1068349431719646438}
+  m_Layer: 6
+  m_Name: WeaponSocketLeftHandShield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &674204875013643131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198619584696982765}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.07246296, y: 0.2871482, z: -0.94042706, w: 0.1670088}
+  m_LocalPosition: {x: -0.011, y: -0, z: 0.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7839395653048353293}
+  m_LocalEulerAnglesHint: {x: 31.056, y: 15.727, z: -155.465}
+--- !u!114 &1068349431719646438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198619584696982765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9431163d4b8af614fb37c415701686a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponSocket
+  socket: 3
 --- !u!1 &1940510609185648920
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +89,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c840f7f7d1f60b4ab78ba58994bc9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.LockOnTransform
+--- !u!1 &3330067138209952203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432658038976854946}
+  - component: {fileID: 5434668853238893972}
+  m_Layer: 8
+  m_Name: WeaponSocketBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1432658038976854946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330067138209952203}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5044579901487816282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5434668853238893972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330067138209952203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9431163d4b8af614fb37c415701686a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponSocket
+  socket: 4
 --- !u!1 &4079222446466100860
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,13 +159,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4079222446466100860}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5955643, y: 0.24516322, z: -0.4337738, w: 0.63010997}
-  m_LocalPosition: {x: 0.115, y: 0.003, z: -0.208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5072942469626694533}
-  m_LocalEulerAnglesHint: {x: -147.462, y: -101.66101, z: 84.165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2078394856439263877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,13 +204,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4228076061297937121}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5316253, y: -0.35378677, z: -0.18857267, w: 0.74608976}
-  m_LocalPosition: {x: -0.0887, y: 0.0279, z: 0.1549}
+  m_LocalRotation: {x: -0.3429042, y: 0.88053507, z: -0.3193119, w: -0.071517326}
+  m_LocalPosition: {x: 0.009, y: -0.013, z: -0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7839395653048353293}
-  m_LocalEulerAnglesHint: {x: 41.289, y: -75.792, z: -61.057}
+  m_LocalEulerAnglesHint: {x: 37.689, y: 173.248, z: -44.861}
 --- !u!114 &3040312436883579816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6861694095501585927}
     m_Modifications:
+    - target: {fileID: 2070088443485873608, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3641003044122998855, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -560,9 +654,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7011284792763705418, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1095664546095060527}
+    - targetCorrespondingSourceObject: {fileID: -7011284792763705418, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1432658038976854946}
     - targetCorrespondingSourceObject: {fileID: 3780837713738550241, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6203542511884557538}
+    - targetCorrespondingSourceObject: {fileID: 3780837713738550241, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 674204875013643131}
     - targetCorrespondingSourceObject: {fileID: 2221872609835778665, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7916541061642012062}
@@ -1092,6 +1192,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
   characterNetwork: {fileID: 0}
   characterSFXManager: {fileID: 0}
   characterController: {fileID: 0}
@@ -1149,17 +1250,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207bb979fca57d641bd57fc08d459a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerInventoryManager
-  LeftHandWeaponSciptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
-  RightHandWeaponSciptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  LeftHandWeaponScriptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  RightHandWeaponScriptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  TwoHandedWeaponScriptable: {fileID: 0}
   LeftHandWeaponSciptables:
   - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
-  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
-  LeftHandWeaponIndex: 0
+  - {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
   RightHandWeaponSciptables:
   - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   - {fileID: 11400000, guid: cc0a9d4bb8168904f85aa9fea2078e7f, type: 2}
-  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  - {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
+  LeftHandWeaponIndex: 0
   RightHandWeaponIndex: 0
 --- !u!114 &-6896822798822141059
 MonoBehaviour:
@@ -1178,7 +1280,9 @@ MonoBehaviour:
   LeftHandWeaponManager: {fileID: 0}
   RightHandWeaponManager: {fileID: 0}
   leftHandSocket: {fileID: 0}
+  leftHandShieldSocket: {fileID: 0}
   rightHandSocket: {fileID: 0}
+  backSocket: {fileID: 0}
 --- !u!114 &7241501903264518259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,6 +1305,7 @@ MonoBehaviour:
   isAllowedToDoBackstepAttack: 0
   CanDoComboMainHand: 0
   CanDoComboOffHand: 0
+  CanBlock: 1
 --- !u!114 &-5545744967686267344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,6 +1351,17 @@ MonoBehaviour:
   sprintStaminaCost: 2
   dodgeStaminaCost: 20
   jumpStaminaCost: 10
+  damageAbsorbtionPhysical: 0
+  damageAbsorbtionMagic: 0
+  damageAbsorbtionFire: 0
+  damageAbsorbtionLightning: 0
+  damageAbsorbtionHoly: 0
+  stability: 0
+  poiseResetTimer: 0
+  poiseResetTime: 8
+  totalPoiseDamage: 0
+  basePoiseOffense: 50
+  bonusAttackingPoiseOffense: 0
 --- !u!114 &5004651384973126896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,6 +1377,7 @@ MonoBehaviour:
   applyRootMotion: 0
   locomotionSmoothTime: 0.1
   actionSmoothTime: 0.2
+  lastUsedDamageAnimation: 
   hit_front_medium_01: hit_front_medium_01
   hit_front_medium_02: hit_front_medium_02
   hit_back_medium_01: hit_back_medium_01
@@ -1269,11 +1386,22 @@ MonoBehaviour:
   hit_left_medium_02: hit_left_medium_02
   hit_right_medium_01: hit_right_medium_01
   hit_right_medium_02: hit_right_medium_02
-  lastUsedDamageAnimation: 
   HitFrontMedium: []
   HitBackMedium: []
   HitLeftMedium: []
   HitRightMedium: []
+  hit_front_ping_01: hit_front_ping_01
+  hit_front_ping_02: hit_front_ping_02
+  hit_back_ping_01: hit_back_ping_01
+  hit_back_ping_02: hit_back_ping_02
+  hit_left_ping_01: hit_left_ping_01
+  hit_left_ping_02: hit_left_ping_02
+  hit_right_ping_01: hit_right_ping_01
+  hit_right_ping_02: hit_right_ping_02
+  HitFrontPing: []
+  HitBackPing: []
+  HitLeftPing: []
+  HitRightPing: []
 --- !u!114 &6981076817539189815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1304,9 +1432,15 @@ MonoBehaviour:
     m_InternalValue: 0
   networkIsSprinting:
     m_InternalValue: 0
+  networkIsWalking:
+    m_InternalValue: 0
   networkIsJumping:
     m_InternalValue: 0
   networkIsRolling:
+    m_InternalValue: 0
+  networkIsBlocking:
+    m_InternalValue: 0
+  networkIsAttacking:
     m_InternalValue: 0
   networkIsDead:
     m_InternalValue: 0
@@ -1410,6 +1544,14 @@ MonoBehaviour:
   networkIsUsingLeftHand:
     m_InternalValue: 0
   networkCurrentWeaponInUseID:
+    m_InternalValue: 0
+  networkTwoHandWeaponID:
+    m_InternalValue: 0
+  networkIsTwoHanding:
+    m_InternalValue: 0
+  networkIsTwoHandingLeftWeapon:
+    m_InternalValue: 0
+  networkIsTwoHandingRightWeapon:
     m_InternalValue: 0
 --- !u!114 &8644109883490154838
 MonoBehaviour:

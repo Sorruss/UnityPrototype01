@@ -13,6 +13,7 @@ namespace FG
 
         [Header("Attack Damage")]
         public int baseDamage = 20;
+        public int basePoiseDamage = 40;
 
         [Header("Attack Modifiers")]
         public float Attack01DamageModifier = 1.0f;
@@ -63,8 +64,11 @@ namespace FG
         {
             base.DisableAllDamageColliders();
 
-            LeftHandWeaponManager?.ActivateDamageCollider(false);
-            RightHandWeaponManager?.ActivateDamageCollider(false);
+            if (LeftHandWeaponManager != null)
+                LeftHandWeaponManager.ActivateDamageCollider(false);
+
+            if (RightHandWeaponManager != null)
+                RightHandWeaponManager.ActivateDamageCollider(false);
         }
 
         // ----------------------------------------------------
@@ -99,7 +103,7 @@ namespace FG
 
             // SET WEAPON DAMAGE VALUES TO THE DAMAGE COLLIDER WHICH IS ON ITS PREFUB.
             LeftHandWeaponManager = LeftHandWeaponInstance.GetComponent<WeaponManager>();
-            LeftHandWeaponManager.SetWeaponDamage(aiCharacter, ref LeftHandWeaponScriptable);
+            LeftHandWeaponManager.TransferWeaponValuesToCollider(aiCharacter, ref LeftHandWeaponScriptable);
         }
 
         public void LoadRightWeapon()
@@ -114,7 +118,7 @@ namespace FG
             rightHandSocket.LoadModel(RightHandWeaponInstance);
 
             RightHandWeaponManager = RightHandWeaponInstance.GetComponent<WeaponManager>();
-            RightHandWeaponManager.SetWeaponDamage(aiCharacter, ref RightHandWeaponScriptable);
+            RightHandWeaponManager.TransferWeaponValuesToCollider(aiCharacter, ref RightHandWeaponScriptable);
         }
 
         private void LoadBothHandsWeapons()
@@ -129,7 +133,7 @@ namespace FG
         {
             LeftHandWeaponManager.ActivateDamageCollider(true);
             aiCharacter.characterSFXManager.PlayAudioClip(
-                    SFXManager.instance.GetRandomSFX(ref LeftHandWeaponScriptable.whooshes));
+                    SFXManager.instance.GetRandomSFX(ref LeftHandWeaponScriptable.whooshesSoundFX));
         }
 
         public void DeactivateLeftDamageCollider()
@@ -141,7 +145,7 @@ namespace FG
         {
             RightHandWeaponManager.ActivateDamageCollider(true);
             aiCharacter.characterSFXManager.PlayAudioClip(
-                    SFXManager.instance.GetRandomSFX(ref RightHandWeaponScriptable.whooshes));
+                    SFXManager.instance.GetRandomSFX(ref RightHandWeaponScriptable.whooshesSoundFX));
         }
 
         public void DeactivateRightDamageCollider()
@@ -153,13 +157,15 @@ namespace FG
         public void ApplyAttack01DamageModifier()
         {
             RightHandWeaponScriptable.physicalDamage = (int)(baseDamage * Attack01DamageModifier);
-            RightHandWeaponManager.SetWeaponDamage(aiCharacter, ref RightHandWeaponScriptable);
+            RightHandWeaponScriptable.poiseDamage = (int)(basePoiseDamage * Attack01DamageModifier);
+            RightHandWeaponManager.TransferWeaponValuesToCollider(aiCharacter, ref RightHandWeaponScriptable);
         }
 
         public void ApplyAttack02DamageModifier()
         {
             RightHandWeaponScriptable.physicalDamage = (int)(baseDamage * Attack02DamageModifier);
-            RightHandWeaponManager.SetWeaponDamage(aiCharacter, ref RightHandWeaponScriptable);
+            RightHandWeaponScriptable.poiseDamage = (int)(basePoiseDamage * Attack02DamageModifier);
+            RightHandWeaponManager.TransferWeaponValuesToCollider(aiCharacter, ref RightHandWeaponScriptable);
         }
     }
 }

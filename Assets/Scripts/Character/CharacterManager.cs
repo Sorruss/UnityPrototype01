@@ -79,6 +79,9 @@ namespace FG
 
             characterNetwork.OnIsActiveChanged(false, characterNetwork.networkIsActive.Value);
             characterNetwork.networkIsActive.OnValueChanged += characterNetwork.OnIsActiveChanged;
+        
+            characterNetwork.OnIsBlockingChanged(false, characterNetwork.networkIsBlocking.Value);
+            characterNetwork.networkIsBlocking.OnValueChanged += characterNetwork.OnIsBlockingChanged;
         }
 
         public override void OnNetworkDespawn()
@@ -87,6 +90,7 @@ namespace FG
 
             characterNetwork.networkIsMoving.OnValueChanged -= characterNetwork.OnIsMovingChanged;
             characterNetwork.networkIsActive.OnValueChanged -= characterNetwork.OnIsActiveChanged;
+            characterNetwork.networkIsBlocking.OnValueChanged -= characterNetwork.OnIsBlockingChanged;
         }
 
         // ------

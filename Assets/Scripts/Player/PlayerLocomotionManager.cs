@@ -61,11 +61,19 @@ namespace FG
 
                 if (!player.playerNetwork.networkIsLockedOn.Value)
                 {   // NOT LOCKED ON MOVEMENT (ONE DIRECTIONAL)
-                    player.playerAnimatorManager.UpdateMovementValues(0.0f, moveAmount, player.characterNetwork.networkIsSprinting.Value);
+                    player.playerAnimatorManager.UpdateMovementValues(
+                        0.0f, 
+                        moveAmount, 
+                        player.characterNetwork.networkIsSprinting.Value, 
+                        player.characterNetwork.networkIsWalking.Value);
                 }
                 else
                 {   // LOCKED ON MOVEMENT (8 DIRECTIONAL)
-                    player.playerAnimatorManager.UpdateMovementValues(horizontalMovement, verticalMovement, player.characterNetwork.networkIsSprinting.Value);
+                    player.playerAnimatorManager.UpdateMovementValues(
+                        horizontalMovement, 
+                        verticalMovement, 
+                        player.characterNetwork.networkIsSprinting.Value, 
+                        player.characterNetwork.networkIsWalking.Value);
                 }
             }
         }
@@ -120,6 +128,10 @@ namespace FG
             if (player.playerNetwork.networkIsSprinting.Value)
             {
                 currentHorizontalSpeed = sprintMoveSpeed;
+            }
+            else if (player.playerNetwork.networkIsWalking.Value)
+            {
+                currentHorizontalSpeed = walkMoveSpeed;
             }
             else
             {

@@ -27,7 +27,7 @@ namespace FG
                 return SwitchState(aiCharacter, aiCharacter.pursueTargetState);
 
             // RESET MOVEMENT VALUES TO 0 JUST IN CASE
-            aiCharacter.aiCharacterAnimatorManager.UpdateMovementValues(0.0f, 0.0f, false);
+            aiCharacter.aiCharacterAnimatorManager.UpdateMovementValues(0.0f, 0.0f);
 
             // ROTATION
             aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2116bc4951a151540811d47d430d06de, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponMeleeItem
+  Name: Shield
+  Description: That's a common shield
+  ID: 3
+  Icon: {fileID: 21300000, guid: d3dbe7b13bf52da42b3b7b7bee555822, type: 3}
+  ModelPrefub: {fileID: 667837401097958796, guid: 85fd96ac9da746a469e6a1b27435ffa5, type: 3}
+  weaponType: 1
+  animatorOverrider: {fileID: 22100000, guid: 40bddc7d345807e459f52d4da94bb39a, type: 2}
+  physicalDamage: 20
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 20
+  physicalDamageAbsorbtion: 0.85
+  magicDamageAbsorbtion: 0
+  fireDamageAbsorbtion: 0
+  lightningDamageAbsorbtion: 0
+  holyDamageAbsorbtion: 0
+  stability: 0.8
+  lightAttack01DamageModifier: 1
+  lightAttack02DamageModifier: 1.2
+  heavyAttack01DamageModifier: 1.4
+  heavyAttack02DamageModifier: 1.6
+  chargedAttack01DamageModifier: 2
+  chargedAttack02DamageModifier: 2.2
+  runAttack01DamageModifier: 1.2
+  rollAttack01DamageModifier: 1.1
+  backstepAttack01DamageModifier: 1.1
+  strengthReq: 3
+  intelligenceReq: 0
+  dexteriteReq: 1
+  baseStaminaCost: 12
+  lightAttackStaminaCostModifier: 1
+  heavyAttackStaminaCostModifier: 1.3
+  runAttackStaminaCostModifier: 0.9
+  rollAttackStaminaCostModifier: 0.8
+  backstepAttackStaminaCostModifier: 0.8
+  OH_RB_Action: {fileID: 11400000, guid: 272f43987e0310547bf9d29358222958, type: 2}
+  OH_LB_Action: {fileID: 11400000, guid: e54148aa1d68bc64583b18643e775586, type: 2}
+  OH_RT_Action: {fileID: 11400000, guid: bfbf4d1d01f850249bc44f232e402657, type: 2}
+  whooshesSoundFX:
+  - {fileID: 8300000, guid: 39bf8f00a4006964e92e75d2c449ecde, type: 3}
+  - {fileID: 8300000, guid: 8d1d10ec0d227c546aa614b5c6a8d4db, type: 3}
+  - {fileID: 8300000, guid: 6def074e51404d0459516961e986a195, type: 3}
+  - {fileID: 8300000, guid: 84e429dbb07c2704c9a853662397aa12, type: 3}
+  - {fileID: 8300000, guid: 863bcd5b722d0d5489f42d4decbff1ce, type: 3}
+  blocksSoundFX:
+  - {fileID: 8300000, guid: 9a9830830b3be8b4daf4f10bfc695384, type: 3}
+  - {fileID: 8300000, guid: 284b8a789d4cbae4e9a763f28ddce4b0, type: 3}

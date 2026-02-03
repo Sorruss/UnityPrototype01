@@ -55,20 +55,20 @@ namespace FG
             return false;
         }
 
-        public DamageIntensity GetDamageIntensityBasedOnPoiseDamage(float poiseDamage)
+        public DamageIntensity GetDamageIntensityBasedOnPoiseDamage(int poiseDamage)
         {
             DamageIntensity damageIntensity = DamageIntensity.Ping;
 
-            if (poiseDamage > 10.0f)
+            if (poiseDamage > 10)
                 damageIntensity = DamageIntensity.Light;
 
-            if (poiseDamage > 30.0f)
+            if (poiseDamage > 30)
                 damageIntensity = DamageIntensity.Medium;
 
-            if (poiseDamage > 70.0f)
+            if (poiseDamage > 70)
                 damageIntensity = DamageIntensity.Heavy;
 
-            if (poiseDamage > 120.0f)
+            if (poiseDamage > 120)
                 damageIntensity = DamageIntensity.Colossal;
 
             return damageIntensity;

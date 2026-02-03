@@ -50,6 +50,10 @@ namespace FG
             new(false, 
                 NetworkVariableReadPermission.Everyone, 
                 NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> networkIsWalking =
+            new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> networkIsJumping = 
             new(false, 
                 NetworkVariableReadPermission.Everyone, 
@@ -59,6 +63,10 @@ namespace FG
                 NetworkVariableReadPermission.Everyone, 
                 NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> networkIsBlocking =
+            new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> networkIsAttacking =
             new(false,
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
@@ -126,6 +134,11 @@ namespace FG
         public void OnIsActiveChanged(bool oldValue, bool newValue)
         {
             gameObject.SetActive(newValue);
+        }
+
+        public virtual void OnIsBlockingChanged(bool oldValue, bool newValue)
+        {
+            character.animator.SetBool("IsBlocking", newValue);
         }
 
         // LOCOMOTION STATES LISTENERS.
@@ -219,7 +232,7 @@ namespace FG
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -252,7 +265,7 @@ namespace FG
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -281,7 +294,7 @@ namespace FG
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -316,12 +329,14 @@ namespace FG
         public void NotifyClientOfBlockedDamageTakenServerRpc(
             ulong damageDealerID,
             ulong damageReceiverID,
+
             float physicalDamage,
             float magicDamage,
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
+
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -332,12 +347,14 @@ namespace FG
                 NotifyClientOfBlockedDamageTakenClientRpc(
                     damageDealerID,
                     damageReceiverID,
+
                     physicalDamage,
                     magicDamage,
                     fireDamage,
                     lightningDamage,
                     holyDamage,
                     poiseDamage,
+
                     hitAngle,
                     contactPointX,
                     contantPointY,
@@ -349,12 +366,14 @@ namespace FG
         private void NotifyClientOfBlockedDamageTakenClientRpc(
             ulong damageDealerID,
             ulong damageReceiverID,
+
             float physicalDamage,
             float magicDamage,
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
+
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -363,12 +382,14 @@ namespace FG
             ApplyBlockedDamage(
                 damageDealerID,
                 damageReceiverID,
+
                 physicalDamage,
                 magicDamage,
                 fireDamage,
                 lightningDamage,
                 holyDamage,
                 poiseDamage,
+
                 hitAngle,
                 contactPointX,
                 contantPointY,
@@ -378,12 +399,14 @@ namespace FG
         private void ApplyBlockedDamage(
             ulong damageDealerID,
             ulong damageReceiverID,
+
             float physicalDamage,
             float magicDamage,
             float fireDamage,
             float lightningDamage,
             float holyDamage,
-            float poiseDamage,
+            int poiseDamage,
+
             float hitAngle,
             float contactPointX,
             float contantPointY,
@@ -407,7 +430,9 @@ namespace FG
             healthDamageEffect.fireDamage = fireDamage;
             healthDamageEffect.lightningDamage = lightningDamage;
             healthDamageEffect.holyDamage = holyDamage;
+
             healthDamageEffect.poiseDamage = poiseDamage;
+            healthDamageEffect.staminaDamage = poiseDamage;
 
             // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
             damageReceiver.characterEffectsManager.ApplyInstantEffect(healthDamageEffect);

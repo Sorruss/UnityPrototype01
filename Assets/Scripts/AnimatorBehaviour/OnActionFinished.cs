@@ -32,6 +32,7 @@ namespace FG
                 character.characterNetwork.networkIsJumping.Value = false;
                 character.characterNetwork.networkIsRolling.Value = false;
                 character.characterNetwork.networkIsInvincible.Value = false;
+                character.characterNetwork.networkIsAttacking.Value = false;
             }
         }
 

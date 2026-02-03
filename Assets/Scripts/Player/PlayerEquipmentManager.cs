@@ -16,7 +16,9 @@ namespace FG
 
         [Header("Sockets (Auto)")]
         [SerializeField] private WeaponSocket leftHandSocket;
+        [SerializeField] private WeaponSocket leftHandShieldSocket;
         [SerializeField] private WeaponSocket rightHandSocket;
+        [SerializeField] private WeaponSocket backSocket;
 
         protected override void Awake()
         {
@@ -39,13 +41,13 @@ namespace FG
             foreach (WeaponSocket socket in sockets)
             {
                 if (socket.socket == CharacterWeaponSocket.LEFT_HAND)
-                {
                     leftHandSocket = socket;
-                }
                 else if (socket.socket == CharacterWeaponSocket.RIGHT_HAND)
-                {
                     rightHandSocket = socket;
-                }
+                else if (socket.socket == CharacterWeaponSocket.LEFT_HAND_SHIELD)
+                    leftHandShieldSocket = socket;
+                else if (socket.socket == CharacterWeaponSocket.BACK)
+                    backSocket = socket;
             }
         }
 
@@ -54,9 +56,7 @@ namespace FG
         public void SwitchLeftWeapon()
         {
             if (!playerManager.IsOwner)
-            {
                 return;
-            }
 
             // DO ANIMATION WITHOUT MOVEMENT RESTRICTIONS.
             playerManager.playerAnimatorManager.PerformAnimationAction("swap_left_weapon_01", false, false, true, true);
@@ -95,7 +95,7 @@ namespace FG
             if (anotherWeapon != null)
             {
                 playerManager.playerInventoryManager.LeftHandWeaponIndex = anotherWeaponIndex;
-                playerManager.playerInventoryManager.LeftHandWeaponSciptable = anotherWeapon;
+                playerManager.playerInventoryManager.LeftHandWeaponScriptable = anotherWeapon;
 
                 // NOTIFY NETWORK SO IT CHANGES WIELDING WEAPON FOR EVERYONE INCLUDING THIS CLIENT.
                 playerManager.playerNetwork.networkLeftHandWeaponID.Value = anotherWeapon.ID;
@@ -103,30 +103,41 @@ namespace FG
             else
             {
                 playerManager.playerInventoryManager.LeftHandWeaponIndex = 0;
-                playerManager.playerInventoryManager.LeftHandWeaponSciptable = ItemDatabase.instance.unarmedWeapon;
+                playerManager.playerInventoryManager.LeftHandWeaponScriptable = ItemDatabase.instance.unarmedWeapon;
 
                 // NOTIFY NETWORK SO IT CHANGES WIELDING WEAPON FOR EVERYONE INCLUDING THIS CLIENT.
                 playerManager.playerNetwork.networkLeftHandWeaponID.Value = ItemDatabase.instance.unarmedWeapon.ID;
             }
+
+            // OVERRIDE ANIMATIONS FOR NEWLY EQUIPPED WEAPON
+            playerManager.playerAnimatorManager.UpdateAnimatorOverrider(
+                playerManager.playerInventoryManager.LeftHandWeaponScriptable.animatorOverrider);
         }
 
         public void LoadLeftWeapon()
         {
-            if (playerManager.playerInventoryManager.LeftHandWeaponSciptable != null)
+            if (playerManager.playerInventoryManager.LeftHandWeaponScriptable != null)
             {
-                // INSTANTIATE WEAPON PREFUB AND LOAD IT INTO HAND.
-                LeftHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.LeftHandWeaponSciptable.ModelPrefub);
-                leftHandSocket.LoadModel(LeftHandWeaponInstance);
+                // INSTANTIATE WEAPON PREFUB AND LOAD IT INTO HAND
+                LeftHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.LeftHandWeaponScriptable.ModelPrefub);
 
-                // SET WEAPON DAMAGE VALUES TO THE DAMAGE COLLIDER WHICH IS ON ITS PREFUB.
+                // CHOOSE WHICH SOCKET TO LOAD TO DEPENDING ON THE WEAPON TYPE WE LOADING
+                WeaponType leftWeaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
+                if (leftWeaponType == WeaponType.WEAPON)
+                    leftHandSocket.LoadModel(LeftHandWeaponInstance);
+                else if (leftWeaponType == WeaponType.SHIELD)
+                    leftHandShieldSocket.LoadModel(LeftHandWeaponInstance);
+
+                // SET WEAPON DAMAGE VALUES TO THE DAMAGE COLLIDER WHICH IS ON ITS PREFUB
                 LeftHandWeaponManager = LeftHandWeaponInstance.GetComponent<WeaponManager>();
-                LeftHandWeaponManager.SetWeaponDamage(playerManager, ref playerManager.playerInventoryManager.LeftHandWeaponSciptable);
+                LeftHandWeaponManager.TransferWeaponValuesToCollider(playerManager, ref playerManager.playerInventoryManager.LeftHandWeaponScriptable);
             }
         }
 
         public void UnloadLeftWeapon()
         {
             leftHandSocket.UnloadModel();
+            leftHandShieldSocket.UnloadModel();
         }
 
         // ----------------
@@ -134,9 +145,7 @@ namespace FG
         public void SwitchRightWeapon()
         {
             if (!playerManager.IsOwner)
-            {
                 return;
-            }
 
             // DO ANIMATION WITHOUT MOVEMENT RESTRICTIONS.
             playerManager.playerAnimatorManager.PerformAnimationAction("swap_right_weapon_01", false, false, true, true);
@@ -175,7 +184,7 @@ namespace FG
             if (anotherWeapon != null)
             {
                 playerManager.playerInventoryManager.RightHandWeaponIndex = anotherWeaponIndex;
-                playerManager.playerInventoryManager.RightHandWeaponSciptable = anotherWeapon;
+                playerManager.playerInventoryManager.RightHandWeaponScriptable = anotherWeapon;
 
                 // NOTIFY NETWORK SO IT CHANGES WIELDING WEAPON FOR EVERYONE INCLUDING THIS CLIENT.
                 playerManager.playerNetwork.networkRightHandWeaponID.Value = anotherWeapon.ID;
@@ -183,28 +192,64 @@ namespace FG
             else
             {
                 playerManager.playerInventoryManager.RightHandWeaponIndex = 0;
-                playerManager.playerInventoryManager.RightHandWeaponSciptable = ItemDatabase.instance.unarmedWeapon;
+                playerManager.playerInventoryManager.RightHandWeaponScriptable = ItemDatabase.instance.unarmedWeapon;
 
                 // NOTIFY NETWORK SO IT CHANGES WIELDING WEAPON FOR EVERYONE INCLUDING THIS CLIENT.
                 playerManager.playerNetwork.networkRightHandWeaponID.Value = ItemDatabase.instance.unarmedWeapon.ID;
             }
+
+            // OVERRIDE ANIMATIONS FOR NEWLY EQUIPPED WEAPON
+            playerManager.playerAnimatorManager.UpdateAnimatorOverrider(
+                playerManager.playerInventoryManager.RightHandWeaponScriptable.animatorOverrider);
         }
 
         public void LoadRightWeapon()
         {
-            if (playerManager.playerInventoryManager.RightHandWeaponSciptable != null)
+            if (playerManager.playerInventoryManager.RightHandWeaponScriptable != null)
             {
-                RightHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.RightHandWeaponSciptable.ModelPrefub);
+                RightHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.RightHandWeaponScriptable.ModelPrefub);
                 rightHandSocket.LoadModel(RightHandWeaponInstance);
 
                 RightHandWeaponManager = RightHandWeaponInstance.GetComponent<WeaponManager>();
-                RightHandWeaponManager.SetWeaponDamage(playerManager, ref playerManager.playerInventoryManager.RightHandWeaponSciptable);
+                RightHandWeaponManager.TransferWeaponValuesToCollider(playerManager, ref playerManager.playerInventoryManager.RightHandWeaponScriptable);
             }
         }
 
         public void UnloadRightWeapon()
         {
             rightHandSocket.UnloadModel();
+        }
+
+        // -----------
+        // TWO HANDING
+        public void UnTwoHandWeapon()
+        {
+            // 1. REMOVE STRENGTH BUFF FROM COLLIDER
+            // 2. RETURN WEAPON IN ITS SOCKET
+            // 3. RETURN WEAPON FROM BACK IN ITS SOCKET
+            // 4. APPLY 1H ANIMSET
+
+            playerManager.animator.SetBool("IsTwoHanding", false);
+        }
+
+        public void TwoHandLeftWeapon()
+        {
+            // 1. APPLY STRENGTH BOOST TO COLLIDER
+            // 2. SEND RIGHT WEAPON TO BACK SOCKET
+            // 3. FIT LEFT WEAPON IN RIGHT HAND SOCKET
+            // 4. APPLY 2H ANIMSET
+
+            playerManager.animator.SetBool("IsTwoHanding", true);
+        }
+
+        public void TwoHandRightWeapon()
+        {
+            // 1. APPLY STRENGTH BOOST TO COLLIDER
+            // 2. SEND LEFT WEAPON TO BACK SOCKET
+            // 3. FIT LEFT WEAPON IN RIGHT HAND SOCKET
+            // 4. APPLY 2H ANIMSET
+
+            playerManager.animator.SetBool("IsTwoHanding", true);
         }
 
         // --------------
@@ -215,12 +260,6 @@ namespace FG
             LoadRightWeapon();
         }
 
-        private void UnloadBothHandsWeapons()
-        {
-            UnloadLeftWeapon();
-            UnloadRightWeapon();
-        }
-
         // ----------------------------------------------
         // ATTACK ANIMATION EVENTS - COLLIDERS MANAGEMENT
         public void ActivateDamageCollider()
@@ -229,14 +268,14 @@ namespace FG
             {
                 LeftHandWeaponManager.ActivateDamageCollider(true);
                 playerManager.playerSFXManager.PlayAudioClip(
-                    SFXManager.instance.GetRandomSFX(ref playerManager.playerInventoryManager.LeftHandWeaponSciptable.whooshes));
+                    SFXManager.instance.GetRandomSFX(ref playerManager.playerInventoryManager.LeftHandWeaponScriptable.whooshesSoundFX));
             }
 
             if (playerManager.playerNetwork.networkIsUsingRightHand.Value)
             {
                 RightHandWeaponManager.ActivateDamageCollider(true);
                 playerManager.playerSFXManager.PlayAudioClip(
-                    SFXManager.instance.GetRandomSFX(ref playerManager.playerInventoryManager.RightHandWeaponSciptable.whooshes));
+                    SFXManager.instance.GetRandomSFX(ref playerManager.playerInventoryManager.RightHandWeaponScriptable.whooshesSoundFX));
             }
         }
 

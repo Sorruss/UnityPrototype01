@@ -7,8 +7,10 @@ namespace FG
     {
         private PlayerManager player;
 
-        [HideInInspector] public bool CanDoComboMainHand = false;
-        [HideInInspector] public bool CanDoComboOffHand = false;
+        [Header("Debug Only")]
+        public bool CanDoComboMainHand = false;
+        public bool CanDoComboOffHand = false;
+        public bool CanBlock = true;
 
         protected override void Awake()
         {
@@ -21,8 +23,11 @@ namespace FG
         {
             base.DisableAllDamageColliders();
 
-            player.playerEquipmentManager.LeftHandWeaponManager.ActivateDamageCollider(false);
-            player.playerEquipmentManager.RightHandWeaponManager.ActivateDamageCollider(false);
+            if (player.playerEquipmentManager.LeftHandWeaponManager != null)
+                player.playerEquipmentManager.LeftHandWeaponManager.ActivateDamageCollider(false);
+
+            if (player.playerEquipmentManager.RightHandWeaponManager != null)
+                player.playerEquipmentManager.RightHandWeaponManager.ActivateDamageCollider(false);
         }
 
         // LOCK ON STUFF
@@ -39,6 +44,8 @@ namespace FG
         // WEAPON ACTIONS
         public void TryToPerformWeaponAction(WeaponAction weaponAction, WeaponItem weapon)
         {
+            player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverrider);
+
             // PERFORM ACTION ON THIS CLIENT.
             weaponAction.TryToPerformAction(player, weapon);
 

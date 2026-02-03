@@ -6,17 +6,17 @@ namespace FG
     public class WeaponActionLightAttack : WeaponAction
     {
         [Header("Animations - Light Attacks")]
-        public string MainLightAttack01Anim = "main_light_attack_01";
-        public string MainLightAttack02Anim = "main_light_attack_02";
+        [SerializeField] private string MainLightAttack01Anim = "main_light_attack_01";
+        [SerializeField] private string MainLightAttack02Anim = "main_light_attack_02";
 
         [Header("Animations - Run Attacks")]
-        public string MainRunAttack01Anim = "main_run_attack_01";
+        [SerializeField] private string MainRunAttack01Anim = "main_run_attack_01";
 
         [Header("Animations - Roll Attacks")]
-        public string MainRollAttack01Anim = "main_roll_attack_01";
+        [SerializeField] private string MainRollAttack01Anim = "main_roll_attack_01";
 
         [Header("Animations - Backstep Attacks")]
-        public string MainBackstepAttack01Anim = "main_backstep_attack_01";
+        [SerializeField] private string MainBackstepAttack01Anim = "main_backstep_attack_01";
 
         public override void TryToPerformAction(PlayerManager player, WeaponItem weapon)
         {
@@ -31,6 +31,9 @@ namespace FG
 
             if (!player.characterLocomotionManager.isGrounded)
                 return;
+
+            // AT THIS POINT WE WILL DO ATTACK SO
+            player.playerNetwork.networkIsAttacking.Value = true;
 
             // CHOOSE WHICH ATTACK TYPE TO DO (RUNNING, ROLLING, ETC.)
             if (player.playerNetwork.networkIsSprinting.Value)

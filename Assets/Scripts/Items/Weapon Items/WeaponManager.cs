@@ -11,7 +11,7 @@ namespace FG
             meleeDamageCollider = GetComponentInChildren<MeleeWeaponDamageCollider>();
         }
 
-        public void SetWeaponDamage(CharacterManager damageDealer, ref WeaponItem weaponItem)
+        public void TransferWeaponValuesToCollider(CharacterManager damageDealer, ref WeaponItem weaponItem)
         {
             meleeDamageCollider.damageDealer = damageDealer;
 

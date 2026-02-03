@@ -8,15 +8,18 @@ namespace FG
         [HideInInspector] public static SFXManager instance;
 
         [Header("SFX - Actions")]
-        [SerializeField] public AudioClip rollActionSFX;
-        [SerializeField] public AudioClip backstepActionSFX;
+        public AudioClip rollActionSFX;
+        public AudioClip backstepActionSFX;
 
         [Header("SFX - Attack Actions")]
-        [SerializeField] public AudioClip[] lightSwingSFX;
-        [SerializeField] public AudioClip[] heavySwingSFX;
+        public AudioClip[] lightSwingSFX;
+        public AudioClip[] heavySwingSFX;
 
         [Header("SFX - Damage")]
-        [SerializeField] public AudioClip[] physicalDamageSFX;
+        public AudioClip[] physicalDamageSFX;
+
+        [Header("SFX - Guard Broken")]
+        public AudioClip[] guardBrokenSFX;
 
         [Header("Audio Sorces - Boss Fight")]
         [SerializeField] private AudioSource audioSourceBossFightIntro;

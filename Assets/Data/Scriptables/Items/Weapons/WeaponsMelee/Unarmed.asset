@@ -17,14 +17,27 @@ MonoBehaviour:
   ID: 0
   Icon: {fileID: 0}
   ModelPrefub: {fileID: 667837401097958796, guid: ad6112e59d5e0304a8c87f6af93a4f90, type: 3}
+  weaponType: 0
+  animatorOverrider: {fileID: 22100000, guid: 96cc7a8ac1c60224eb4a34cfd1c6171d, type: 2}
   physicalDamage: 10
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  physicalDamageAbsorbtion: 0.3
+  magicDamageAbsorbtion: 0
+  fireDamageAbsorbtion: 0
+  lightningDamageAbsorbtion: 0
+  holyDamageAbsorbtion: 0
   lightAttack01DamageModifier: 1
+  lightAttack02DamageModifier: 1.2
   heavyAttack01DamageModifier: 1.4
+  heavyAttack02DamageModifier: 1.6
   chargedAttack01DamageModifier: 2
+  chargedAttack02DamageModifier: 2.2
+  runAttack01DamageModifier: 1.2
+  rollAttack01DamageModifier: 1.1
+  backstepAttack01DamageModifier: 1.1
   poiseDamage: 5
   strengthReq: 0
   intelligenceReq: 0
@@ -32,5 +45,10 @@ MonoBehaviour:
   baseStaminaCost: 5
   lightAttackStaminaCostModifier: 1
   heavyAttackStaminaCostModifier: 1.3
+  runAttackStaminaCostModifier: 0.9
+  rollAttackStaminaCostModifier: 0.8
+  backstepAttackStaminaCostModifier: 0.8
   OH_RB_Action: {fileID: 11400000, guid: 4a295cbc7de09a94991b4ddb510bb6e5, type: 2}
+  OH_LB_Action: {fileID: 11400000, guid: 4a295cbc7de09a94991b4ddb510bb6e5, type: 2}
   OH_RT_Action: {fileID: 11400000, guid: 4a295cbc7de09a94991b4ddb510bb6e5, type: 2}
+  whooshes: []
