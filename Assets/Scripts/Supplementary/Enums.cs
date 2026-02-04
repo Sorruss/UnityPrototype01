@@ -20,7 +20,6 @@ namespace FG
         RIGHT_HAND,
         LEFT_HAND_SHIELD,
         BACK,
-        BACK_SHIELD,
     }
 
     public enum WeaponMeleeAttackType       // WEAPON ACTION ATTACK TYPES
@@ -60,6 +59,13 @@ namespace FG
     {
         WEAPON,
         SHIELD
+    }
+
+    public enum WeaponClass                 // FOR "UNEQUIPPED" SLOT CORRECT PLACEMENT
+    {
+        STRAIGHT_SWORD = 1,
+        SHIELD,
+        FIST,
     }
 
     public enum HitDirection                // DIRECTION OF HIT (IN PERSPECTIVE OF TARGET)

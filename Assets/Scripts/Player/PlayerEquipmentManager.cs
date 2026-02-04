@@ -19,7 +19,6 @@ namespace FG
         [SerializeField] private WeaponSocket leftHandShieldSocket;
         [SerializeField] private WeaponSocket rightHandSocket;
         [SerializeField] private WeaponSocket backSocket;
-        [SerializeField] private WeaponSocket backSocketShield;
 
         protected override void Awake()
         {
@@ -49,8 +48,6 @@ namespace FG
                     leftHandShieldSocket = socket;
                 else if (socket.socket == CharacterWeaponSocket.BACK)
                     backSocket = socket;
-                else if (socket.socket == CharacterWeaponSocket.BACK_SHIELD)
-                    backSocketShield = socket;
             }
         }
 
@@ -127,9 +124,9 @@ namespace FG
                 // CHOOSE WHICH SOCKET TO LOAD TO DEPENDING ON THE WEAPON TYPE WE LOADING
                 WeaponType leftWeaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
                 if (leftWeaponType == WeaponType.WEAPON)
-                    leftHandSocket.LoadModel(LeftHandWeaponInstance);
+                    leftHandSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
                 else if (leftWeaponType == WeaponType.SHIELD)
-                    leftHandShieldSocket.LoadModel(LeftHandWeaponInstance);
+                    leftHandShieldSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
 
                 // SET WEAPON DAMAGE VALUES TO THE DAMAGE COLLIDER WHICH IS ON ITS PREFUB
                 LeftHandWeaponManager = LeftHandWeaponInstance.GetComponent<WeaponManager>();
@@ -211,7 +208,7 @@ namespace FG
             if (playerManager.playerInventoryManager.RightHandWeaponScriptable != null)
             {
                 RightHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.RightHandWeaponScriptable.ModelPrefub);
-                rightHandSocket.LoadModel(RightHandWeaponInstance);
+                rightHandSocket.PlaceModelAsEquipped(RightHandWeaponInstance);
 
                 RightHandWeaponManager = RightHandWeaponInstance.GetComponent<WeaponManager>();
                 RightHandWeaponManager.TransferWeaponValuesToCollider(playerManager, ref playerManager.playerInventoryManager.RightHandWeaponScriptable);
@@ -232,42 +229,26 @@ namespace FG
             if (playerManager.playerNetwork.networkIsTwoHandingLeftWeapon.Value)
             {
                 // TRANSFER ORIGINALLY LEFT WEAPON FROM RIGHT BACK TO LEFT SOCKET
-                UnloadRightWeapon();
-
-                // RE-LOAD LEFT WEAPON
-                ReLoadLeftWeaponInstanceAndItsManager();
-
-                // LOAD LEFT WEAPON INTO LEFT HAND SOCKET
-                WeaponType leftWeaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
-                if (leftWeaponType == WeaponType.WEAPON)
-                    leftHandSocket.LoadModel(LeftHandWeaponInstance);
-                else if (leftWeaponType == WeaponType.SHIELD)
-                    leftHandShieldSocket.LoadModel(LeftHandWeaponInstance);
+                WeaponType weaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
+                if (weaponType == WeaponType.WEAPON)
+                    leftHandSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
+                else if (weaponType == WeaponType.SHIELD)
+                    leftHandShieldSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
 
                 // TRANSFER ORIGINALLY RIGHT WEAPON FROM BACK TO RIGHT SOCKET
                 if (RightHandWeaponInstance != null)
-                {
-                    UnlockBackWeapon();
-                    ReLoadRightWeaponInstanceAndItsManager();
-                    rightHandSocket.LoadModel(RightHandWeaponInstance);
-                }
+                    rightHandSocket.PlaceModelAsEquipped(RightHandWeaponInstance);
             }
             else
             {
                 if (LeftHandWeaponInstance != null)
                 {
-                    // REMOVE LEFT WEAPON FROM BACK
-                    UnlockBackWeapon();
-
-                    // RE-LOAD LEFT WEAPON
-                    ReLoadLeftWeaponInstanceAndItsManager();
-
                     // LOAD LEFT WEAPON IN LEFT SOCKET
-                    WeaponType leftWeaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
-                    if (leftWeaponType == WeaponType.WEAPON)
-                        leftHandSocket.LoadModel(LeftHandWeaponInstance);
-                    else if (leftWeaponType == WeaponType.SHIELD)
-                        leftHandShieldSocket.LoadModel(LeftHandWeaponInstance);
+                    WeaponType weaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
+                    if (weaponType == WeaponType.WEAPON)
+                        leftHandSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
+                    else if (weaponType == WeaponType.SHIELD)
+                        leftHandShieldSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
                 }
             }
 
@@ -276,7 +257,7 @@ namespace FG
             playerManager.playerAnimatorManager.UpdateAnimatorOverrider(
                 playerManager.playerInventoryManager.TwoHandedWeaponScriptable.animatorOverriderOH);
 
-            // 4. CONFIGURE DAMAGE COLLIDER
+            // 4. RESET DAMAGE COLLIDER
             LeftHandWeaponManager.TransferWeaponValuesToCollider(playerManager, 
                 ref playerManager.playerInventoryManager.LeftHandWeaponScriptable);
             RightHandWeaponManager.TransferWeaponValuesToCollider(playerManager,
@@ -285,27 +266,24 @@ namespace FG
 
         public void TwoHandLeftWeapon()
         {
-            // 1. SEND RIGHT WEAPON TO BACK SOCKET
+            // WE CAN'T TWO HAND "UNARMED" WEAPON
+            if (playerManager.playerInventoryManager.LeftHandWeaponScriptable.ID == ItemDatabase.instance.unarmedWeapon.ID)
+            {
+                if (playerManager.IsOwner)
+                    playerManager.playerNetwork.networkIsTwoHanding.Value = false;
+
+                return;
+            }
+
+            // 1. PLACE RIGHT WEAPON IN BACK SOCKET
             if (RightHandWeaponInstance != null)
             {
-                // REMOVE RIGHT WEAPON FROM RIGHT SOCKET
-                UnloadRightWeapon();
-
-                // RE-LOAD RIGHT WEAPON
-                ReLoadRightWeaponInstanceAndItsManager();
-
-                // LOAD RIGHT WEAPON IN BACK SOCKET
-                WeaponType rightWeaponType = playerManager.playerInventoryManager.RightHandWeaponScriptable.weaponType;
-                if (rightWeaponType == WeaponType.WEAPON)
-                    backSocket.LoadModel(RightHandWeaponInstance);
-                else if (rightWeaponType == WeaponType.SHIELD)
-                    backSocketShield.LoadModel(RightHandWeaponInstance);
+                backSocket.PlaceModelAsUnequipped(RightHandWeaponInstance, 
+                    playerManager.playerInventoryManager.RightHandWeaponScriptable.weaponClass);
             }
             
             // 2. FIT LEFT WEAPON IN RIGHT HAND SOCKET
-            UnloadLeftWeapon();
-            ReLoadLeftWeaponInstanceAndItsManager();
-            rightHandSocket.LoadModel(LeftHandWeaponInstance);
+            rightHandSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
 
             // 3. APPLY 2H ANIMSET
             playerManager.animator.SetBool("IsTwoHanding", true);
@@ -313,28 +291,25 @@ namespace FG
                 playerManager.playerInventoryManager.TwoHandedWeaponScriptable.animatorOverriderTH);
 
             // 4. APPLY STRENGTH BOOST TO COLLIDER
-            LeftHandWeaponManager.TransferWeaponValuesToCollider(playerManager, 
-                ref playerManager.playerInventoryManager.TwoHandedWeaponScriptable);
             LeftHandWeaponManager.ApplyTwoHandingBoost();
         }
 
         public void TwoHandRightWeapon()
         {
-            // 1. SEND LEFT WEAPON TO BACK SOCKET
-            if (LeftHandWeaponInstance != null)
+            // WE CAN'T TWO HAND "UNARMED" WEAPON
+            if (playerManager.playerInventoryManager.RightHandWeaponScriptable.ID == ItemDatabase.instance.unarmedWeapon.ID)
             {
-                // REMOVE LEFT WEAPON FROM LEFT SOCKET
-                UnloadLeftWeapon();
+                if (playerManager.IsOwner)
+                    playerManager.playerNetwork.networkIsTwoHanding.Value = false;
 
-                // RE-LOAD LEFT WEAPON
-                ReLoadLeftWeaponInstanceAndItsManager();
+                return;
+            }
 
-                // SET LEFT WEAPON IN BACK SOCKET
-                WeaponType leftWeaponType = playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponType;
-                if (leftWeaponType == WeaponType.WEAPON)
-                    backSocket.LoadModel(LeftHandWeaponInstance);
-                else if (leftWeaponType == WeaponType.SHIELD)
-                    backSocketShield.LoadModel(LeftHandWeaponInstance);
+            // 1. PLACE LEFT WEAPON IN BACK SOCKET
+            if (RightHandWeaponInstance != null)
+            {
+                backSocket.PlaceModelAsUnequipped(LeftHandWeaponInstance,
+                    playerManager.playerInventoryManager.LeftHandWeaponScriptable.weaponClass);
             }
             
             // 2. APPLY 2H ANIMSET
@@ -343,15 +318,7 @@ namespace FG
                 playerManager.playerInventoryManager.TwoHandedWeaponScriptable.animatorOverriderTH);
 
             // 3. APPLY STRENGTH BOOST TO COLLIDER
-            RightHandWeaponManager.TransferWeaponValuesToCollider(playerManager, 
-                ref playerManager.playerInventoryManager.TwoHandedWeaponScriptable);
             RightHandWeaponManager.ApplyTwoHandingBoost();
-        }
-
-        private void UnlockBackWeapon()
-        {
-            backSocket.UnloadModel();
-            backSocketShield.UnloadModel();
         }
 
         // --------------
@@ -360,18 +327,6 @@ namespace FG
         {
             LoadLeftWeapon();
             LoadRightWeapon();
-        }
-
-        private void ReLoadLeftWeaponInstanceAndItsManager()
-        {
-            LeftHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.LeftHandWeaponScriptable.ModelPrefub);
-            LeftHandWeaponManager = LeftHandWeaponInstance.GetComponent<WeaponManager>();
-        }
-
-        private void ReLoadRightWeaponInstanceAndItsManager()
-        {
-            RightHandWeaponInstance = Instantiate(playerManager.playerInventoryManager.RightHandWeaponScriptable.ModelPrefub);
-            RightHandWeaponManager = RightHandWeaponInstance.GetComponent<WeaponManager>();
         }
 
         // ----------------------------------------------
@@ -414,8 +369,11 @@ namespace FG
 
         public void DeactivateDamageCollider()
         {
-            LeftHandWeaponManager.ActivateDamageCollider(false);
-            RightHandWeaponManager.ActivateDamageCollider(false);
+            if (LeftHandWeaponManager != null)
+                LeftHandWeaponManager.ActivateDamageCollider(false);
+
+            if (RightHandWeaponManager != null)
+                RightHandWeaponManager.ActivateDamageCollider(false);
         }
     }
 }

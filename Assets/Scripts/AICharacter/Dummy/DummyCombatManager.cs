@@ -99,7 +99,7 @@ namespace FG
 
             // INSTANTIATE WEAPON PREFUB AND LOAD IT INTO HAND.
             LeftHandWeaponInstance = Instantiate(LeftHandWeaponScriptable.ModelPrefub);
-            leftHandSocket.LoadModel(LeftHandWeaponInstance);
+            leftHandSocket.PlaceModelAsEquipped(LeftHandWeaponInstance);
 
             // SET WEAPON DAMAGE VALUES TO THE DAMAGE COLLIDER WHICH IS ON ITS PREFUB.
             LeftHandWeaponManager = LeftHandWeaponInstance.GetComponent<WeaponManager>();
@@ -115,7 +115,7 @@ namespace FG
                 return;
 
             RightHandWeaponInstance = Instantiate(RightHandWeaponScriptable.ModelPrefub);
-            rightHandSocket.LoadModel(RightHandWeaponInstance);
+            rightHandSocket.PlaceModelAsEquipped(RightHandWeaponInstance);
 
             RightHandWeaponManager = RightHandWeaponInstance.GetComponent<WeaponManager>();
             RightHandWeaponManager.TransferWeaponValuesToCollider(aiCharacter, ref RightHandWeaponScriptable);

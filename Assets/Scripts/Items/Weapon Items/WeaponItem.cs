@@ -10,6 +10,9 @@ namespace FG
         [Header("Type")]
         public WeaponType weaponType = WeaponType.WEAPON;
 
+        [Header("Class")]
+        public WeaponClass weaponClass;
+
         [Header("Overrider")]
         public AnimatorOverrideController animatorOverriderOH;
         public AnimatorOverrideController animatorOverriderTH;

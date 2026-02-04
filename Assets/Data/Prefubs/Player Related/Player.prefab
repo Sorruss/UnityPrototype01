@@ -114,13 +114,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3330067138209952203}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16999085, y: -0.69893205, z: -0.15652837, w: 0.67682797}
-  m_LocalPosition: {x: -0.38491222, y: -0.08434274, z: -0.2537582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.124, y: -0.121, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5044579901487816282}
-  m_LocalEulerAnglesHint: {x: 0.648, y: -91.995, z: -26.714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5434668853238893972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,51 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponSocket
   socket: 1
---- !u!1 &4751149151002188718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5819983250573865199}
-  - component: {fileID: 8304419565266183034}
-  m_Layer: 8
-  m_Name: WeaponSocketBackShield
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5819983250573865199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4751149151002188718}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.15401827, y: -0.9562457, z: -0.24819447, w: 0.016496833}
-  m_LocalPosition: {x: -0.092, y: -0.065, z: -0.063}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5044579901487816282}
-  m_LocalEulerAnglesHint: {x: -28.008, y: 187.027, z: -380.05402}
---- !u!114 &8304419565266183034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4751149151002188718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9431163d4b8af614fb37c415701686a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.WeaponSocket
-  socket: 5
 --- !u!1001 &2791668107703657950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -702,9 +657,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7011284792763705418, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1432658038976854946}
-    - targetCorrespondingSourceObject: {fileID: -7011284792763705418, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 5819983250573865199}
     - targetCorrespondingSourceObject: {fileID: 3780837713738550241, guid: 0919753a8a23c864484f3a92f6382869, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6203542511884557538}
@@ -1331,7 +1283,6 @@ MonoBehaviour:
   leftHandShieldSocket: {fileID: 0}
   rightHandSocket: {fileID: 0}
   backSocket: {fileID: 0}
-  backSocketShield: {fileID: 0}
 --- !u!114 &7241501903264518259
 MonoBehaviour:
   m_ObjectHideFlags: 0

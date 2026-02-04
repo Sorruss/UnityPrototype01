@@ -18,6 +18,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   ModelPrefub: {fileID: 667837401097958796, guid: ad6112e59d5e0304a8c87f6af93a4f90, type: 3}
   weaponType: 0
+  weaponClass: 3
   animatorOverriderOH: {fileID: 22100000, guid: 96cc7a8ac1c60224eb4a34cfd1c6171d, type: 2}
   animatorOverriderTH: {fileID: 22100000, guid: 96cc7a8ac1c60224eb4a34cfd1c6171d, type: 2}
   physicalDamage: 10
