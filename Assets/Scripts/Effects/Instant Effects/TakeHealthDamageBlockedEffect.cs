@@ -42,7 +42,7 @@ namespace FG
         [Header("Sound FX")]
         [SerializeField] private bool toPlaySFX = true;
 
-        public override void ApplyEffect(ref CharacterManager character)
+        public override void ApplyInstantEffect(ref CharacterManager character)
         {
             // Check if character is dead.
             if (character.characterNetwork.networkIsDead.Value)
@@ -52,7 +52,7 @@ namespace FG
             if (character.characterNetwork.networkIsInvincible.Value)
                 return;
 
-            base.ApplyEffect(ref character);
+            base.ApplyInstantEffect(ref character);
 
             // -------------------------------------------------------------
             // PART WHERE ALL CLIENTS SHOULD SEE THE ACTIONS (SFX, VFX, ETC)

@@ -146,14 +146,22 @@ namespace FG
         public void OnIsTwoHandingChanged(bool oldValue, bool newValue)
         {
             if (newValue)
-                return;
-
-            player.playerEquipmentManager.UnTwoHandWeapon();        // ORDER IS IMPORTANT
-
-            if (player.IsOwner)
             {
-                networkIsTwoHandingLeftWeapon.Value = false;
-                networkIsTwoHandingRightWeapon.Value = false;
+                // TWO HANDING IS ACTIVE
+                TwoHandingStaticEffect effect = Instantiate(EffectsManager.instance.twoHandingEffect);
+                player.playerEffectsManager.ApplyStaticEffect(effect);
+            }
+            else
+            {
+                // TWO HANDING IS NOT ACTIVE
+                player.playerEffectsManager.RemoveStaticEffect(EffectsManager.instance.twoHandingEffect.staticEffectID);
+                player.playerEquipmentManager.UnTwoHandWeapon();        // ORDER IS IMPORTANT
+
+                if (player.IsOwner)
+                {
+                    networkIsTwoHandingLeftWeapon.Value = false;
+                    networkIsTwoHandingRightWeapon.Value = false;
+                }
             }
         }
 

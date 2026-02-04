@@ -7,9 +7,9 @@ namespace FG
     {
         public float staminaDamage = 0.0f;
 
-        public override void ApplyEffect(ref CharacterManager character)
+        public override void ApplyInstantEffect(ref CharacterManager character)
         {
-            base.ApplyEffect(ref character);
+            base.ApplyInstantEffect(ref character);
             DecreaseStamina(ref character);
         }
 

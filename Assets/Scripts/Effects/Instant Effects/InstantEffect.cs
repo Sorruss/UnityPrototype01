@@ -6,7 +6,7 @@ namespace FG
     {
         [HideInInspector] public int instantEffectID;
 
-        public virtual void ApplyEffect(ref CharacterManager character)
+        public virtual void ApplyInstantEffect(ref CharacterManager character)
         {
 
         }

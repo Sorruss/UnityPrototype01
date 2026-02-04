@@ -52,3 +52,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 023c9f893d2453e40a72ead01214d68b, type: 2}
   - {fileID: 11400000, guid: e06967e9ce02b6f45b2f661a02a65185, type: 2}
   - {fileID: 11400000, guid: 2315fd8da7aa1894ab6a98d9322d2d44, type: 2}
+  twoHandingEffect: {fileID: 11400000, guid: 0ec8af2c4c8f13c4d88c644e7aea3a5c, type: 2}
+  staticEffects:
+  - {fileID: 11400000, guid: 0ec8af2c4c8f13c4d88c644e7aea3a5c, type: 2}

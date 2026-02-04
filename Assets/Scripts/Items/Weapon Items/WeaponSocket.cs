@@ -38,8 +38,8 @@ namespace FG
             }
             else if (weaponClass == WeaponClass.SHIELD)
             {
-                model.transform.localPosition = new Vector3(0.036f, 0.062f, -0.063f);
-                model.transform.localRotation = Quaternion.Euler(-44.244f, -166.844f, -26.351f);
+                model.transform.localPosition = new Vector3(0.03637858f, 0.02979704f, -0.06785431f);
+                model.transform.localRotation = Quaternion.Euler(-11.155f, -192.938f, -19.209f);
             }
         }
     }

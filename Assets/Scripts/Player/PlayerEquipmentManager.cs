@@ -289,9 +289,6 @@ namespace FG
             playerManager.animator.SetBool("IsTwoHanding", true);
             playerManager.playerAnimatorManager.UpdateAnimatorOverrider(
                 playerManager.playerInventoryManager.TwoHandedWeaponScriptable.animatorOverriderTH);
-
-            // 4. APPLY STRENGTH BOOST TO COLLIDER
-            LeftHandWeaponManager.ApplyTwoHandingBoost();
         }
 
         public void TwoHandRightWeapon()
@@ -316,9 +313,6 @@ namespace FG
             playerManager.animator.SetBool("IsTwoHanding", true);
             playerManager.playerAnimatorManager.UpdateAnimatorOverrider(
                 playerManager.playerInventoryManager.TwoHandedWeaponScriptable.animatorOverriderTH);
-
-            // 3. APPLY STRENGTH BOOST TO COLLIDER
-            RightHandWeaponManager.ApplyTwoHandingBoost();
         }
 
         // --------------

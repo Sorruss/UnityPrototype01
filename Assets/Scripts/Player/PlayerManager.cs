@@ -10,6 +10,7 @@ namespace FG
         [HideInInspector] public PlayerInventoryManager playerInventoryManager;
         [HideInInspector] public PlayerEquipmentManager playerEquipmentManager;
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
+        [HideInInspector] public PlayerEffectsManager playerEffectsManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotion;
         [HideInInspector] public PlayerCombatManager playerCombatManager;
         [HideInInspector] public PlayerStatsManager playerStatsManager;
@@ -26,6 +27,7 @@ namespace FG
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+            playerEffectsManager = GetComponent<PlayerEffectsManager>();
             playerLocomotion = GetComponent<PlayerLocomotionManager>();
             playerCombatManager = GetComponent<PlayerCombatManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();

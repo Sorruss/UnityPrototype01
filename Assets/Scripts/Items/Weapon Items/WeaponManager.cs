@@ -33,11 +33,6 @@ namespace FG
             meleeDamageCollider.backstepAttack01DamageModifier = weaponItem.backstepAttack01DamageModifier;
         }
 
-        public void ApplyTwoHandingBoost()
-        {
-            meleeDamageCollider.physicalDamage = (int)(meleeDamageCollider.physicalDamage * 1.5f);
-        }
-
         public void ActivateDamageCollider(bool activate)
         {
             if (activate)

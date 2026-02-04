@@ -110,6 +110,17 @@ namespace FG
             new(7,
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> networkStrength =
+            new(4,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+
+        // STATS MODIFIERS
+        [Header("STATS MODIFIERS")]
+        public NetworkVariable<int> networkStrengthModifier =
+            new(0,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
 
         // RESOURCES.
         [Header("RESOURCES")]

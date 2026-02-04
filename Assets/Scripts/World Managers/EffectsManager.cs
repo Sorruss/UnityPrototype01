@@ -17,6 +17,11 @@ namespace FG
         [Space]
         [SerializeField] private List<InstantEffect> instantEffects;
 
+        [Header("Static Effects")]
+        [SerializeField] public TwoHandingStaticEffect twoHandingEffect;
+        [Space]
+        [SerializeField] private List<StaticEffect> staticEffects;
+
         private void Start()
         {
             if (instance == null)
@@ -29,13 +34,24 @@ namespace FG
             }
 
             GenerateInstantEffectsIDs();
+            GenerateStaticEffectsIDs();
         }
 
+        // --------------
+        // AUTO GENERATING IDs
         private void GenerateInstantEffectsIDs()
         {
             for (int i = 0;  i < instantEffects.Count; ++i)
             {
                 instantEffects[i].instantEffectID = i;
+            }
+        }
+
+        private void GenerateStaticEffectsIDs()
+        {
+            for (int i = 0; i < staticEffects.Count; ++i)
+            {
+                staticEffects[i].staticEffectID = i;
             }
         }
     }
