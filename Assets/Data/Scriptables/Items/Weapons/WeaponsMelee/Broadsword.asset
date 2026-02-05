@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: Just a broadsword
   ID: 2
   Icon: {fileID: 21300000, guid: 10bce6c72b3e00142a635e303642fc37, type: 3}
+  equipmentWeight: 2
   ModelPrefub: {fileID: 667837401097958796, guid: 4a3b37d790f21bb4789f2db7b67270b9, type: 3}
   weaponType: 0
   weaponClass: 1

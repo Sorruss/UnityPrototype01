@@ -36,9 +36,7 @@ namespace FG
             base.SetCurrentTarget(target);
 
             if (player.IsOwner)
-            {
                 PlayerCamera.instance.AdjustCameraHeight();
-            }
         }
 
         // WEAPON ACTIONS

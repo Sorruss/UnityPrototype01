@@ -95,13 +95,19 @@ namespace FG
             // STATES
             playerNetwork.networkIsChargingAttack.OnValueChanged += playerNetwork.OnIsChargingAttackChanged;
 
-            // WEAPON ACTIONS STUFF
+            // WEAPONS STUFF
             playerNetwork.networkCurrentWeaponInUseID.OnValueChanged += playerNetwork.OnCurrentWeaponInUseIDChanged;
 
             // TWO HANDING
             playerNetwork.networkIsTwoHanding.OnValueChanged += playerNetwork.OnIsTwoHandingChanged;
             playerNetwork.networkIsTwoHandingLeftWeapon.OnValueChanged += playerNetwork.OnIsTwoHandingLeftWeaponChanged;
             playerNetwork.networkIsTwoHandingRightWeapon.OnValueChanged += playerNetwork.OnIsTwoHandingRightWeaponChanged;
+
+            // ARMOR
+            playerNetwork.networkArmorHelmetID.OnValueChanged += playerNetwork.OnArmorHelmetIDChanged;
+            playerNetwork.networkArmorChestplateID.OnValueChanged += playerNetwork.OnArmorChestplateIDChanged;
+            playerNetwork.networkArmorGauntletsID.OnValueChanged += playerNetwork.OnArmorGauntletsIDChanged;
+            playerNetwork.networkArmorLegginsID.OnValueChanged += playerNetwork.OnArmorLegginsIDChanged;
 
             // TODO: IF THE OWNER IS A CLIENT (NOT A SERVER), WE NEED TO LOAD HIS DATA
             if (IsOwner && !IsServer)
@@ -144,13 +150,19 @@ namespace FG
             // STATES
             playerNetwork.networkIsChargingAttack.OnValueChanged -= playerNetwork.OnIsChargingAttackChanged;
 
-            // WEAPON ACTIONS STUFF
+            // WEAPONS STUFF
             playerNetwork.networkCurrentWeaponInUseID.OnValueChanged -= playerNetwork.OnCurrentWeaponInUseIDChanged;
 
             // TWO HANDING
             playerNetwork.networkIsTwoHanding.OnValueChanged -= playerNetwork.OnIsTwoHandingChanged;
             playerNetwork.networkIsTwoHandingLeftWeapon.OnValueChanged -= playerNetwork.OnIsTwoHandingLeftWeaponChanged;
             playerNetwork.networkIsTwoHandingRightWeapon.OnValueChanged -= playerNetwork.OnIsTwoHandingRightWeaponChanged;
+
+            // ARMOR
+            playerNetwork.networkArmorHelmetID.OnValueChanged -= playerNetwork.OnArmorHelmetIDChanged;
+            playerNetwork.networkArmorChestplateID.OnValueChanged -= playerNetwork.OnArmorChestplateIDChanged;
+            playerNetwork.networkArmorGauntletsID.OnValueChanged -= playerNetwork.OnArmorGauntletsIDChanged;
+            playerNetwork.networkArmorLegginsID.OnValueChanged -= playerNetwork.OnArmorLegginsIDChanged;
         }
 
         // NETWORK CALLBACKS
@@ -184,13 +196,18 @@ namespace FG
             playerNetwork.OnRightHandWeaponIDChanged(0, playerNetwork.networkRightHandWeaponID.Value);
 
             // TWO HANDING
-            playerNetwork.OnIsTwoHandingChanged(false, playerNetwork.networkIsTwoHanding.Value);
             playerNetwork.OnIsTwoHandingLeftWeaponChanged(false, playerNetwork.networkIsTwoHandingLeftWeapon.Value);
             playerNetwork.OnIsTwoHandingRightWeaponChanged(false, playerNetwork.networkIsTwoHandingRightWeapon.Value);
 
             // LOCK ON
             if (playerNetwork.networkIsLockedOn.Value)
                 playerNetwork.OnTargetNetworkObjectIDChanged(0, playerNetwork.networkTargetNetworkObejectID.Value);
+
+            // ARMOR
+            playerNetwork.OnArmorHelmetIDChanged(0, playerNetwork.networkArmorHelmetID.Value);
+            playerNetwork.OnArmorChestplateIDChanged(0, playerNetwork.networkArmorChestplateID.Value);
+            playerNetwork.OnArmorGauntletsIDChanged(0, playerNetwork.networkArmorGauntletsID.Value);
+            playerNetwork.OnArmorLegginsIDChanged(0, playerNetwork.networkArmorLegginsID.Value);
         }
 
         private void SetupUI_Stamina()

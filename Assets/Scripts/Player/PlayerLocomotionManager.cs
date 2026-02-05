@@ -158,6 +158,9 @@ namespace FG
 
             if (player.playerNetwork.networkIsLockedOn.Value)
             {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
                 if (player.playerNetwork.networkIsSprinting.Value ||
                     player.playerNetwork.networkIsRolling.Value)
                 {

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2535efb414474804998b9ecc848bc605, type: 3}
+  m_Name: KnightSet Chest
+  m_EditorClassIdentifier: Assembly-CSharp::FG.ChestArmorItem
+  Name: Knight's Chestplate
+  Description: 
+  ID: 0
+  Icon: {fileID: 0}
+  equipmentWeight: 11
+  physicalDamageAbsorbtion: 0.124
+  magicDamageAbsorbtion: 0.109
+  fireDamageAbsorbtion: 0.109
+  lightningDamageAbsorbtion: 0.095
+  holyDamageAbsorbtion: 0.088
+  poisonResistance: 28
+  rotResistance: 28
+  bleedResistance: 50
+  frostResistance: 50
+  madnessResistance: 18
+  sleepResistance: 18
+  curseResistance: 18
+  poise: 24

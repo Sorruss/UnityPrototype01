@@ -15,7 +15,7 @@ namespace FG
                 NetworkVariableReadPermission.Everyone, 
                 NetworkVariableWritePermission.Owner);
 
-        // EQUIPMENT INFORMATION
+        // WEAPON INFORMATION
         public NetworkVariable<int> networkLeftHandWeaponID = 
             new(0,
                 NetworkVariableReadPermission.Everyone,
@@ -54,6 +54,24 @@ namespace FG
                 NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> networkIsTwoHandingRightWeapon =
             new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+
+        // ARMOR INFORMATION
+        public NetworkVariable<int> networkArmorHelmetID =
+            new(-1,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> networkArmorChestplateID =
+            new(-1,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> networkArmorGauntletsID =
+            new(-1,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> networkArmorLegginsID =
+            new(-1,
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
 
@@ -125,21 +143,37 @@ namespace FG
             if (!player.IsOwner)
                 return;
 
-            if (player.playerInventoryManager.LeftHandWeaponScriptable == null)
-                return;
+            if (newValue)
+            {
+                // IF WE ARE BLOCKING -> SET BLOCKING VALUES
+                WeaponItem blockingWeapon = player.playerInventoryManager.LeftHandWeaponScriptable;
 
-            player.playerStatsManager.damageAbsorbtionPhysical = 
-                player.playerInventoryManager.LeftHandWeaponScriptable.physicalDamageAbsorbtion;
-            player.playerStatsManager.damageAbsorbtionMagic =
-                player.playerInventoryManager.LeftHandWeaponScriptable.magicDamageAbsorbtion;
-            player.playerStatsManager.damageAbsorbtionFire =
-                player.playerInventoryManager.LeftHandWeaponScriptable.fireDamageAbsorbtion;
-            player.playerStatsManager.damageAbsorbtionLightning =
-                player.playerInventoryManager.LeftHandWeaponScriptable.lightningDamageAbsorbtion;
-            player.playerStatsManager.damageAbsorbtionHoly =
-                player.playerInventoryManager.LeftHandWeaponScriptable.holyDamageAbsorbtion;
+                // IF WE ARE NOT TWO HANDING AND DON'T HAVE WEAPON IN LEFT HAND -> RETURN
+                if (!networkIsTwoHanding.Value && blockingWeapon == null)
+                    return;
 
-            player.playerStatsManager.stability = player.playerInventoryManager.LeftHandWeaponScriptable.stability;
+                // IF WE ARE TWO HANDING -> CHANGE BLOCKING WEAPON TO TWOHANDED ONE
+                if (networkIsTwoHanding.Value)
+                    blockingWeapon = player.playerInventoryManager.TwoHandedWeaponScriptable;
+
+                // SET VALUES
+                player.playerStatsManager.blockDamageAbsorbtionPhysical = blockingWeapon.physicalDamageAbsorbtion;
+                player.playerStatsManager.blockDamageAbsorbtionMagic = blockingWeapon.magicDamageAbsorbtion;
+                player.playerStatsManager.blockDamageAbsorbtionFire = blockingWeapon.fireDamageAbsorbtion;
+                player.playerStatsManager.blockDamageAbsorbtionLightning = blockingWeapon.lightningDamageAbsorbtion;
+                player.playerStatsManager.blockDamageAbsorbtionHoly = blockingWeapon.holyDamageAbsorbtion;
+                player.playerStatsManager.stability = blockingWeapon.stability;
+            }
+            else
+            {
+                // IF WE ARE NOT BLOCKING -> RESET BLOCKING VALUES
+                player.playerStatsManager.blockDamageAbsorbtionPhysical = 0.0f;
+                player.playerStatsManager.blockDamageAbsorbtionMagic = 0.0f;
+                player.playerStatsManager.blockDamageAbsorbtionFire = 0.0f;
+                player.playerStatsManager.blockDamageAbsorbtionLightning = 0.0f;
+                player.playerStatsManager.blockDamageAbsorbtionHoly = 0.0f;
+                player.playerStatsManager.stability = 0;
+            }
         }
 
         // TWO HANDING INFORMATION
@@ -193,6 +227,75 @@ namespace FG
 
             player.playerInventoryManager.TwoHandedWeaponScriptable = player.playerInventoryManager.RightHandWeaponScriptable;
             player.playerEquipmentManager.TwoHandRightWeapon();
+        }
+
+        // ARMOR INFORMATION
+        public void OnArmorHelmetIDChanged(int oldValue, int newValue)
+        {
+            if (player.IsOwner)
+            {
+                // CAUSE WE ALREADY APPLIED ALL LOGIC LOCALLY
+                return;
+            }
+
+            // GETTING NEEDED ARMOR PIECE
+            HeadArmorItem armorItem = ItemDatabase.instance.GetHeadArmorItemByID(newValue);
+            if (armorItem != null)
+                armorItem = Instantiate(armorItem);
+
+            // IF IT'S NULL, IT WILL TRY TO UNQUIP THIS PARTICULAR ARMOR PIECE
+            player.playerEquipmentManager.EquipHeadArmor(armorItem);
+        }
+
+        public void OnArmorChestplateIDChanged(int oldValue, int newValue)
+        {
+            if (player.IsOwner)
+            {
+                // CAUSE WE ALREADY APPLIED ALL LOGIC LOCALLY
+                return;
+            }
+
+            // GETTING NEEDED ARMOR PIECE
+            ChestArmorItem armorItem = ItemDatabase.instance.GetChestArmorItemByID(newValue);
+            if (armorItem != null)
+                armorItem = Instantiate(armorItem);
+
+            // IF IT'S NULL, IT WILL TRY TO UNQUIP THIS PARTICULAR ARMOR PIECE
+            player.playerEquipmentManager.EquipChestArmor(armorItem);
+        }
+
+        public void OnArmorGauntletsIDChanged(int oldValue, int newValue)
+        {
+            if (player.IsOwner)
+            {
+                // CAUSE WE ALREADY APPLIED ALL LOGIC LOCALLY
+                return;
+            }
+
+            // GETTING NEEDED ARMOR PIECE
+            HandArmorItem armorItem = ItemDatabase.instance.GetHandArmorItemByID(newValue);
+            if (armorItem != null)
+                armorItem = Instantiate(armorItem);
+
+            // IF IT'S NULL, IT WILL TRY TO UNQUIP THIS PARTICULAR ARMOR PIECE
+            player.playerEquipmentManager.EquipHandArmor(armorItem);
+        }
+
+        public void OnArmorLegginsIDChanged(int oldValue, int newValue)
+        {
+            if (player.IsOwner)
+            {
+                // CAUSE WE ALREADY APPLIED ALL LOGIC LOCALLY
+                return;
+            }
+
+            // GETTING NEEDED ARMOR PIECE
+            LegArmorItem armorItem = ItemDatabase.instance.GetLegArmorItemByID(newValue);
+            if (armorItem != null)
+                armorItem = Instantiate(armorItem);
+
+            // IF IT'S NULL, IT WILL TRY TO UNQUIP THIS PARTICULAR ARMOR PIECE
+            player.playerEquipmentManager.EquipLegArmor(armorItem);
         }
 
         // -----------------

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc23ff1d7976dc4e85a04ed63d3b535, type: 3}
+  m_Name: KnightSet Leg
+  m_EditorClassIdentifier: Assembly-CSharp::FG.LegArmorItem
+  Name: Knight's Leggins
+  Description: 
+  ID: 0
+  Icon: {fileID: 0}
+  equipmentWeight: 7
+  physicalDamageAbsorbtion: 0.071
+  magicDamageAbsorbtion: 0.062
+  fireDamageAbsorbtion: 0.062
+  lightningDamageAbsorbtion: 0.054
+  holyDamageAbsorbtion: 0.05
+  poisonResistance: 17
+  rotResistance: 17
+  bleedResistance: 31
+  frostResistance: 31
+  madnessResistance: 11
+  sleepResistance: 11
+  curseResistance: 11
+  poise: 14

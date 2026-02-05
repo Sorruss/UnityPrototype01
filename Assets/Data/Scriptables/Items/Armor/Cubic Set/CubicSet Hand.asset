@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4221d3990aad464ebce890cc097ef2d, type: 3}
+  m_Name: CubicSet Hand
+  m_EditorClassIdentifier: Assembly-CSharp::FG.HandArmorItem
+  Name: Knight's Gauntlets
+  Description: 
+  ID: 40001
+  Icon: {fileID: 0}
+  equipmentWeight: 3
+  physicalDamageAbsorbtion: 0.031
+  magicDamageAbsorbtion: 0.027
+  fireDamageAbsorbtion: 0.027
+  lightningDamageAbsorbtion: 0.023
+  holyDamageAbsorbtion: 0.021
+  poisonResistance: 9
+  rotResistance: 9
+  bleedResistance: 17
+  frostResistance: 17
+  madnessResistance: 6
+  sleepResistance: 6
+  curseResistance: 6
+  poise: 5
+  armorModels:
+  - {fileID: 11400000, guid: 8c0e3442a0a2cb943bafda3a4610c229, type: 2}
+  - {fileID: 11400000, guid: 811ee9adf6e85c24bb0363c983df5e57, type: 2}

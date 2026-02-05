@@ -87,11 +87,11 @@ namespace FG
             }
 
             // Add up all character's damage absobtions
-            physicalDamageAbsorbtion += character.characterStatsManager.damageAbsorbtionPhysical;
-            magicDamageAbsorbtion += character.characterStatsManager.damageAbsorbtionMagic;
-            fireDamageAbsorbtion += character.characterStatsManager.damageAbsorbtionFire;
-            lightningDamageAbsorbtion += character.characterStatsManager.damageAbsorbtionLightning;
-            holyDamageAbsorbtion += character.characterStatsManager.damageAbsorbtionHoly;
+            physicalDamageAbsorbtion += character.characterStatsManager.blockDamageAbsorbtionPhysical;
+            magicDamageAbsorbtion += character.characterStatsManager.blockDamageAbsorbtionMagic;
+            fireDamageAbsorbtion += character.characterStatsManager.blockDamageAbsorbtionFire;
+            lightningDamageAbsorbtion += character.characterStatsManager.blockDamageAbsorbtionLightning;
+            holyDamageAbsorbtion += character.characterStatsManager.blockDamageAbsorbtionHoly;
 
             // Clip absobrtions so they limit at 1
             physicalDamageAbsorbtion = Mathf.Clamp01(physicalDamageAbsorbtion);

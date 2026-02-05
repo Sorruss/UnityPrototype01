@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: That's a common shield
   ID: 3
   Icon: {fileID: 21300000, guid: d3dbe7b13bf52da42b3b7b7bee555822, type: 3}
+  equipmentWeight: 2
   ModelPrefub: {fileID: 667837401097958796, guid: 85fd96ac9da746a469e6a1b27435ffa5, type: 3}
   weaponType: 1
   weaponClass: 2

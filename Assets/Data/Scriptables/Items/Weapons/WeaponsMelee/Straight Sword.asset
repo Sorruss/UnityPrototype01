@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: That's a straight sword
   ID: 1
   Icon: {fileID: 21300000, guid: ad2ce71010986cc47916e656fdf7aa32, type: 3}
+  equipmentWeight: 2
   ModelPrefub: {fileID: 667837401097958796, guid: b484b834d526ad740a5a0fd392523691, type: 3}
   weaponType: 0
   weaponClass: 1

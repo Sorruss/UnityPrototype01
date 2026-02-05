@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace FG
@@ -9,6 +10,9 @@ namespace FG
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!NetworkManager.Singleton.IsServer)
+                return;
+
             BossAICharacterManager boss = AIManager.instance.GetSpawnedBossByID(bossToAwake);
             boss.AwakeBoss();
             gameObject.SetActive(false);

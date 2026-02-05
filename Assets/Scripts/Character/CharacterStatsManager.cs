@@ -19,21 +19,37 @@ namespace FG
         private float staminaRecoverTimer = 0.0f;
         private float staminaDelayTimer = 0.0f;
 
-        [Header("Damage Absorbtion (0.0f - 1.0f) (Debug)")]
-        public float damageAbsorbtionPhysical = 0.0f;
-        public float damageAbsorbtionMagic = 0.0f;
-        public float damageAbsorbtionFire = 0.0f;
-        public float damageAbsorbtionLightning = 0.0f;
-        public float damageAbsorbtionHoly = 0.0f;
+        [Header("Damage Absorbtion From Blocking (0.0f - 1.0f) (Debug)")]
+        public float blockDamageAbsorbtionPhysical = 0.0f;
+        public float blockDamageAbsorbtionMagic = 0.0f;
+        public float blockDamageAbsorbtionFire = 0.0f;
+        public float blockDamageAbsorbtionLightning = 0.0f;
+        public float blockDamageAbsorbtionHoly = 0.0f;
 
         [Header("Damage Absorbtion Stability (0.0 - 1.0) (Debug)")]
         public float stability = 0.0f;
 
+        [Header("Damage Absorbtion From Armor (0.0f - 1.0f) (Debug)")]
+        public float armorDamageAbsorbtionPhysical = 0.0f;
+        public float armorDamageAbsorbtionMagic = 0.0f;
+        public float armorDamageAbsorbtionFire = 0.0f;
+        public float armorDamageAbsorbtionLightning = 0.0f;
+        public float armorDamageAbsorbtionHoly = 0.0f;
+
+        [Header("Resistance From Armor")]
+        public int armorPoisonResistance;
+        public int armorRotResistance;
+        public int armorBleedResistance;
+        public int armorFrostResistance;
+        public int armorMadnessResistance;
+        public int armorSleepResistance;
+        public int armorCurseResistance;
+
         [Header("Poise")]
-        [SerializeField] float poiseResetTimer;
-        [SerializeField] float poiseResetTime = 8.0f;
+        [SerializeField] private float poiseResetTimer;
+        [SerializeField] private float poiseResetTime = 8.0f;
         public int totalPoiseDamage;
-        public int basePoiseOffense = 50;
+        public int basePoiseOffense;
         public int bonusAttackingPoiseOffense;
 
         protected virtual void Awake()

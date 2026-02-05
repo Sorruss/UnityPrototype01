@@ -68,6 +68,44 @@ namespace FG
         FIST,
     }
 
+    public enum EquipmentModelType          // FOR PROPER ARMOR INSTANTIATION
+    {
+        // HEAD
+        FULL_HELMET = 1,    // HIDE HEAD
+        OPEN_HELMET,        // HIDE HAIR
+        HOOD,               // HIDE HAIR
+        HEAD_ACESSORIE,
+        FACE_COVER,
+        // CHEST
+        TORSO,
+        BACK,
+        // LEFT HAND
+        LEFT_SHOULDER,
+        LEFT_UPPERARM,
+        LEFT_ELBOW,
+        LEFT_LOWERARM,
+        LEFT_HAND,
+        // RIGHT HAND
+        RIGHT_SHOULDER,
+        RIGHT_UPPERARM,
+        RIGHT_ELBOW,
+        RIGHT_LOWERARM,
+        RIGHT_HAND,
+        // HIPS
+        HIPS,
+        HIPS_ATTACHMENT,
+        // LEFT LEG
+        LEFT_UPPERLEG,
+        LEFT_KNEE,
+        LEFT_LOWERLEG,
+        LEFT_LEG,
+        // RIGHT LEG
+        RIGHT_UPPERLEG,
+        RIGHT_KNEE,
+        RIGHT_LOWERLEG,
+        RIGHT_LEG,
+    }
+
     public enum HitDirection                // DIRECTION OF HIT (IN PERSPECTIVE OF TARGET)
     {
         LEFT = 1,

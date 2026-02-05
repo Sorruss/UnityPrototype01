@@ -98,6 +98,9 @@ namespace FG
         {
             if (player.playerNetwork.networkIsLockedOn.Value)
             {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
                 // HORIZONTAL ROTATION (CAMERA OBJECT)
                 Vector3 rotationDirection = 
                     player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.transform.position - 
@@ -276,9 +279,8 @@ namespace FG
         public void AdjustCameraHeight()
         {
             if (lockOnCoroutine != null)
-            {
                 StopCoroutine(lockOnCoroutine);
-            }
+
             lockOnCoroutine = StartCoroutine(AdjustCameraHeightEnumerator());
         }
 
@@ -341,9 +343,8 @@ namespace FG
         public void WaitAndTrySwitchLockOnTarget()
         {
             if (lockOnSwitchCoroutine != null)
-            {
                 StopCoroutine(lockOnSwitchCoroutine);
-            }
+
             lockOnSwitchCoroutine = StartCoroutine(WaitAndTrySwitchLockOnTargetEnumerator());
         }
 
@@ -351,16 +352,14 @@ namespace FG
         {
             // WAITING UNTIL PLAYER FINISHES AN ACTION
             while (player.isPerfomingAction)
-            {
                 yield return null;
-            }
 
             TryToFindTargetsToLockOn();
             if (closestTarget != null)
-            {
                 player.playerNetwork.networkIsLockedOn.Value = true;
-                player.playerCombatManager.SetCurrentTarget(closestTarget);
-            }
+
+            // THIS WAY IF closestTarget IS NULL -> ADJUST CAMERA DOWN, IF NOT NULL -> UP
+            player.playerCombatManager.SetCurrentTarget(closestTarget);
 
             yield return null;
         }

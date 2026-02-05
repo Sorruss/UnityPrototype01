@@ -390,10 +390,8 @@ namespace FG
             // UNLOCK IF WE ARE LOCKED ON AND THE TARGET IS DEAD
             if (player.playerNetwork.networkIsLockedOn.Value)
             {
-                if (player.playerCombatManager.currentTarget == null)
-                    return;
-
-                if (player.playerCombatManager.currentTarget.characterNetwork.networkIsDead.Value)
+                if (player.playerCombatManager.currentTarget == null ||
+                    player.playerCombatManager.currentTarget.characterNetwork.networkIsDead.Value)
                 {
                     player.playerNetwork.networkIsLockedOn.Value = false;
                     PlayerCamera.instance.WaitAndTrySwitchLockOnTarget();

@@ -50,3 +50,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc0a9d4bb8168904f85aa9fea2078e7f, type: 2}
   - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
   - {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
+  headArmorItems:
+  - {fileID: 11400000, guid: 40d0a2afc101f8b41aa783a41957c264, type: 2}
+  - {fileID: 11400000, guid: 679ef8d2de529474b9d8863241bfdd52, type: 2}
+  chestArmorItems:
+  - {fileID: 11400000, guid: b63649a4c4c08d64fa0434cd1090d6cb, type: 2}
+  - {fileID: 11400000, guid: 2207e7f7f4a367a4eb6f7c785302d26e, type: 2}
+  handArmorItems:
+  - {fileID: 11400000, guid: d03ef6c2713c35e46951c06bbb48e503, type: 2}
+  - {fileID: 11400000, guid: 81ac07d3d523e9f43b955b097a9d9b7a, type: 2}
+  legArmorItems:
+  - {fileID: 11400000, guid: 3fb54cb4c74b27f49a5f9fb3c199fed2, type: 2}
+  - {fileID: 11400000, guid: 67ffbcea23ce9ef4aae75c05b21253da, type: 2}

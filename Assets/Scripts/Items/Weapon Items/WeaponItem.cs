@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FG
 {
-    public class WeaponItem : Item
+    public class WeaponItem : EquipmentItem
     {
         [Header("Model")]
         public GameObject ModelPrefub;
