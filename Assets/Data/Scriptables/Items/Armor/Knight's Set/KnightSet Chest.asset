@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.ChestArmorItem
   Name: Knight's Chestplate
   Description: 
-  ID: 0
+  ID: 30000
   Icon: {fileID: 0}
   equipmentWeight: 11
   physicalDamageAbsorbtion: 0.124
@@ -30,3 +30,11 @@ MonoBehaviour:
   sleepResistance: 18
   curseResistance: 18
   poise: 24
+  armorModels:
+  - {fileID: 11400000, guid: b09b68ff16e28e34c967249cdadb8aa9, type: 2}
+  - {fileID: 11400000, guid: ae89ca1ea4b601445bff7e0b1d6373ea, type: 2}
+  - {fileID: 11400000, guid: 725b9c4a67962ac4188d126c4afd4db3, type: 2}
+  - {fileID: 11400000, guid: 23bdaab7833f70646808bca7e8587f54, type: 2}
+  - {fileID: 11400000, guid: 10d6e88b2a111af4dbcde4116e793916, type: 2}
+  - {fileID: 11400000, guid: fbe5b1e8a157d854991566937532dcf0, type: 2}
+  - {fileID: 11400000, guid: 5eff50b5cf65c354a881ff7ace859df4, type: 2}

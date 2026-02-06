@@ -14,6 +14,10 @@ namespace FG
             new("Character", 
                 NetworkVariableReadPermission.Everyone, 
                 NetworkVariableWritePermission.Owner);
+        [HideInInspector] public NetworkVariable<bool> networkIsMale =
+            new(true,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
 
         // WEAPON INFORMATION
         public NetworkVariable<int> networkLeftHandWeaponID = 
@@ -83,6 +87,12 @@ namespace FG
 
         // ----------------------------
         // "ON VALUE CHANGED" FUNCTIONS
+        // PLAYER INFORMATION
+        public void OnIsMaleChanged(bool oldValue, bool newValue)
+        {
+            player.playerBodyManager.SwapGender(newValue);
+        }
+
         // STATS
         public void OnEnduranceValueChanged(int prevEndurance, int newEndurance)
         {
@@ -96,7 +106,7 @@ namespace FG
             networkCurrentHealth.Value = networkMaxHealth.Value;
         }
 
-        // EQUIPMENT INFORMATION
+        // WEAPON INFORMATION
         public void OnLeftHandWeaponIDChanged(int prevID, int newID)
         {
             WeaponItem newWeapon = ItemDatabase.instance.GetWeaponItemByID(newID);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.LegArmorItem
   Name: Knight's Leggins
   Description: 
-  ID: 0
+  ID: 50000
   Icon: {fileID: 0}
   equipmentWeight: 7
   physicalDamageAbsorbtion: 0.071
@@ -30,3 +30,9 @@ MonoBehaviour:
   sleepResistance: 11
   curseResistance: 11
   poise: 14
+  armorModels:
+  - {fileID: 11400000, guid: 4cca5bd6dcaca67499510b6885ba30c9, type: 2}
+  - {fileID: 11400000, guid: d850b8998f00606499ab97b3f904d091, type: 2}
+  - {fileID: 11400000, guid: 0363efaf2553f2e47898f1fbc0d51aa4, type: 2}
+  - {fileID: 11400000, guid: da598b5e5ffa79340af19b10a6a42a79, type: 2}
+  - {fileID: 11400000, guid: 0bf0f9349b6c1e14e9948b816b89e08b, type: 2}

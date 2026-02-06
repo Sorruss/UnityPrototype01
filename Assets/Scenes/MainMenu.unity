@@ -4812,6 +4812,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6402757407958561281, guid: 3c5d954ab3c93d1468a5a1c7dba2f2fe, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 8670393711186675098, guid: d81bec23c4864494daf26f4fc773c016, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

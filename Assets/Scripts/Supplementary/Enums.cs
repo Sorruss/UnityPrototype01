@@ -72,7 +72,7 @@ namespace FG
     {
         // HEAD
         FULL_HELMET = 1,    // HIDE HEAD
-        OPEN_HELMET,        // HIDE HAIR
+        HAT,        // HIDE HAIR
         HOOD,               // HIDE HAIR
         HEAD_ACESSORIE,
         FACE_COVER,
@@ -95,15 +95,19 @@ namespace FG
         HIPS,
         HIPS_ATTACHMENT,
         // LEFT LEG
-        LEFT_UPPERLEG,
         LEFT_KNEE,
-        LEFT_LOWERLEG,
         LEFT_LEG,
         // RIGHT LEG
-        RIGHT_UPPERLEG,
         RIGHT_KNEE,
-        RIGHT_LOWERLEG,
         RIGHT_LEG,
+    }
+
+    public enum HeadEquipmentType           // TO KNOW WHAT BODY FEATURES TO DISABLE
+    {
+        HAT = 1,
+        HOOD,
+        FACE_COVER,
+        FULL_HELMET,
     }
 
     public enum HitDirection                // DIRECTION OF HIT (IN PERSPECTIVE OF TARGET)

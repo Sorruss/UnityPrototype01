@@ -7,6 +7,10 @@ namespace FG
     {
         private PlayerManager playerManager;
 
+        // -------
+        // WEAPONS
+        [Header("----------- WEAPONS -----------")]
+
         [Header("Weapon Prefubs Instances (Auto)")]
         [SerializeField] private GameObject LeftHandWeaponInstance;
         [SerializeField] private GameObject RightHandWeaponInstance;
@@ -21,100 +25,134 @@ namespace FG
         [SerializeField] private WeaponSocket rightHandSocket;
         [SerializeField] private WeaponSocket backSocket;
 
+        // ----------
+        // EQUIPMENT UNISEX
+        [Header("----------- EQUIPMENT UNISEX -----------")]
         // ARMOR MALE HEAD
-        [Header("Armor Male Full Helmet")]
+        [Header("Equipment Unisex Head (Hand)")]
+        [SerializeField] private GameObject EquipmentHatParent;
+        [HideInInspector] public GameObject[] equipmentHats;
+        [SerializeField] private GameObject EquipmentHoodParent;
+        [HideInInspector] public GameObject[] equipmentHoods;
+        [SerializeField] private GameObject EquipmentFaceCoverParent;
+        [HideInInspector] public GameObject[] equipmentFaceCovers;
+        [SerializeField] private GameObject EquipmentHelmetAccessoryParent;
+        [HideInInspector] public GameObject[] equipmentHelmetAccessories;
+        
+        [Header("Equipment Unisex Chest (Hand)")]
+        [SerializeField] private GameObject EquipmentBackAccessoryParent;
+        [HideInInspector] public GameObject[] equipmentBackAccessories;
+        [SerializeField] private GameObject EquipmentLeftShoulderParent;
+        [HideInInspector] public GameObject[] equipmentLeftShoulders;
+        [SerializeField] private GameObject EquipmentRightShoulderParent;
+        [HideInInspector] public GameObject[] equipmentRightShoulders;
+
+        [Header("Equipment Unisex Hand (Hand)")]
+        [SerializeField] private GameObject EquipmentLeftElbowParent;
+        [HideInInspector] public GameObject[] equipmentLeftElbows;
+        [SerializeField] private GameObject EquipmentRightElbowParent;
+        [HideInInspector] public GameObject[] equipmentRightElbows;
+
+        [Header("Equipment Unisex Leg (Hand)")]
+        [SerializeField] private GameObject EquipmentHipsParent;
+        [HideInInspector] public GameObject[] equipmentHips;
+        [SerializeField] private GameObject EquipmentLeftKneeParent;
+        [HideInInspector] public GameObject[] equipmentLeftKnees;
+        [SerializeField] private GameObject EquipmentRightKneeParent;
+        [HideInInspector] public GameObject[] equipmentRightKnees;
+
+        // ----------
+        // ARMOR MALE
+        [Header("----------- ARMOR MALE -----------")]
+        // ARMOR MALE HEAD
+        [Header("Armor Male Head (Hand)")]
         [SerializeField] private GameObject MaleArmorFullHelmetParent;
-        public GameObject[] maleArmorFullHelmets;
+        [HideInInspector] public GameObject[] maleArmorFullHelmets;
 
         // ARMOR MALE CHEST
-        [Header("Armor Male Torso")]
+        [Header("Armor Male Chest (Hand)")]
         [SerializeField] private GameObject MaleArmorTorsoParent;
-        public GameObject[] maleArmorTorsos;
-
-        [Header("Armor Male Left Upper Arm")]
+        [HideInInspector] public GameObject[] maleArmorTorsos;
         [SerializeField] private GameObject MaleArmorLeftUpperArmParent;
-        public GameObject[] maleArmorLeftUpperArms;
-
-        [Header("Armor Male Left Lower Arm")]
-        [SerializeField] private GameObject MaleArmorLeftLowerArmParent;
-        public GameObject[] maleArmorLeftLowerArms;
-
-        [Header("Armor Male Right Upper Arm")]
+        [HideInInspector] public GameObject[] maleArmorLeftUpperArms;
         [SerializeField] private GameObject MaleArmorRightUpperArmParent;
-        public GameObject[] maleArmorRightUpperArms;
-
-        [Header("Armor Male Right Lower Arm")]
-        [SerializeField] private GameObject MaleArmorRightLowerArmParent;
-        public GameObject[] maleArmorRightLowerArms;
-
+        [HideInInspector] public GameObject[] maleArmorRightUpperArms;
+        
         // ARMOR MALE HAND
-        [Header("Armor Male Left Hand")]
+        [Header("Armor Male Hand (Hand)")]
+        [SerializeField] private GameObject MaleArmorLeftLowerArmParent;
+        [HideInInspector] public GameObject[] maleArmorLeftLowerArms;
         [SerializeField] private GameObject MaleArmorLeftHandParent;
-        public GameObject[] maleArmorLeftHands;
-
-        [Header("Armor Male Right Hand")]
+        [HideInInspector] public GameObject[] maleArmorLeftHands;
+        [SerializeField] private GameObject MaleArmorRightLowerArmParent;
+        [HideInInspector] public GameObject[] maleArmorRightLowerArms;
         [SerializeField] private GameObject MaleArmorRightHandParent;
-        public GameObject[] maleArmorRightHands;
+        [HideInInspector] public GameObject[] maleArmorRightHands;
 
         // ARMOR MALE LEG
-        [Header("Armor Male Left Upper Leg")]
-        [SerializeField] private GameObject MaleArmorLeftUpperLegParent;
-        public GameObject[] maleArmorLeftUpperLegs;
-
-        [Header("Armor Male Left Lower Leg")]
-        [SerializeField] private GameObject MaleArmorLeftLowerLegParent;
-        public GameObject[] maleArmorLeftLowerLegs;
-
-        [Header("Armor Male Left Leg")]
+        [Header("Armor Male Leg (Hand)")]
+        [SerializeField] private GameObject MaleArmorHipsParent;
+        [HideInInspector] public GameObject[] maleArmorHips;
         [SerializeField] private GameObject MaleArmorLeftLegParent;
-        public GameObject[] maleArmorLeftLegs;
-
-        [Header("Armor Male Right Upper Leg")]
-        [SerializeField] private GameObject MaleArmorRightUpperLegParent;
-        public GameObject[] maleArmorRightUpperLegs;
-
-        [Header("Armor Male Right Lower Leg")]
-        [SerializeField] private GameObject MaleArmorRightLowerLegParent;
-        public GameObject[] maleArmorRightLowerLegs;
-
-        [Header("Armor Male Right Leg")]
+        [HideInInspector] public GameObject[] maleArmorLeftLegs;
         [SerializeField] private GameObject MaleArmorRightLegParent;
-        public GameObject[] maleArmorRightLegs;
+        [HideInInspector] public GameObject[] maleArmorRightLegs;
 
-        [Header("Debug Equip Armor")]
+        // ------------
+        // ARMOR FEMALE
+        [Header("----------- ARMOR FEMALE -----------")]
+        // ARMOR MALE HEAD
+        [Header("Armor Male Head (Hand)")]
+        [SerializeField] private GameObject FemaleArmorFullHelmetParent;
+        [HideInInspector] public GameObject[] femaleArmorFullHelmets;
+
+        // ARMOR MALE CHEST
+        [Header("Armor Male Chest (Hand)")]
+        [SerializeField] private GameObject FemaleArmorTorsoParent;
+        [HideInInspector] public GameObject[] femaleArmorTorsos;
+        [SerializeField] private GameObject FemaleArmorLeftUpperArmParent;
+        [HideInInspector] public GameObject[] femaleArmorLeftUpperArms;
+        [SerializeField] private GameObject FemaleArmorRightUpperArmParent;
+        [HideInInspector] public GameObject[] femaleArmorRightUpperArms;
+
+        // ARMOR MALE HAND
+        [Header("Armor Male Hand (Hand)")]
+        [SerializeField] private GameObject FemaleArmorLeftLowerArmParent;
+        [HideInInspector] public GameObject[] femaleArmorLeftLowerArms;
+        [SerializeField] private GameObject FemaleArmorLeftHandParent;
+        [HideInInspector] public GameObject[] femaleArmorLeftHands;
+        [SerializeField] private GameObject FemaleArmorRightLowerArmParent;
+        [HideInInspector] public GameObject[] femaleArmorRightLowerArms;
+        [SerializeField] private GameObject FemaleArmorRightHandParent;
+        [HideInInspector] public GameObject[] femaleArmorRightHands;
+
+        // ARMOR MALE LEG
+        [Header("Armor Male Leg (Hand)")]
+        [SerializeField] private GameObject FemaleArmorHipsParent;
+        [HideInInspector] public GameObject[] femaleArmorHips;
+        [SerializeField] private GameObject FemaleArmorLeftLegParent;
+        [HideInInspector] public GameObject[] femaleArmorLeftLegs;
+        [SerializeField] private GameObject FemaleArmorRightLegParent;
+        [HideInInspector] public GameObject[] femaleArmorRightLegs;
+
+        [Header("Debug")]
         public bool debugEquipArmor = false;
+        public bool debugChangeGender = false;
 
         protected override void Awake()
         {
             base.Awake();
 
             playerManager = GetComponent<PlayerManager>();
-            
+
             // WEAPONS
             FindSockets();
-            
-            // MALE ARMOR - HEAD
-            FindArmorMaleFullHelmets();
 
-            // MALE ARMOR - CHEST
-            FindArmorMaleTorsos();
-            FindArmorMaleLeftUpperArms();
-            FindArmorMaleLeftLowerArms();
-            FindArmorMaleRightUpperArms();
-            FindArmorMaleRightLowerArms();
-
-            // MALE ARMOR - HAND
-            FindArmorMaleLeftHands();
-            FindArmorMaleRightHands();
-
-            // MALE ARMOR - LEG
-            FindArmorMaleLeftUpperLegs();
-            FindArmorMaleLeftLowerLegs();
-            FindArmorMaleLeftLegs();
-            FindArmorMaleRightUpperLegs();
-            FindArmorMaleRightLowerLegs();
-            FindArmorMaleRightLegs();
-        }
+            // EQUIPMENT
+            FindArmorMale();
+            FindArmorFemale();
+            FindEquipmentUnisex();
+        }            
 
         protected override void Start()
         {
@@ -130,16 +168,22 @@ namespace FG
             if (debugEquipArmor)
             {
                 debugEquipArmor = false;
+                EquipFullArmor();
+            }
 
-                EquipHeadArmor(playerManager.playerInventoryManager.HeadArmorScriptable);
-                EquipChestArmor(playerManager.playerInventoryManager.ChestArmorScriptable);
-                EquipHandArmor(playerManager.playerInventoryManager.HandArmorScriptable);
-                EquipLegArmor(playerManager.playerInventoryManager.LegArmorScriptable);
+            if (debugChangeGender)
+            {
+                debugChangeGender = false;
+
+                if (!playerManager.IsOwner)
+                    playerManager.playerBodyManager.SwapGender(playerManager.playerNetwork.networkIsMale.Value);
+                else
+                    playerManager.playerNetwork.networkIsMale.Value = !playerManager.playerNetwork.networkIsMale.Value;
             }
         }
 
-        // ------------------------
-        // WEAPONS RELATED ON_AWAKE
+        // --------------
+        // WEAPON SOCKETS
         private void FindSockets()
         {
             WeaponSocket[] sockets = GetComponentsInChildren<WeaponSocket>();
@@ -156,139 +200,223 @@ namespace FG
             }
         }
 
-        // ---------------------------
-        // FIND MALE ARMOR HEAD
-        private void FindArmorMaleFullHelmets()
+        // ----------------------
+        // FIND ARMOR / EQUIPMENT
+        private void FindArmorMale()
         {
+            // FULL HELMET
             List<GameObject> children = new();
             foreach (Transform model in MaleArmorFullHelmetParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorFullHelmets = children.ToArray();
-        }
 
-        // FIND MALE ARMOR CHEST
-        private void FindArmorMaleTorsos()
-        {
-            List<GameObject> children = new();
+            // TORSO
+            children.Clear();
             foreach (Transform model in MaleArmorTorsoParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorTorsos = children.ToArray();
-        }
 
-        private void FindArmorMaleLeftUpperArms()
-        {
-            List<GameObject> children = new();
+            // LEFT UPPER ARM
+            children.Clear();
             foreach (Transform model in MaleArmorLeftUpperArmParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorLeftUpperArms = children.ToArray();
-        }
 
-        private void FindArmorMaleLeftLowerArms()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorLeftLowerArmParent.transform)
-                children.Add(model.gameObject);
-
-            maleArmorLeftLowerArms = children.ToArray();
-        }
-
-        private void FindArmorMaleRightUpperArms()
-        {
-            List<GameObject> children = new();
+            // RIGHT UPPER ARM
+            children.Clear();
             foreach (Transform model in MaleArmorRightUpperArmParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorRightUpperArms = children.ToArray();
-        }
 
-        private void FindArmorMaleRightLowerArms()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorRightLowerArmParent.transform)
+            // LEFT LOWER ARM
+            children.Clear();
+            foreach (Transform model in MaleArmorLeftLowerArmParent.transform)
                 children.Add(model.gameObject);
+            maleArmorLeftLowerArms = children.ToArray();
 
-            maleArmorRightLowerArms = children.ToArray();
-        }
-
-        // FIND MALE ARMOR HAND
-        private void FindArmorMaleLeftHands()
-        {
-            List<GameObject> children = new();
+            // LEFT HAND
+            children.Clear();
             foreach (Transform model in MaleArmorLeftHandParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorLeftHands = children.ToArray();
-        }
 
-        private void FindArmorMaleRightHands()
-        {
-            List<GameObject> children = new();
+            // RIGHT LOWER ARM
+            children.Clear();
+            foreach (Transform model in MaleArmorRightLowerArmParent.transform)
+                children.Add(model.gameObject);
+            maleArmorRightLowerArms = children.ToArray();
+
+            // RIGHT HAND
+            children.Clear();
             foreach (Transform model in MaleArmorRightHandParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorRightHands = children.ToArray();
-        }
 
-        // FIND MALE ARMOR LEG
-        private void FindArmorMaleLeftUpperLegs()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorLeftUpperLegParent.transform)
+            // HIPS
+            children.Clear();
+            foreach (Transform model in MaleArmorHipsParent.transform)
                 children.Add(model.gameObject);
+            maleArmorHips = children.ToArray();
 
-            maleArmorLeftUpperLegs = children.ToArray();
-        }
-
-        private void FindArmorMaleLeftLowerLegs()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorLeftLowerLegParent.transform)
-                children.Add(model.gameObject);
-
-            maleArmorLeftLowerLegs = children.ToArray();
-        }
-
-        private void FindArmorMaleLeftLegs()
-        {
-            List<GameObject> children = new();
+            // LEFT LEG
+            children.Clear();
             foreach (Transform model in MaleArmorLeftLegParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorLeftLegs = children.ToArray();
-        }
 
-        private void FindArmorMaleRightUpperLegs()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorRightUpperLegParent.transform)
-                children.Add(model.gameObject);
-
-            maleArmorRightUpperLegs = children.ToArray();
-        }
-
-        private void FindArmorMaleRightLowerLegs()
-        {
-            List<GameObject> children = new();
-            foreach (Transform model in MaleArmorRightLowerLegParent.transform)
-                children.Add(model.gameObject);
-
-            maleArmorRightLowerLegs = children.ToArray();
-        }
-
-        private void FindArmorMaleRightLegs()
-        {
-            List<GameObject> children = new();
+            // RIGHT LEG
+            children.Clear();
             foreach (Transform model in MaleArmorRightLegParent.transform)
                 children.Add(model.gameObject);
-
             maleArmorRightLegs = children.ToArray();
         }
 
+        private void FindArmorFemale()
+        {
+            // FULL HELMET
+            List<GameObject> children = new();
+            foreach (Transform model in FemaleArmorFullHelmetParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorFullHelmets = children.ToArray();
+
+            // TORSO
+            children.Clear();
+            foreach (Transform model in FemaleArmorTorsoParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorTorsos = children.ToArray();
+
+            // LEFT UPPER ARM
+            children.Clear();
+            foreach (Transform model in FemaleArmorLeftUpperArmParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorLeftUpperArms = children.ToArray();
+
+            // RIGHT UPPER ARM
+            children.Clear();
+            foreach (Transform model in FemaleArmorRightUpperArmParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorRightUpperArms = children.ToArray();
+
+            // LEFT LOWER ARM
+            children.Clear();
+            foreach (Transform model in FemaleArmorLeftLowerArmParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorLeftLowerArms = children.ToArray();
+
+            // LEFT HAND
+            children.Clear();
+            foreach (Transform model in FemaleArmorLeftHandParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorLeftHands = children.ToArray();
+
+            // RIGHT LOWER ARM
+            children.Clear();
+            foreach (Transform model in FemaleArmorRightLowerArmParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorRightLowerArms = children.ToArray();
+
+            // RIGHT HAND
+            children.Clear();
+            foreach (Transform model in FemaleArmorRightHandParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorRightHands = children.ToArray();
+
+            // HIPS
+            children.Clear();
+            foreach (Transform model in FemaleArmorHipsParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorHips = children.ToArray();
+
+            // LEFT LEG
+            children.Clear();
+            foreach (Transform model in FemaleArmorLeftLegParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorLeftLegs = children.ToArray();
+
+            // RIGHT LEG
+            children.Clear();
+            foreach (Transform model in FemaleArmorRightLegParent.transform)
+                children.Add(model.gameObject);
+            femaleArmorRightLegs = children.ToArray();
+        }
+
+        private void FindEquipmentUnisex()
+        {
+            // HAT
+            List<GameObject> children = new();
+            foreach (Transform model in EquipmentHatParent.transform)
+                children.Add(model.gameObject);
+            equipmentHats = children.ToArray();
+
+            // HOOD
+            children.Clear();
+            foreach (Transform model in EquipmentHoodParent.transform)
+                children.Add(model.gameObject);
+            equipmentHoods = children.ToArray();
+
+            // FACE COVER
+            children.Clear();
+            foreach (Transform model in EquipmentFaceCoverParent.transform)
+                children.Add(model.gameObject);
+            equipmentFaceCovers = children.ToArray();
+
+            // HELMET
+            children.Clear();
+            foreach (Transform model in EquipmentHelmetAccessoryParent.transform)
+                children.Add(model.gameObject);
+            equipmentHelmetAccessories = children.ToArray();
+
+            // BACK
+            children.Clear();
+            foreach (Transform model in EquipmentBackAccessoryParent.transform)
+                children.Add(model.gameObject);
+            equipmentBackAccessories = children.ToArray();
+
+            // LEFT SHOULDER
+            children.Clear();
+            foreach (Transform model in EquipmentLeftShoulderParent.transform)
+                children.Add(model.gameObject);
+            equipmentLeftShoulders = children.ToArray();
+
+            // RIGHT SHOULDER
+            children.Clear();
+            foreach (Transform model in EquipmentRightShoulderParent.transform)
+                children.Add(model.gameObject);
+            equipmentRightShoulders = children.ToArray();
+
+            // LEFT ELBOW
+            children.Clear();
+            foreach (Transform model in EquipmentLeftElbowParent.transform)
+                children.Add(model.gameObject);
+            equipmentLeftElbows = children.ToArray();
+
+            // RIGHT ELBOW
+            children.Clear();
+            foreach (Transform model in EquipmentRightElbowParent.transform)
+                children.Add(model.gameObject);
+            equipmentRightElbows = children.ToArray();
+
+            // HIPS
+            children.Clear();
+            foreach (Transform model in EquipmentHipsParent.transform)
+                children.Add(model.gameObject);
+            equipmentHips = children.ToArray();
+
+            // LEFT KNEE
+            children.Clear();
+            foreach (Transform model in EquipmentLeftKneeParent.transform)
+                children.Add(model.gameObject);
+            equipmentLeftKnees = children.ToArray();
+
+            // RIGHT KNEE
+            children.Clear();
+            foreach (Transform model in EquipmentRightKneeParent.transform)
+                children.Add(model.gameObject);
+            equipmentRightKnees = children.ToArray();
+        }
+
         // ----------------
-        // LEFT HAND WEAPON.
+        // LEFT HAND WEAPON
         public void SwitchLeftWeapon()
         {
             if (!playerManager.IsOwner)
@@ -304,9 +432,9 @@ namespace FG
             {
                 for (int i = playerManager.playerInventoryManager.LeftHandWeaponIndex + 1; i < 3; ++i)
                 {
-                    if (playerManager.playerInventoryManager.LeftHandWeaponSciptables[i].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                    if (playerManager.playerInventoryManager.LeftHandWeaponScriptables[i].ID != ItemDatabase.instance.unarmedWeapon.ID)
                     {
-                        anotherWeapon = playerManager.playerInventoryManager.LeftHandWeaponSciptables[i];
+                        anotherWeapon = playerManager.playerInventoryManager.LeftHandWeaponScriptables[i];
                         anotherWeaponIndex = i;
                         break;
                     }
@@ -318,9 +446,9 @@ namespace FG
             {
                 for (int i = 0; i < playerManager.playerInventoryManager.LeftHandWeaponIndex; ++i)
                 {
-                    if (playerManager.playerInventoryManager.LeftHandWeaponSciptables[i].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                    if (playerManager.playerInventoryManager.LeftHandWeaponScriptables[i].ID != ItemDatabase.instance.unarmedWeapon.ID)
                     {
-                        anotherWeapon = playerManager.playerInventoryManager.LeftHandWeaponSciptables[i];
+                        anotherWeapon = playerManager.playerInventoryManager.LeftHandWeaponScriptables[i];
                         anotherWeaponIndex = i;
                         break;
                     }
@@ -377,7 +505,7 @@ namespace FG
         }
 
         // ----------------
-        // RIGT HAND WEAPON.
+        // RIGT HAND WEAPON
         public void SwitchRightWeapon()
         {
             if (!playerManager.IsOwner)
@@ -553,6 +681,14 @@ namespace FG
 
         // -------------
         // ARMOR - EQUIP
+        public void EquipFullArmor()
+        {
+            EquipHeadArmor(playerManager.playerInventoryManager.HeadArmorScriptable);
+            EquipChestArmor(playerManager.playerInventoryManager.ChestArmorScriptable);
+            EquipHandArmor(playerManager.playerInventoryManager.HandArmorScriptable);
+            EquipLegArmor(playerManager.playerInventoryManager.LegArmorScriptable);
+        }
+
         public void EquipHeadArmor(HeadArmorItem armorItem)
         {
             // 1. UNEQUIP ALL RELATED ARMOR
@@ -574,9 +710,28 @@ namespace FG
 
             // 4. EQUIP PASSED ARMOR PIECE MODELS
             foreach (var model in armorItem.armorModels)
-                model.LoadModel(playerManager, true);
+                model.LoadModel(playerManager, playerManager.playerNetwork.networkIsMale.Value);
 
-            // 5. RECALCULATE ARMOR VALUES
+            // 5. DISABLE CERTAIN BODY FEATURES DEPENDING ON THE HEAD PIECE TYPE
+            switch (armorItem.headEquipmentType)
+            {
+                case HeadEquipmentType.HAT:
+                    break;
+                case HeadEquipmentType.HOOD:
+                    playerManager.playerBodyManager.DisableHair();
+                    break;
+                case HeadEquipmentType.FACE_COVER:
+                    playerManager.playerBodyManager.DisableFacialHair();
+                    break;
+                case HeadEquipmentType.FULL_HELMET:
+                    playerManager.playerBodyManager.DisableHair();
+                    playerManager.playerBodyManager.DisableHead();
+                    break;
+                default:
+                    break;
+            }
+
+            // 6. RECALCULATE ARMOR VALUES
             playerManager.playerStatsManager.RecalculateTotalArmorStatsImpact();
         }
 
@@ -594,16 +749,19 @@ namespace FG
                 return;
             }
 
-            // 3. SET PASSED ARMOR PIECE IN INVENTORY
+            // 3. DISABLE BODY PARTS
+            playerManager.playerBodyManager.DisableBody();
+
+            // 4. SET PASSED ARMOR PIECE IN INVENTORY
             playerManager.playerInventoryManager.ChestArmorScriptable = armorItem;
             if (playerManager.IsOwner)
                 playerManager.playerNetwork.networkArmorChestplateID.Value = armorItem.ID;
 
-            // 4. EQUIP PASSED ARMOR PIECE MODELS
+            // 5. EQUIP PASSED ARMOR PIECE MODELS
             foreach (var model in armorItem.armorModels)
-                model.LoadModel(playerManager, true);
+                model.LoadModel(playerManager, playerManager.playerNetwork.networkIsMale.Value);
 
-            // 5. RECALCULATE ARMOR VALUES
+            // 6. RECALCULATE ARMOR VALUES
             playerManager.playerStatsManager.RecalculateTotalArmorStatsImpact();
         }
 
@@ -621,16 +779,19 @@ namespace FG
                 return;
             }
 
-            // 3. SET PASSED ARMOR PIECE IN INVENTORY
+            // 3. DISABLE BODY PARTS
+            playerManager.playerBodyManager.DisableHands();
+
+            // 4. SET PASSED ARMOR PIECE IN INVENTORY
             playerManager.playerInventoryManager.HandArmorScriptable = armorItem;
             if (playerManager.IsOwner)
                 playerManager.playerNetwork.networkArmorGauntletsID.Value = armorItem.ID;
 
-            // 4. EQUIP PASSED ARMOR PIECE MODELS
+            // 5. EQUIP PASSED ARMOR PIECE MODELS
             foreach (var model in armorItem.armorModels)
-                model.LoadModel(playerManager, true);
+                model.LoadModel(playerManager, playerManager.playerNetwork.networkIsMale.Value);
 
-            // 5. RECALCULATE ARMOR VALUES
+            // 6. RECALCULATE ARMOR VALUES
             playerManager.playerStatsManager.RecalculateTotalArmorStatsImpact();
         }
 
@@ -648,16 +809,19 @@ namespace FG
                 return;
             }
 
-            // 3. SET PASSED ARMOR PIECE IN INVENTORY
+            // 3. DISABLE BODY PARTS
+            playerManager.playerBodyManager.DisableLegs();
+
+            // 4. SET PASSED ARMOR PIECE IN INVENTORY
             playerManager.playerInventoryManager.LegArmorScriptable = armorItem;
             if (playerManager.IsOwner)
                 playerManager.playerNetwork.networkArmorLegginsID.Value = armorItem.ID;
 
-            // 4. EQUIP PASSED ARMOR PIECE MODELS
+            // 5. EQUIP PASSED ARMOR PIECE MODELS
             foreach (var model in armorItem.armorModels)
-                model.LoadModel(playerManager, true);
+                model.LoadModel(playerManager, playerManager.playerNetwork.networkIsMale.Value);
 
-            // 5. RECALCULATE ARMOR VALUES
+            // 6. RECALCULATE ARMOR VALUES
             playerManager.playerStatsManager.RecalculateTotalArmorStatsImpact();
         }
 
@@ -665,13 +829,44 @@ namespace FG
         // ARMOR - UNEQUIP
         private void UnequipHeadArmor()
         {
-            // MALE FULL HELMET
+            // ----
+            // MALE
             foreach (GameObject armorItem in maleArmorFullHelmets)
                 armorItem.SetActive(false);
+
+            // ------
+            // FEMALE
+            foreach (GameObject armorItem in femaleArmorFullHelmets)
+                armorItem.SetActive(false);
+
+            // ------
+            // UNISEX
+            // HATS
+            foreach (GameObject equipment in equipmentHats)
+                equipment.SetActive(false);
+
+            // HOODS
+            foreach (GameObject equipment in equipmentHoods)
+                equipment.SetActive(false);
+
+            // FACE COVERS
+            foreach (GameObject equipment in equipmentFaceCovers)
+                equipment.SetActive(false);
+
+            // HELMET ACCESSORIES
+            foreach (GameObject equipment in equipmentHelmetAccessories)
+                equipment.SetActive(false);
+
+            // -------------
+            // BODY FEATURES
+            playerManager.playerBodyManager.EnableHead();
+            playerManager.playerBodyManager.EnableHair();
         }
 
         private void UnequipChestArmor()
         {
+            // ----
+            // MALE
             // MALE TORSO
             foreach (GameObject armorItem in maleArmorTorsos)
                 armorItem.SetActive(false);
@@ -680,59 +875,145 @@ namespace FG
             foreach (GameObject armorItem in maleArmorLeftUpperArms)
                 armorItem.SetActive(false);
 
+            // MALE RIGHT UPPER ARM
+            foreach (GameObject armorItem in maleArmorRightUpperArms)
+                armorItem.SetActive(false);
+
+            // ------
+            // FEMALE
+            // FEMALE TORSO
+            foreach (GameObject armorItem in femaleArmorTorsos)
+                armorItem.SetActive(false);
+
+            // FEMALE LEFT UPPER ARM
+            foreach (GameObject armorItem in femaleArmorLeftUpperArms)
+                armorItem.SetActive(false);
+
+            // FEMALE RIGHT UPPER ARM
+            foreach (GameObject armorItem in femaleArmorRightUpperArms)
+                armorItem.SetActive(false);
+
+            // ------
+            // UNISEX
+            // BACK ACCESSORIES
+            foreach (GameObject equipment in equipmentBackAccessories)
+                equipment.SetActive(false);
+
+            // LEFT SHOULDER
+            foreach (GameObject equipment in equipmentLeftShoulders)
+                equipment.SetActive(false);
+
+            // LEFT ELBOW
+            foreach (GameObject equipment in equipmentLeftElbows)
+                equipment.SetActive(false);
+
+            // RIGHT SHOULDER
+            foreach (GameObject equipment in equipmentRightShoulders)
+                equipment.SetActive(false);
+
+            // RIGHT ELBOW
+            foreach (GameObject equipment in equipmentRightElbows)
+                equipment.SetActive(false);
+
+            // -------------
+            // BODY FEATURES
+            playerManager.playerBodyManager.EnableBody();
+        }
+
+        private void UnequipHandArmor()
+        {
+            // ----
+            // MALE
             // MALE LEFT LOWER ARM
             foreach (GameObject armorItem in maleArmorLeftLowerArms)
                 armorItem.SetActive(false);
 
-            // MALE RIGHT UPPER ARM
-            foreach (GameObject armorItem in maleArmorRightUpperArms)
+            // MALE LEFT HAND
+            foreach (GameObject armorItem in maleArmorLeftHands)
                 armorItem.SetActive(false);
 
             // MALE RIGHT LOWER ARM
             foreach (GameObject armorItem in maleArmorRightLowerArms)
                 armorItem.SetActive(false);
-        }
-
-        private void UnequipHandArmor()
-        {
-            // MALE LEFT HAND
-            foreach (GameObject armorItem in maleArmorLeftHands)
-                armorItem.SetActive(false);
 
             // MALE RIGHT HAND
             foreach (GameObject armorItem in maleArmorRightHands)
                 armorItem.SetActive(false);
+
+            // ------
+            // FEMALE
+            // FEMALE LEFT LOWER ARM
+            foreach (GameObject armorItem in femaleArmorLeftLowerArms)
+                armorItem.SetActive(false);
+
+            // FEMALE LEFT HAND
+            foreach (GameObject armorItem in femaleArmorLeftHands)
+                armorItem.SetActive(false);
+
+            // FEMALE RIGHT LOWER ARM
+            foreach (GameObject armorItem in femaleArmorRightLowerArms)
+                armorItem.SetActive(false);
+
+            // FEMALE RIGHT HAND
+            foreach (GameObject armorItem in femaleArmorRightHands)
+                armorItem.SetActive(false);
+
+            // -------------
+            // BODY FEATURES
+            playerManager.playerBodyManager.EnableHands();
         }
 
         private void UnequipLegArmor()
         {
-            // MALE LEFT UPPER LEG
-            foreach (GameObject armorItem in maleArmorLeftUpperLegs)
-                armorItem.SetActive(false);
-
-            // MALE LEFT LOWER LEG
-            foreach (GameObject armorItem in maleArmorLeftLowerLegs)
+            // ----
+            // MALE
+            // MALE HIPS
+            foreach (GameObject armorItem in maleArmorHips)
                 armorItem.SetActive(false);
 
             // MALE LEFT LEG
             foreach (GameObject armorItem in maleArmorLeftLegs)
                 armorItem.SetActive(false);
 
-            // MALE RIGHT UPPER LEG
-            foreach (GameObject armorItem in maleArmorRightUpperLegs)
-                armorItem.SetActive(false);
-
-            // MALE RIGHT LOWER LEG
-            foreach (GameObject armorItem in maleArmorRightLowerLegs)
-                armorItem.SetActive(false);
-
             // MALE RIGHT LEG
             foreach (GameObject armorItem in maleArmorRightLegs)
                 armorItem.SetActive(false);
+
+            // ------
+            // FEMALE
+            // FEMALE HIPS
+            foreach (GameObject armorItem in femaleArmorHips)
+                armorItem.SetActive(false);
+
+            // FEMALE LEFT LEG
+            foreach (GameObject armorItem in femaleArmorLeftLegs)
+                armorItem.SetActive(false);
+
+            // FEMALE RIGHT LEG
+            foreach (GameObject armorItem in femaleArmorRightLegs)
+                armorItem.SetActive(false);
+
+            // ------
+            // UNISEX
+            // HIPS
+            foreach (GameObject equipment in equipmentHips)
+                equipment.SetActive(false);
+
+            // LEFT KNEE
+            foreach (GameObject equipment in equipmentLeftKnees)
+                equipment.SetActive(false);
+
+            // RIGHT KNEE
+            foreach (GameObject equipment in equipmentRightKnees)
+                equipment.SetActive(false);
+
+            // -------------
+            // BODY FEATURES
+            playerManager.playerBodyManager.EnableLegs();
         }
 
         // --------------
-        // COMMON METHODS.
+        // COMMON METHODS
         private void LoadBothHandsWeapons()
         {
             LoadLeftWeapon();

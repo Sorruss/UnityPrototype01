@@ -11,12 +11,14 @@ namespace FG
             bossListDefeated = new SerializableDictionary<int, bool>();
         }
 
-        // CHARACTER VALUES
+        // CHARACTER INFORMATION
         public string characterName = "Character";
+        public bool isMale = true;
         
         // STATS
         public int enduranceLevel;
         public int vitalityLevel;
+        public int strengthLevel;
 
         // RESOURCES
         public float currentStamina;
@@ -37,9 +39,23 @@ namespace FG
         // BONFIRE LIST
         public SerializableDictionary<int, bool> bonfireList;       // INT - ID, BOOL - IF WAS ACTIVATED
 
-        // EQUIPMENT
-        public int weaponLeftHandID;
-        public int weaponRightHandID;
+        // WEAPON QUICK SLOTS
+        public int leftHandWeaponID_01;
+        public int leftHandWeaponID_02;
+        public int leftHandWeaponID_03;
+        public int rightHandWeaponID_01;
+        public int rightHandWeaponID_02;
+        public int rightHandWeaponID_03;
+
+        // EQUIPPED WEAPONS INDEX IN QUICK SLOT
+        public int leftHandWeaponQuickSlotIndex;
+        public int rightHandWeaponQuickSlotIndex;
+
+        // ARMOR
+        public int headArmorID;
+        public int chestArmorID;
+        public int handArmorID;
+        public int legArmorID;
 
         public void SavePosition(Vector3 position)
         {

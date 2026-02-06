@@ -12,7 +12,7 @@ namespace FG
         public WeaponItem TwoHandedWeaponScriptable;
 
         [Header("List of weapons in quick slots")]
-        public WeaponItem[] LeftHandWeaponSciptables = new WeaponItem[3];
+        public WeaponItem[] LeftHandWeaponScriptables = new WeaponItem[3];
         public WeaponItem[] RightHandWeaponScriptables = new WeaponItem[3];
 
         [Header("Currently active weapons indexes in quick slots")]

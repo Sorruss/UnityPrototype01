@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df15e840a6d8dbf4483638cf2f56b3da, type: 3}
+  m_Name: KnightSet Head_Full
+  m_EditorClassIdentifier: Assembly-CSharp::FG.HeadArmorItem
+  Name: Knight's Helmet
+  Description: 
+  ID: 20000
+  Icon: {fileID: 0}
+  equipmentWeight: 5
+  physicalDamageAbsorbtion: 0.044
+  magicDamageAbsorbtion: 0.038
+  fireDamageAbsorbtion: 0.038
+  lightningDamageAbsorbtion: 0.034
+  holyDamageAbsorbtion: 0.031
+  poisonResistance: 12
+  rotResistance: 12
+  bleedResistance: 22
+  frostResistance: 22
+  madnessResistance: 8
+  sleepResistance: 8
+  curseResistance: 8
+  poise: 8
+  armorModels:
+  - {fileID: 11400000, guid: 2352a94a7da57f2428b67e0acf38bf97, type: 2}
+  headEquipmentType: 4

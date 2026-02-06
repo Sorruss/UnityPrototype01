@@ -14,6 +14,7 @@ namespace FG
         [HideInInspector] public PlayerLocomotionManager playerLocomotion;
         [HideInInspector] public PlayerCombatManager playerCombatManager;
         [HideInInspector] public PlayerStatsManager playerStatsManager;
+        [HideInInspector] public PlayerBodyManager playerBodyManager;
         [HideInInspector] public PlayerNetworkManager playerNetwork;
         [HideInInspector] public PlayerSFXManager playerSFXManager;
 
@@ -31,6 +32,7 @@ namespace FG
             playerLocomotion = GetComponent<PlayerLocomotionManager>();
             playerCombatManager = GetComponent<PlayerCombatManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerBodyManager = GetComponent<PlayerBodyManager>();
             playerNetwork = GetComponent<PlayerNetworkManager>();
             playerSFXManager = GetComponent<PlayerSFXManager>();
         }
@@ -85,6 +87,9 @@ namespace FG
             SetupUI_Stamina();
             SetupUI_Health();
 
+            // PLAYER INFORMATION
+            playerNetwork.networkIsMale.OnValueChanged += playerNetwork.OnIsMaleChanged;
+
             // CHANGE WIELDING WEAPON UPON ID CHANGE
             playerNetwork.networkLeftHandWeaponID.OnValueChanged += playerNetwork.OnLeftHandWeaponIDChanged;
             playerNetwork.networkRightHandWeaponID.OnValueChanged += playerNetwork.OnRightHandWeaponIDChanged;
@@ -138,7 +143,11 @@ namespace FG
                 characterNetwork.networkCurrentHealth.OnValueChanged -= PlayerUIManager.instance.hudManager.OnHealthChanged;
                 characterNetwork.networkMaxHealth.OnValueChanged -= PlayerUIManager.instance.hudManager.OnMaxHealthChanged;
             }
+
             characterNetwork.networkCurrentHealth.OnValueChanged -= CheckHealth;
+
+            // PLAYER INFORMATION
+            playerNetwork.networkIsMale.OnValueChanged -= playerNetwork.OnIsMaleChanged;
 
             // CHANGE WIELDING WEAPON UPON ID CHANGE
             playerNetwork.networkLeftHandWeaponID.OnValueChanged -= playerNetwork.OnLeftHandWeaponIDChanged;
@@ -191,6 +200,9 @@ namespace FG
         // NETWORK HELPER FUNCTIONS
         public void UpdateThisPlayerNetworkValues()
         {
+            // PLAYER INFORMATION
+            playerNetwork.OnIsMaleChanged(false, playerNetwork.networkIsMale.Value);
+
             // WEAPONS
             playerNetwork.OnLeftHandWeaponIDChanged(0, playerNetwork.networkLeftHandWeaponID.Value);
             playerNetwork.OnRightHandWeaponIDChanged(0, playerNetwork.networkRightHandWeaponID.Value);
@@ -244,53 +256,126 @@ namespace FG
         // SAVE SYSTEM FUNCTIONS
         public void ImportSaveData(CharacterSaveData saveData)
         {
-            // Importing values from save file.
+            // CHARACTER INFORMATION
             playerNetwork.networkPlayerName.Value = saveData.characterName;
+            playerNetwork.networkIsMale.Value = saveData.isMale;
+
+            // STATS
             playerNetwork.networkEndurance.Value = saveData.enduranceLevel;
             playerNetwork.networkVitality.Value = saveData.vitalityLevel;
+            playerNetwork.networkStrength.Value = saveData.strengthLevel;
+
+            // POSITION
             transform.position = saveData.GetPosition();
 
-            // Setting camera position so it doesn't lurp to the player on the start of the game.
+            // Setting camera position so it doesn't lurp to the player on the start of the game
             PlayerCamera.instance.AdjustPositionToPlayers();
 
-            // Setting up HEALTH values.
+            // Setting up HEALTH values
             characterNetwork.networkMaxHealth.Value = playerStatsManager.GetMaxHealthOfVitalityLevel(saveData.vitalityLevel);
             characterNetwork.networkCurrentHealth.Value = saveData.currentHealth;
 
-            // Setting up STAMINA values.
+            // Setting up STAMINA values
             characterNetwork.networkMaxStamina.Value = playerStatsManager.GetMaxStaminaOfEnduranceLevel(saveData.enduranceLevel);
             characterNetwork.networkCurrentStamina.Value = saveData.currentStamina;
 
-            // Inventory.
+            // Weapons quick slots
+            playerInventoryManager.LeftHandWeaponIndex = saveData.leftHandWeaponQuickSlotIndex;
+            playerInventoryManager.RightHandWeaponIndex = saveData.rightHandWeaponQuickSlotIndex;
 
+            WeaponItem weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.leftHandWeaponID_01);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.LeftHandWeaponScriptables[0] = weapon;
 
-            // Equipment.
-            //playerNetwork.networkLeftHandWeaponID.Value = saveData.weaponLeftHandID;
-            //playerNetwork.networkRightHandWeaponID.Value = saveData.weaponRightHandID;
+            weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.leftHandWeaponID_02);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.LeftHandWeaponScriptables[1] = weapon;
+
+            weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.leftHandWeaponID_03);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.LeftHandWeaponScriptables[2] = weapon;
+
+            weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.rightHandWeaponID_01);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.RightHandWeaponScriptables[0] = weapon;
+
+            weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.rightHandWeaponID_02);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.RightHandWeaponScriptables[1] = weapon;
+
+            weapon = ItemDatabase.instance.GetWeaponItemByID(saveData.rightHandWeaponID_03);
+            if (weapon == null)
+                weapon = ItemDatabase.instance.unarmedWeapon;
+            playerInventoryManager.RightHandWeaponScriptables[2] = weapon;
+
+            // Equipped weapons
+            playerNetwork.networkLeftHandWeaponID.Value =
+                playerInventoryManager.LeftHandWeaponScriptables[saveData.leftHandWeaponQuickSlotIndex].ID;
+            playerNetwork.networkRightHandWeaponID.Value = 
+                playerInventoryManager.RightHandWeaponScriptables[saveData.rightHandWeaponQuickSlotIndex].ID;
+
+            // Armor
+            HeadArmorItem headArmor = ItemDatabase.instance.GetHeadArmorItemByID(saveData.headArmorID);
+            if (headArmor != null)
+                headArmor = Instantiate(headArmor);
+            playerEquipmentManager.EquipHeadArmor(headArmor);
+
+            ChestArmorItem chestArmor = ItemDatabase.instance.GetChestArmorItemByID(saveData.chestArmorID);
+            if (chestArmor != null)
+                chestArmor = Instantiate(chestArmor);
+            playerEquipmentManager.EquipChestArmor(chestArmor);
+
+            HandArmorItem handArmor = ItemDatabase.instance.GetHandArmorItemByID(saveData.handArmorID);
+            if (handArmor != null)
+                handArmor = Instantiate(handArmor);
+            playerEquipmentManager.EquipHandArmor(handArmor);
+
+            LegArmorItem legArmor = ItemDatabase.instance.GetLegArmorItemByID(saveData.legArmorID);
+            if (legArmor != null)
+                legArmor = Instantiate(legArmor);
+            playerEquipmentManager.EquipLegArmor(legArmor);
         }
 
         public void ExportSaveData(CharacterSaveData saveData)
         {
-            // VALUES.
+            // CHARACTER INFORMATION
             saveData.characterName = playerNetwork.networkPlayerName.Value.ToString();
+            saveData.isMale = playerNetwork.networkIsMale.Value;
 
-            // STATS.
+            // STATS
             saveData.enduranceLevel = playerNetwork.networkEndurance.Value;
             saveData.vitalityLevel = playerNetwork.networkVitality.Value;
+            saveData.strengthLevel = playerNetwork.networkStrength.Value;
 
-            // RESOURCES.
+            // RESOURCES
             saveData.currentStamina = playerNetwork.networkCurrentStamina.Value;
             saveData.currentHealth = playerNetwork.networkCurrentHealth.Value;
 
-            // TRANSFORM.
+            // TRANSFORM
             saveData.SavePosition(transform.position);
 
-            // INVENTORY.
+            // WEAPON QUICK SLOTS
+            saveData.leftHandWeaponID_01 = playerInventoryManager.LeftHandWeaponScriptables[0].ID;
+            saveData.leftHandWeaponID_02 = playerInventoryManager.LeftHandWeaponScriptables[1].ID;
+            saveData.leftHandWeaponID_03 = playerInventoryManager.LeftHandWeaponScriptables[2].ID;
+            saveData.rightHandWeaponID_01 = playerInventoryManager.RightHandWeaponScriptables[0].ID;
+            saveData.rightHandWeaponID_02 = playerInventoryManager.RightHandWeaponScriptables[1].ID;
+            saveData.rightHandWeaponID_03 = playerInventoryManager.RightHandWeaponScriptables[2].ID;
 
+            // EQUPPED WEAPONS
+            saveData.leftHandWeaponQuickSlotIndex = playerInventoryManager.LeftHandWeaponIndex;
+            saveData.rightHandWeaponQuickSlotIndex = playerInventoryManager.RightHandWeaponIndex;
 
-            // EQUIPMENT.
-            //saveData.weaponLeftHandID = playerNetwork.networkLeftHandWeaponID.Value;
-            //saveData.weaponRightHandID = playerNetwork.networkRightHandWeaponID.Value;
+            // ARMOR
+            saveData.headArmorID = playerNetwork.networkArmorHelmetID.Value;
+            saveData.chestArmorID = playerNetwork.networkArmorChestplateID.Value;
+            saveData.handArmorID = playerNetwork.networkArmorGauntletsID.Value;
+            saveData.legArmorID = playerNetwork.networkArmorLegginsID.Value;
         }
 
         // -----

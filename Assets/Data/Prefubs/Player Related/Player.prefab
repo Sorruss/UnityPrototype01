@@ -3484,34 +3484,74 @@ MonoBehaviour:
   leftHandShieldSocket: {fileID: 0}
   rightHandSocket: {fileID: 0}
   backSocket: {fileID: 0}
+  EquipmentHatParent: {fileID: 0}
+  equipmentHats: []
+  EquipmentHoodParent: {fileID: 0}
+  equipmentHoods: []
+  EquipmentFaceCoverParent: {fileID: 0}
+  equipmentFaceCovers: []
+  EquipmentHelmetAccessoryParent: {fileID: 0}
+  equipmentHelmetAccessories: []
+  EquipmentBackAccessoryParent: {fileID: 0}
+  equipmentBackAccessories: []
+  EquipmentLeftShoulderParent: {fileID: 0}
+  equipmentLeftShoulders: []
+  EquipmentRightShoulderParent: {fileID: 0}
+  equipmentRightShoulders: []
+  EquipmentLeftElbowParent: {fileID: 0}
+  equipmentLeftElbows: []
+  EquipmentRightElbowParent: {fileID: 0}
+  equipmentRightElbows: []
+  EquipmentHipsParent: {fileID: 0}
+  equipmentHips: []
+  EquipmentLeftKneeParent: {fileID: 0}
+  equipmentLeftKnees: []
+  EquipmentRightKneeParent: {fileID: 0}
+  equipmentRightKnees: []
   MaleArmorFullHelmetParent: {fileID: 6626971212857784538}
   maleArmorFullHelmets: []
   MaleArmorTorsoParent: {fileID: 3234972781253292411}
   maleArmorTorsos: []
   MaleArmorLeftUpperArmParent: {fileID: 6822959762400811172}
   maleArmorLeftUpperArms: []
-  MaleArmorLeftLowerArmParent: {fileID: 4244182470079531229}
-  maleArmorLeftLowerArms: []
   MaleArmorRightUpperArmParent: {fileID: 5578901132507098726}
   maleArmorRightUpperArms: []
-  MaleArmorRightLowerArmParent: {fileID: 8752374334257777660}
-  maleArmorRightLowerArms: []
+  MaleArmorLeftLowerArmParent: {fileID: 4244182470079531229}
+  maleArmorLeftLowerArms: []
   MaleArmorLeftHandParent: {fileID: 226066577943617112}
   maleArmorLeftHands: []
+  MaleArmorRightLowerArmParent: {fileID: 8752374334257777660}
+  maleArmorRightLowerArms: []
   MaleArmorRightHandParent: {fileID: 190270285371011012}
   maleArmorRightHands: []
-  MaleArmorLeftUpperLegParent: {fileID: 5909349136896031638}
-  maleArmorLeftUpperLegs: []
-  MaleArmorLeftLowerLegParent: {fileID: 3109124342963458276}
-  maleArmorLeftLowerLegs: []
+  MaleArmorHipsParent: {fileID: 0}
+  maleArmorHips: []
   MaleArmorLeftLegParent: {fileID: 6286038573036469815}
   maleArmorLeftLegs: []
-  MaleArmorRightUpperLegParent: {fileID: 5337245097596897520}
-  maleArmorRightUpperLegs: []
-  MaleArmorRightLowerLegParent: {fileID: 5134668873383062343}
-  maleArmorRightLowerLegs: []
   MaleArmorRightLegParent: {fileID: 4134589503716822761}
   maleArmorRightLegs: []
+  FemaleArmorFullHelmetParent: {fileID: 0}
+  femaleArmorFullHelmets: []
+  FemaleArmorTorsoParent: {fileID: 0}
+  femaleArmorTorsos: []
+  FemaleArmorLeftUpperArmParent: {fileID: 0}
+  femaleArmorLeftUpperArms: []
+  FemaleArmorRightUpperArmParent: {fileID: 0}
+  femaleArmorRightUpperArms: []
+  FemaleArmorLeftLowerArmParent: {fileID: 0}
+  femaleArmorLeftLowerArms: []
+  FemaleArmorLeftHandParent: {fileID: 0}
+  femaleArmorLeftHands: []
+  FemaleArmorRightLowerArmParent: {fileID: 0}
+  femaleArmorRightLowerArms: []
+  FemaleArmorRightHandParent: {fileID: 0}
+  femaleArmorRightHands: []
+  FemaleArmorHipsParent: {fileID: 0}
+  femaleArmorHips: []
+  FemaleArmorLeftLegParent: {fileID: 0}
+  femaleArmorLeftLegs: []
+  FemaleArmorRightLegParent: {fileID: 0}
+  femaleArmorRightLegs: []
   debugEquipArmor: 0
 --- !u!114 &7241501903264518259
 MonoBehaviour:
@@ -3781,6 +3821,8 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  networkIsMale:
+    m_InternalValue: 1
   networkLeftHandWeaponID:
     m_InternalValue: 0
   networkRightHandWeaponID:

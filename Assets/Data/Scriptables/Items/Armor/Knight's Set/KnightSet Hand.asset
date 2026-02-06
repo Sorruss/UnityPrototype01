@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.HandArmorItem
   Name: Knight's Gauntlets
   Description: 
-  ID: 0
+  ID: 40000
   Icon: {fileID: 0}
   equipmentWeight: 3
   physicalDamageAbsorbtion: 0.031
@@ -30,3 +30,8 @@ MonoBehaviour:
   sleepResistance: 6
   curseResistance: 6
   poise: 5
+  armorModels:
+  - {fileID: 11400000, guid: 1bb26c21ffc3a2d42a4cf56fc43ebd33, type: 2}
+  - {fileID: 11400000, guid: a6a281d449e30274f8828aeacbb487b4, type: 2}
+  - {fileID: 11400000, guid: 3e17357d3ca75d548af66378d797560a, type: 2}
+  - {fileID: 11400000, guid: 1c254c53966dc6646b982136d3867715, type: 2}

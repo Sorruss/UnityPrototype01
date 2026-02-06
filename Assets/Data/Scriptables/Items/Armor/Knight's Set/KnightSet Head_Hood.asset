@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df15e840a6d8dbf4483638cf2f56b3da, type: 3}
-  m_Name: KnightSet Head
+  m_Name: KnightSet Head_Hood
   m_EditorClassIdentifier: Assembly-CSharp::FG.HeadArmorItem
   Name: Knight's Helmet
   Description: 
@@ -30,4 +30,6 @@ MonoBehaviour:
   sleepResistance: 8
   curseResistance: 8
   poise: 8
-  armorModels: []
+  armorModels:
+  - {fileID: 11400000, guid: a5755e3bf1a5912429f0c14b12dca038, type: 2}
+  headEquipmentType: 2

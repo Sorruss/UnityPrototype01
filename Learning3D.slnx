@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="RBG.Mulligan.csproj" />
   <Project Path="CFXRRuntime.csproj" />
   <Project Path="CFXREditor.csproj" />
   <Project Path="CFXRDemo.csproj" />
