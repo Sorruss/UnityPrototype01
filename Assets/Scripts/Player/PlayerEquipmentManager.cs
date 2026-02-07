@@ -28,7 +28,6 @@ namespace FG
         // ----------
         // EQUIPMENT UNISEX
         [Header("----------- EQUIPMENT UNISEX -----------")]
-        // ARMOR MALE HEAD
         [Header("Equipment Unisex Head (Hand)")]
         [SerializeField] private GameObject EquipmentHatParent;
         [HideInInspector] public GameObject[] equipmentHats;

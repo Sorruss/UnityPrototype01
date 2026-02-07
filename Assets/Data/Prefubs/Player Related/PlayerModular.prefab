@@ -70902,7 +70902,7 @@ GameObject:
   - component: {fileID: 6070704085419736245}
   - component: {fileID: 7983286493136123532}
   - component: {fileID: 348030816473018644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerModular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70961,7 +70961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1439709443
+  GlobalObjectIdHash: 2727962914
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -71273,6 +71273,7 @@ MonoBehaviour:
   ChestArmorScriptable: {fileID: 0}
   HandArmorScriptable: {fileID: 0}
   LegArmorScriptable: {fileID: 0}
+  itemsInInventory: []
 --- !u!114 &1942159457614222852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71363,8 +71364,6 @@ MonoBehaviour:
   femaleArmorRightLegs: []
   debugEquipArmor: 0
   debugChangeGender: 0
-  MaleParts: {fileID: 3048131444120957446}
-  FemaleParts: {fileID: 1103091586477236187}
 --- !u!114 &3180896361268879619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71442,6 +71441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerBodyManager
   BodyFeatureHair: {fileID: 6426595749249606196}
+  AllMaleParts: {fileID: 0}
   BodyFeatureMaleHead: {fileID: 8827182762109145013}
   MaleBody:
   - {fileID: 7406822173356512263}
@@ -71458,6 +71458,7 @@ MonoBehaviour:
   - {fileID: 7204055285272240281}
   BodyFeatureMaleEyebrows: {fileID: 6611956550219463387}
   BodyFeatureFacialHair: {fileID: 7462548804038154016}
+  AllFemaleParts: {fileID: 0}
   BodyFeatureFemaleHead: {fileID: 804962107202271328}
   FemaleBody:
   - {fileID: 3872990382174294742}

@@ -21,7 +21,10 @@ namespace FG
         [Header("SFX - Guard Broken")]
         public AudioClip[] guardBrokenSFX;
 
-        [Header("Audio Sorces - Boss Fight")]
+        [Header("SFX - Item Pick Up")]
+        public AudioClip itemPickUpSoundFX;
+
+        [Header("Music - Boss Fight")]
         [SerializeField] private AudioSource audioSourceBossFightIntro;
         [SerializeField] private AudioSource audioSourceBossFightLoop;
         [SerializeField] private float bossFightMusicFadeOut = 0.75f;

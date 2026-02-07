@@ -83,6 +83,22 @@ namespace FG
 
         // -------
         // GETTERS
+        public Item GetItemByID(int id)
+        {
+            if (id >= weaponIDKey && id < headArmorIDKey)           // IT'S WEAPON
+                return GetWeaponItemByID(id);
+            else if (id >= headArmorIDKey && id < chestArmorIDKey)  // IT'S HEAD PIECE
+                return GetHeadArmorItemByID(id);
+            else if (id >= chestArmorIDKey && id < handArmorIDKey)  // IT'S CHEST PIECE
+                return GetChestArmorItemByID(id);
+            else if (id >= handArmorIDKey && id < legArmorIDKey)    // IT'S HAND PIECE
+                return GetHandArmorItemByID(id);
+            else if (id >= legArmorIDKey && id < 60000)             // IT'S A LEG PIECE
+                return GetLegArmorItemByID(id);
+
+            return null;
+        }
+
         public WeaponItem GetWeaponItemByID(int id)
         {
             return weaponItems.FirstOrDefault(weapon => weapon.ID == id);

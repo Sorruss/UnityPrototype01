@@ -73,6 +73,14 @@ namespace FG
             yield return null;
         }
 
+        public override string GetInteractableText()
+        {
+            if (networkIsActivated.Value)
+                return base.GetInteractableText();
+            else
+                return unactivatedPopUpText;
+        }
+
         // -------------------
         // INTERACTION METHODS
         private void ActivateBonfire(PlayerManager player)
@@ -142,14 +150,6 @@ namespace FG
                 RestAtBonfire(player);
             else
                 ActivateBonfire(player);
-        }
-
-        public override string GetInteractableText()
-        {
-            if (networkIsActivated.Value)
-                return base.GetInteractableText();
-            else
-                return unactivatedPopUpText;
         }
     }
 }

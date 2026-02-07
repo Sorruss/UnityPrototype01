@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FG
 {
@@ -24,12 +25,17 @@ namespace FG
         [SerializeField] private TextMeshProUGUI interactableText;
         [SerializeField] private TextMeshProUGUI interactableQuantityText;
 
-        public void DisableAllSecondaryPopUps()
-        {
-            if (!PlayerUIManager.instance.isPopUpOpened)
-                return;
+        [Header("PopUp - Item Pick Up")]
+        [SerializeField] private GameObject itemPickUpPopUp;
+        [SerializeField] private TextMeshProUGUI itemPickUpItemName;
+        [SerializeField] private Image itemPickUpItemIcon;
+        [SerializeField] private TextMeshProUGUI itemPickUpItemAmount;
 
+        public void CloseAllPopUps()
+        {
             interactablePopUp.SetActive(false);
+            itemPickUpPopUp.SetActive(false);
+
             PlayerUIManager.instance.isPopUpOpened = false;
         }
 
@@ -68,6 +74,22 @@ namespace FG
         {
             interactableText.text = text;
             interactablePopUp.SetActive(true);
+        }
+
+        public void SendItemPickedUpPopUp(Item item, int amount)
+        {
+            itemPickUpItemAmount.enabled = false;
+            itemPickUpItemName.text = item.Name;
+            itemPickUpItemIcon.sprite = item.Icon;
+
+            if (amount > 0)
+            {
+                itemPickUpItemAmount.enabled = true;
+                itemPickUpItemAmount.text = $"X{amount}";
+            }
+
+            itemPickUpPopUp.SetActive(true);
+            PlayerUIManager.instance.isPopUpOpened = true;
         }
 
         public void UpdateInteractablePopUpQuantityText(int quantity)

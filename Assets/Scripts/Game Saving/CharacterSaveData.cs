@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace FG
 {
@@ -9,6 +11,9 @@ namespace FG
         {
             bossListAwakened = new SerializableDictionary<int, bool>();
             bossListDefeated = new SerializableDictionary<int, bool>();
+            bonfireList = new SerializableDictionary<int, bool>();
+            worldItemsIDs = new SerializableDictionary<int, bool>();
+            itemsInInventoryIDs = new List<int>();
         }
 
         // CHARACTER INFORMATION
@@ -56,6 +61,12 @@ namespace FG
         public int chestArmorID;
         public int handArmorID;
         public int legArmorID;
+
+        // WORLD ITEMS
+        public SerializableDictionary<int, bool> worldItemsIDs;     // INT - ID, BOOL - IF WAS PICKED UP
+
+        // INVENTORY
+        public List<int> itemsInInventoryIDs;
 
         public void SavePosition(Vector3 position)
         {

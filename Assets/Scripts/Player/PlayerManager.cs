@@ -339,6 +339,10 @@ namespace FG
             if (legArmor != null)
                 legArmor = Instantiate(legArmor);
             playerEquipmentManager.EquipLegArmor(legArmor);
+
+            // INVENTORY
+            foreach (int itemID in saveData.itemsInInventoryIDs)
+                playerInventoryManager.AddItemToInventory(ItemDatabase.instance.GetItemByID(itemID));
         }
 
         public void ExportSaveData(CharacterSaveData saveData)
@@ -376,6 +380,10 @@ namespace FG
             saveData.chestArmorID = playerNetwork.networkArmorChestplateID.Value;
             saveData.handArmorID = playerNetwork.networkArmorGauntletsID.Value;
             saveData.legArmorID = playerNetwork.networkArmorLegginsID.Value;
+
+            // INVENTORY
+            foreach (Item item in playerInventoryManager.itemsInInventory)
+                saveData.itemsInInventoryIDs.Add(item.ID);
         }
 
         // -----

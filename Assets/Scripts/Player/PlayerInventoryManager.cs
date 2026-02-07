@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace FG
 {
@@ -26,5 +27,22 @@ namespace FG
         public ChestArmorItem ChestArmorScriptable;
         public HandArmorItem HandArmorScriptable;
         public LegArmorItem LegArmorScriptable;
+
+        // ---------
+        // INVENTORY
+        [Header("Inventory")]
+        public List<Item> itemsInInventory = new();
+
+        // -------------------------
+        // INVENTORY RELATED METHODS
+        public void AddItemToInventory(Item item)
+        {
+            itemsInInventory.Add(item);
+        }
+
+        public void RemoveItemFromInventory(Item item)
+        {
+            itemsInInventory.Remove(item);
+        }
     }
 }

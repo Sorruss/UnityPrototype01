@@ -9,14 +9,21 @@ namespace FG
         [SerializeField] private Collider interactableCollider;
         [SerializeField] private string interactableText = "Interact With Me";
         [SerializeField] private bool onlyHostAllowedToInteract = true;
-        [SerializeField] private bool destroyOnInteraction = false;
 
         [Header("Audio")]
+        [SerializeField] private bool playSoundFromInteractable = true;
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip interactedSoundFX;
+        [SerializeField] protected AudioClip interactedSoundFX;
 
-        // ------
-        // EVENTS
+        // ------------
+        // UNITY EVENTS
+        protected virtual void Start()
+        {
+            
+        }
+
+        // ---------------
+        // COLLIDER EVENTS
         private void OnTriggerEnter(Collider other)
         {
             PlayerManager player = other.GetComponent<PlayerManager>();
@@ -47,6 +54,7 @@ namespace FG
                 return;
 
             player.playerInteractableManager.RemoveInteractable(this);
+            PlayerUIManager.instance.popUpManager.CloseAllPopUps();
         }
 
         // --------------
@@ -72,12 +80,10 @@ namespace FG
                 return;
 
             // PLAY SOUND
-            if (audioSource != null)
+            if (audioSource != null && playSoundFromInteractable)
                 audioSource.PlayOneShot(interactedSoundFX);
 
-            // DESTROY
-            if (destroyOnInteraction)
-                Destroy(gameObject);
+            PlayerUIManager.instance.popUpManager.CloseAllPopUps();
         }
 
         public virtual string GetInteractableText() => interactableText;

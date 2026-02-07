@@ -22,20 +22,17 @@ namespace FG
             if (!player.IsOwner)
                 return;
 
-            if (interactables.Count == 0)
-            {
-                PlayerUIManager.instance.popUpManager.DisableAllSecondaryPopUps();
+            if (PlayerUIManager.instance.isPopUpOpened)
                 return;
-            }
+
+            if (interactables.Count <= 0)
+                return;
 
             if (interactables[0] == null)
             {
                 CleanupInteractables();
                 return;
             }
-
-            if (PlayerUIManager.instance.isPopUpOpened)
-                return;
 
             PlayerUIManager.instance.popUpManager.SendInteractablePopUp(interactables[0].GetInteractableText());
             PlayerUIManager.instance.isPopUpOpened = true;
@@ -45,6 +42,8 @@ namespace FG
         {
             if (!player.IsOwner)
                 return;
+
+            PlayerUIManager.instance.popUpManager.CloseAllPopUps();
 
             if (interactables.Count <= 0)
                 return;
@@ -87,6 +86,7 @@ namespace FG
 
             interactables.Remove(interactable);
             CleanupInteractables();
+
             PlayerUIManager.instance.popUpManager.UpdateInteractablePopUpQuantityText(interactables.Count);
         }
     }

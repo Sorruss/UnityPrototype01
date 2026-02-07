@@ -117,4 +117,10 @@ namespace FG
         FRONT,
         BEHIND
     }
+
+    public enum ItemPickUpType
+    {
+        WORLD_ITEM = 1,
+        TEMPORARY_ITEM,
+    }
 }
