@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -65,9 +64,7 @@ namespace FG
         private void OnBackspace(InputAction.CallbackContext obj)
         {
             if (currentlySelectedSlot == null)
-            {
                 return;
-            }
 
             deleteSaveSlotPopUp.SetActive(true);
             deleteSaveSlotPopUpActive = true;

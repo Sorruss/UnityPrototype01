@@ -118,9 +118,27 @@ namespace FG
         BEHIND
     }
 
-    public enum ItemPickUpType
+    public enum ItemPickUpType              // TO KNOW HOW TO PROCESS INTERACTION W/PICK UP ITEM
     {
         WORLD_ITEM = 1,
         TEMPORARY_ITEM,
+    }
+    
+    public enum EquipmentSlotType           // FOR KNOWING WHAT ITEM GOES WHERE
+    {
+        // WEAPONS
+        WEAPON_QUICKSLOT_LEFT_01 = 1,
+        WEAPON_QUICKSLOT_LEFT_02,
+        WEAPON_QUICKSLOT_LEFT_03,
+        WEAPON_QUICKSLOT_RIGHT_01,
+        WEAPON_QUICKSLOT_RIGHT_02,
+        WEAPON_QUICKSLOT_RIGHT_03,
+        // ARMOR
+        HEAD_ARMOR,
+        CHEST_ARMOR,
+        HAND_ARMOR,
+        LEG_ARMOR,
+        // NONE
+        NONE,
     }
 }

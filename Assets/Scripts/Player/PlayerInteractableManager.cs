@@ -22,7 +22,7 @@ namespace FG
             if (!player.IsOwner)
                 return;
 
-            if (PlayerUIManager.instance.isPopUpOpened)
+            if (PlayerUIManager.instance.isPopUpOpened || PlayerUIManager.instance.isMenuOpened)
                 return;
 
             if (interactables.Count <= 0)

@@ -56,6 +56,10 @@ namespace FG
         [SerializeField] private bool isRBQueueActive = false;
         [SerializeField] private bool isRTQueueActive = false;
 
+        [Header("UI Flags")]
+        [SerializeField] private bool isEscapeInputActive = false;
+        [SerializeField] private bool isBackspaceInputActive = false;
+
         // PUBLIC VARIABLES FOR OTHER COMPONENTS TO GET VALUES FROM
         // CHARACTER MOVEMENT VALUES
         [HideInInspector] public float horizontalMovement { get; private set; }
@@ -112,6 +116,8 @@ namespace FG
             HandleAllQuickSlotsInputs();
             // INPUT QUEUE
             HandleAllInputQueue();
+            // UI
+            HandleUI();
         }
 
         // -----------------------
@@ -160,6 +166,12 @@ namespace FG
         {
             cameraHorizontalMovement = CameraInput.x;
             cameraVerticalMovement = CameraInput.y;
+        
+            if (PlayerUIManager.instance.isMenuOpened)
+            {
+                cameraHorizontalMovement = 0.0f;
+                cameraVerticalMovement = 0.0f;
+            }
         }
 
         private void OnSceneChanged(Scene prevScene, Scene newScene)
@@ -236,6 +248,10 @@ namespace FG
             // QUICK SLOTS INPUTS
             playerInput.Default.DPadLeft.performed += _ => isDPadLeftActionActive = true;
             playerInput.Default.DPadRight.performed += _ => isDPadRightActionActive = true;
+
+            // UI
+            playerInput.UI.Escape.performed += _ => isEscapeInputActive = true;
+            playerInput.UI.Backspace.performed += _ => isBackspaceInputActive = true;
         }
 
         // --------------------
@@ -296,22 +312,26 @@ namespace FG
         {
             if (isRBActionActive)
             {
-                // DISABLE LOOPING.
+                // DISABLE LOOPING
                 isRBActionActive = false;
 
-                // INFORM THAT CLIENT IS USING RIGHT HAND WEAPON ACTION.
+                // IF ANY MENU IS OPEN -> PROHIBIT THIS INPUT
+                if (PlayerUIManager.instance.isMenuOpened)
+                    return;
+
+                // INFORM THAT CLIENT IS USING RIGHT HAND WEAPON ACTION
                 player.playerNetwork.SetCurrentActiveHand(true);
 
                 if (player.playerNetwork.networkIsTwoHanding.Value)
                 {
-                    // DO TWO HANDING WEAPON ACTION.
+                    // DO TWO HANDING WEAPON ACTION
                     player.playerCombatManager.TryToPerformWeaponAction(
                         player.playerInventoryManager.TwoHandedWeaponScriptable.OH_RB_Action,
                         player.playerInventoryManager.TwoHandedWeaponScriptable);
                 }
                 else
                 {
-                    // DO RIGHT HAND WEAPON ACTION.
+                    // DO RIGHT HAND WEAPON ACTION
                     player.playerCombatManager.TryToPerformWeaponAction(
                         player.playerInventoryManager.RightHandWeaponScriptable.OH_RB_Action,
                         player.playerInventoryManager.RightHandWeaponScriptable);
@@ -582,6 +602,48 @@ namespace FG
 
                 // LOGIC
                 player.playerNetwork.networkIsTwoHandingRightWeapon.Value = true;
+            }
+        }
+
+        // --
+        // UI
+        private void HandleUI()
+        {
+            HandleEscapeInput();
+            HandleBackspaceInput();
+        }
+
+        private void HandleEscapeInput()
+        {
+            if (isEscapeInputActive)
+            {
+                isEscapeInputActive = false;
+
+                if (PlayerUIManager.instance.isMenuOpened)
+                    PlayerUIManager.instance.CloseAllMenus();
+                else
+                    PlayerUIManager.instance.sideMenuManager.OpenSideMenu();
+            }
+        }
+
+        private void HandleBackspaceInput()
+        {
+            if (isBackspaceInputActive)
+            {
+                isBackspaceInputActive = false;
+
+                if (!PlayerUIManager.instance.isMenuOpened)
+                    return;
+
+                // EQUIPMENT MENU BACKSPACE INPUT MANAGEMENT
+                if (PlayerUIManager.instance.equipmentMenuManager.isEquipmentMenuOpen)
+                {
+                    if (PlayerUIManager.instance.equipmentMenuManager.isInventoryMenuOpen)
+                        PlayerUIManager.instance.equipmentMenuManager.CloseInventoryMenu();
+                    else
+                        PlayerUIManager.instance.equipmentMenuManager.UnequipItem();
+                    return;
+                }
             }
         }
 

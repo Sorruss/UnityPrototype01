@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Knight's Chestplate
   Description: 
   ID: 30000
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: aa2f46b36e30eb746895a66dd13aa016, type: 3}
   equipmentWeight: 11
   physicalDamageAbsorbtion: 0.124
   magicDamageAbsorbtion: 0.109

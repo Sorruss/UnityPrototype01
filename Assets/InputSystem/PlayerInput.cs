@@ -882,6 +882,15 @@ namespace FG
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""a87e7632-0ec5-4815-8325-2ac4e441c944"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -904,6 +913,28 @@ namespace FG
                     ""processors"": """",
                     ""groups"": "";Controller"",
                     ""action"": ""Backspace"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ef7f34c-38d9-41a9-b664-d01a303ecc3b"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82dde5ee-e09a-4140-8498-33c7c4a77b42"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -966,6 +997,7 @@ namespace FG
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Backspace = m_UI.FindAction("Backspace", throwIfNotFound: true);
+            m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         }
 
         ~@PlayerInput()
@@ -1364,6 +1396,7 @@ namespace FG
         private readonly InputActionMap m_UI;
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_Backspace;
+        private readonly InputAction m_UI_Escape;
         /// <summary>
         /// Provides access to input actions defined in input action map "UI".
         /// </summary>
@@ -1379,6 +1412,10 @@ namespace FG
             /// Provides access to the underlying input action "UI/Backspace".
             /// </summary>
             public InputAction @Backspace => m_Wrapper.m_UI_Backspace;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/Escape".
+            /// </summary>
+            public InputAction @Escape => m_Wrapper.m_UI_Escape;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1408,6 +1445,9 @@ namespace FG
                 @Backspace.started += instance.OnBackspace;
                 @Backspace.performed += instance.OnBackspace;
                 @Backspace.canceled += instance.OnBackspace;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
 
             /// <summary>
@@ -1422,6 +1462,9 @@ namespace FG
                 @Backspace.started -= instance.OnBackspace;
                 @Backspace.performed -= instance.OnBackspace;
                 @Backspace.canceled -= instance.OnBackspace;
+                @Escape.started -= instance.OnEscape;
+                @Escape.performed -= instance.OnEscape;
+                @Escape.canceled -= instance.OnEscape;
             }
 
             /// <summary>
@@ -1650,6 +1693,13 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnBackspace(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnEscape(InputAction.CallbackContext context);
         }
     }
 }

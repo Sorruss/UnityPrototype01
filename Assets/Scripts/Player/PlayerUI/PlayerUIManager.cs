@@ -11,9 +11,12 @@ namespace FG
 
         [Header("Flags")]
         public bool isPopUpOpened = false;
+        public bool isMenuOpened = false;
 
         [HideInInspector] public UI_HudManager hudManager;
         [HideInInspector] public UI_PopUpManager popUpManager;
+        [HideInInspector] public UI_SideMenuManager sideMenuManager;
+        [HideInInspector] public UI_EquipmentMenuManager equipmentMenuManager;
 
         private void Awake()
         {
@@ -28,6 +31,8 @@ namespace FG
 
             hudManager = GetComponentInChildren<UI_HudManager>();
             popUpManager = GetComponentInChildren<UI_PopUpManager>();
+            sideMenuManager = GetComponentInChildren<UI_SideMenuManager>();
+            equipmentMenuManager = GetComponentInChildren<UI_EquipmentMenuManager>();
         }
 
         void Start()
@@ -49,6 +54,14 @@ namespace FG
         {
             Cursor.visible = enable;
             Cursor.lockState = enable ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
+        public void CloseAllMenus()
+        {
+            sideMenuManager.CloseSideMenu();
+            equipmentMenuManager.CloseEquipmentMenu();
+            
+            isMenuOpened = false;
         }
     }
 }

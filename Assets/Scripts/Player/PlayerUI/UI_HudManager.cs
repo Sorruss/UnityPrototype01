@@ -5,6 +5,9 @@ namespace FG
 {
     public class UI_HudManager : MonoBehaviour
     {
+        [Header("HUD Canvas Group")]
+        [SerializeField] private CanvasGroup canvasGroup;
+
         [Header("Status Bars")]
         private UI_StaminaBar staminaBar;
         private UI_HealthBar healthBar;
@@ -34,6 +37,16 @@ namespace FG
 
             healthBar.gameObject.SetActive(false);
             healthBar.gameObject.SetActive(true);
+        }
+
+        public void ShowHUD()
+        {
+            canvasGroup.alpha = 1.0f;
+        }
+
+        public void HideHUD()
+        {
+            canvasGroup.alpha = 0.0f;
         }
 
         // STAMINA RELATED FUNCTIONALITY.

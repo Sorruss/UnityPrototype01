@@ -382,6 +382,7 @@ namespace FG
             saveData.legArmorID = playerNetwork.networkArmorLegginsID.Value;
 
             // INVENTORY
+            saveData.itemsInInventoryIDs.Clear();
             foreach (Item item in playerInventoryManager.itemsInInventory)
                 saveData.itemsInInventoryIDs.Add(item.ID);
         }
