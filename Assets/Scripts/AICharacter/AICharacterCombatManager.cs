@@ -10,7 +10,7 @@ namespace FG
         public float distanceToTarget;
 
         [Header("Detection")]
-        [SerializeField] float viewDetectionRadius = 5.0f;
+        [SerializeField] private float viewDetectionRadius = 5.0f;
         [SerializeField] private float viewMinAngle = -35.0f;
         [SerializeField] private float viewMaxAngle = 35.0f;
 
@@ -18,10 +18,10 @@ namespace FG
         public float combatStateRadius = 5.0f;
 
         [Header("Action Recovery Time")]
-        public float actionRecoveryTime = 0.0f;
+        public float actionRecoveryTime = 0.0f;     // AFTER AI DOES AN ATTACK, HE WON'T BE ABLE TO DO OTHER ONE FOR SOME TIME
 
         [Header("Pivoting")]
-        [SerializeField] public bool doPivot = false;
+        public bool doPivot = false;
 
         public void TryToGetATarget(AICharacterManager aiCharacter)
         {

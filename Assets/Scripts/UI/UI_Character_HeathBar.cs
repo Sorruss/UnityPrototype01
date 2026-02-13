@@ -11,7 +11,9 @@ namespace FG
         [SerializeField] private AICharacterManager aiCharacterManager;
 
         [Header("Config - Main")]
-        [SerializeField] private float stayOnScreenTime = 15.0f;
+        [SerializeField] private float stayOnScreenTime;
+        [SerializeField] private float stayOnScreenTimeDefault = 15.0f;
+        [SerializeField] private float stayOnScreenTimeAfterDeath = 5.0f;
         [SerializeField] private float damageNumberStayOnScreenTime = 2.0f;
 
         [Header("Config - Needed GameObjects")]
@@ -25,6 +27,7 @@ namespace FG
         [SerializeField] private int totalDamage;
         [SerializeField] public float previousHealth;
 
+        // TIMERS
         private float stayOnScreenTimer = 0.0f;
         private float damageNumberStayOnScreenTimer = 0.0f;
 
@@ -49,6 +52,9 @@ namespace FG
             // SETTING UP HEALTH ITSELF
             UpdateHealthBarValues();
 
+            // DEFAULT TIME
+            stayOnScreenTime = stayOnScreenTimeDefault;
+
             // MAKE DAMAGE NUMBER TEXT EMPTY
             textDamageNumber.text = "";
 
@@ -71,12 +77,9 @@ namespace FG
             if (!shouldBeShown)
                 return;
 
-            if (characterManager.characterNetwork.networkIsDead.Value)
-            {
-                shouldBeShown = false;
-                parentMainObject.SetActive(false);
-                return;
-            }
+            if (characterManager.characterNetwork.networkIsDead.Value
+                && stayOnScreenTime != stayOnScreenTimeAfterDeath)
+                stayOnScreenTime = stayOnScreenTimeAfterDeath;
 
             parentMainObject.transform.LookAt(parentMainObject.transform.position + Camera.main.transform.forward);
 

@@ -113,7 +113,7 @@ namespace FG
                 totalDamage = 1.0f;
 
             DebugManager.instance.DamageBlockedReceiveLog(totalDamage);
-            character.characterNetwork.networkCurrentHealth.Value -= totalDamage;
+            character.characterStatsManager.DamageHelth(totalDamage);
         }
 
         private void DecreaseStamina(ref CharacterManager character)
@@ -121,8 +121,7 @@ namespace FG
             if (!character.IsOwner)
                 return;
 
-            stability = character.characterStatsManager.stability;
-            float staminaToDeduct = staminaDamage * (1.0f - stability);
+            float staminaToDeduct = staminaDamage * (1.0f - character.characterStatsManager.stability);
 
             if (!character.characterStatsManager.TryDecreaseStamina(staminaToDeduct))
                 character.characterNetwork.networkCurrentStamina.Value = 0.0f;

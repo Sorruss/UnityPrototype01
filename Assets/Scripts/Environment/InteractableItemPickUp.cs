@@ -55,7 +55,7 @@ namespace FG
 
             // PLAY SOUND
             if (interactedSoundFX != null)
-                player.playerSFXManager.PlayAudioClip(SFXManager.instance.itemPickUpSoundFX);
+                player.playerSFXManager.PlayAudioClip(SFXManager.instance.itemPickUpSFX);
 
             // SEND POP UP
             PlayerUIManager.instance.popUpManager.SendItemPickedUpPopUp(item, amount);

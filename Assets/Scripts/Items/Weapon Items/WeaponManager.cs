@@ -4,7 +4,7 @@ namespace FG
 {
     public class WeaponManager : MonoBehaviour
     {
-        private MeleeWeaponDamageCollider meleeDamageCollider;
+        [HideInInspector] public MeleeWeaponDamageCollider meleeDamageCollider;
 
         private void Awake()
         {

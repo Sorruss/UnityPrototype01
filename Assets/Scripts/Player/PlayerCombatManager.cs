@@ -30,6 +30,7 @@ namespace FG
                 player.playerEquipmentManager.RightHandWeaponManager.ActivateDamageCollider(false);
         }
 
+        // -------------
         // LOCK ON STUFF
         public override void SetCurrentTarget(CharacterManager target)
         {
@@ -39,6 +40,7 @@ namespace FG
                 PlayerCamera.instance.AdjustCameraHeight();
         }
 
+        // --------------
         // WEAPON ACTIONS
         public void TryToPerformWeaponAction(WeaponAction weaponAction, WeaponItem weapon)
         {
@@ -58,6 +60,140 @@ namespace FG
                     weaponAction.ActionID, 
                     weapon.ID);
             }
+        }
+
+        // ------------------
+        // RIPOSTE & BACKSTAB
+        protected override void PerformRiposte(CharacterManager target, WeaponClass weaponClass)
+        {
+            // 1. CHECK IF PLAYER CAN DO RIPOSTE
+            if (player.isPerfomingAction)
+                return;
+
+            if (player.characterNetwork.networkIsDead.Value)
+                return;
+
+            if (player.characterNetwork.networkCurrentStamina.Value <= 0.0f)
+                return;
+
+            WeaponMeleeItem weaponUsed = currentWeaponItemBeingUsed as WeaponMeleeItem;
+            if (weaponUsed == null)
+                return;
+
+            // 2. CREATE GAMEOBJECT WITH CORRECT POSITION RELATIVE TO WEAPON WE USING
+            if (riposteTargetPosition == null)
+            {
+                GameObject gameObject = new GameObject("Riposte Victim Position");
+                gameObject.transform.parent = transform;
+                gameObject.transform.position = Vector3.zero;
+                riposteTargetPosition = gameObject.transform;
+            }
+
+            riposteTargetPosition.localPosition = UtilityManager.instance.GetRipostePositionBasedOnWeaponClass(weaponClass);
+
+            // 3. PLACE TARGET ONTO THE CREATED GAMEOBJECT
+            target.transform.position = riposteTargetPosition.position;
+
+            // 4. ROTATE TARGET SO IT LOOKS AT THE CHARACTER
+            target.transform.rotation = Quaternion.LookRotation(-player.transform.forward);
+
+            // 5. CREATE CRITICAL DAMAGE EFFECT
+            TakeCriticalDamageEffect criticalDamageEffect = Instantiate(EffectsManager.instance.criticalDamageEffect);
+            WeaponManager weaponManager = player.playerEquipmentManager.RightHandWeaponManager;
+
+            if (player.playerNetwork.networkIsTwoHandingLeftWeapon.Value)
+                weaponManager = player.playerEquipmentManager.LeftHandWeaponManager;
+
+            criticalDamageEffect.physicalDamage = weaponManager.meleeDamageCollider.physicalDamage;
+            criticalDamageEffect.magicDamage = weaponManager.meleeDamageCollider.magicDamage;
+            criticalDamageEffect.fireDamage = weaponManager.meleeDamageCollider.fireDamage;
+            criticalDamageEffect.lightningDamage = weaponManager.meleeDamageCollider.lightningDamage;
+            criticalDamageEffect.holyDamage = weaponManager.meleeDamageCollider.holyDamage;
+
+            criticalDamageEffect.physicalDamage *= weaponUsed.riposteMultiplier;
+            criticalDamageEffect.magicDamage *= weaponUsed.riposteMultiplier;
+            criticalDamageEffect.fireDamage *= weaponUsed.riposteMultiplier;
+            criticalDamageEffect.lightningDamage *= weaponUsed.riposteMultiplier;
+            criticalDamageEffect.holyDamage *= weaponUsed.riposteMultiplier;
+
+            // 6. APPLY CRITICAL DAMAGE EFFECT TO THE TARGET (WILL ASSIGN PENDING_CRITICAL_DAMAGE VARIABLE)
+            target.characterNetwork.NotifyClientOfRiposteServerRpc(
+                player.NetworkObjectId, target.NetworkObjectId, weaponUsed.ID,
+                criticalDamageEffect.physicalDamage, criticalDamageEffect.magicDamage,
+                criticalDamageEffect.fireDamage, criticalDamageEffect.lightningDamage,
+                criticalDamageEffect.holyDamage);
+
+            // 7. PERFORM THE RIPOSTE ANIMATION ON CHARACTER (RPC)
+            if (player.IsOwner)
+                player.playerNetwork.networkIsInvincible.Value = true;
+
+            player.playerAnimatorManager.PerformInstantAnimationAction("Riposte_01", true);
+        }
+
+        protected override void PerformBackstab(CharacterManager target, WeaponClass weaponClass)
+        {
+            // 1. CHECK IF PLAYER CAN DO RIPOSTE
+            if (player.isPerfomingAction)
+                return;
+
+            if (player.characterNetwork.networkIsDead.Value)
+                return;
+
+            if (player.characterNetwork.networkCurrentStamina.Value <= 0.0f)
+                return;
+
+            WeaponMeleeItem weaponUsed = currentWeaponItemBeingUsed as WeaponMeleeItem;
+            if (weaponUsed == null)
+                return;
+
+            // 2. CREATE GAMEOBJECT WITH CORRECT POSITION RELATIVE TO WEAPON WE USING
+            if (backstabTargetPosition == null)
+            {
+                GameObject gameObject = new GameObject("Backstab Victim Position");
+                gameObject.transform.parent = transform;
+                gameObject.transform.position = Vector3.zero;
+                backstabTargetPosition = gameObject.transform;
+            }
+
+            backstabTargetPosition.localPosition = UtilityManager.instance.GetBackstabPositionBasedOnWeaponClass(weaponClass);
+
+            // 3. PLACE TARGET ONTO THE CREATED GAMEOBJECT
+            target.transform.position = backstabTargetPosition.position;
+
+            // 4. ROTATE TARGET SO IT LOOKS AWAY FROM THE CHARACTER
+            target.transform.rotation = Quaternion.LookRotation(player.transform.forward);
+
+            // 5. CREATE CRITICAL DAMAGE EFFECT
+            TakeCriticalDamageEffect criticalDamageEffect = Instantiate(EffectsManager.instance.criticalDamageEffect);
+            WeaponManager weaponManager = player.playerEquipmentManager.RightHandWeaponManager;
+
+            if (player.playerNetwork.networkIsTwoHandingLeftWeapon.Value)
+                weaponManager = player.playerEquipmentManager.LeftHandWeaponManager;
+
+            criticalDamageEffect.physicalDamage = weaponManager.meleeDamageCollider.physicalDamage;
+            criticalDamageEffect.magicDamage = weaponManager.meleeDamageCollider.magicDamage;
+            criticalDamageEffect.fireDamage = weaponManager.meleeDamageCollider.fireDamage;
+            criticalDamageEffect.lightningDamage = weaponManager.meleeDamageCollider.lightningDamage;
+            criticalDamageEffect.holyDamage = weaponManager.meleeDamageCollider.holyDamage;
+
+            criticalDamageEffect.physicalDamage *= weaponUsed.backstabMultiplier;
+            criticalDamageEffect.magicDamage *= weaponUsed.backstabMultiplier;
+            criticalDamageEffect.fireDamage *= weaponUsed.backstabMultiplier;
+            criticalDamageEffect.lightningDamage *= weaponUsed.backstabMultiplier;
+            criticalDamageEffect.holyDamage *= weaponUsed.backstabMultiplier;
+
+            // 6. APPLY CRITICAL DAMAGE EFFECT TO THE TARGET (WILL ASSIGN PENDING_CRITICAL_DAMAGE VARIABLE)
+            target.characterNetwork.NotifyClientOfBackstabServerRpc(
+                player.NetworkObjectId, target.NetworkObjectId, weaponUsed.ID,
+                criticalDamageEffect.physicalDamage, criticalDamageEffect.magicDamage,
+                criticalDamageEffect.fireDamage, criticalDamageEffect.lightningDamage,
+                criticalDamageEffect.holyDamage);
+
+            // 7. PERFORM THE BACKSTAB ANIMATION ON CHARACTER (RPC)
+            if (player.IsOwner)
+                player.playerNetwork.networkIsInvincible.Value = true;
+
+            player.playerAnimatorManager.PerformInstantAnimationAction("Backstab_01", true);
         }
 
         // ---------------------------------

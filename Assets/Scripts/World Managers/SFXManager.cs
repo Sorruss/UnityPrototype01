@@ -21,8 +21,14 @@ namespace FG
         [Header("SFX - Guard Broken")]
         public AudioClip[] guardBrokenSFX;
 
+        [Header("SFX - Posture Break")]
+        public AudioClip postureBreakSFX;
+
+        [Header("SFX - Critical Strike")]
+        public AudioClip criticalStrikeSFX;
+
         [Header("SFX - Item Pick Up")]
-        public AudioClip itemPickUpSoundFX;
+        public AudioClip itemPickUpSFX;
 
         [Header("Music - Boss Fight")]
         [SerializeField] private AudioSource audioSourceBossFightIntro;

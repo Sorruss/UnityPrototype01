@@ -35,6 +35,10 @@ namespace FG
             // AT THIS POINT WE WILL DO ATTACK SO
             player.playerNetwork.networkIsAttacking.Value = true;
 
+            // RIPOSTE & BACKSTAB (IF HAPPENS IT WILL NOT ALLOW SMTH ELSE BELOW IT)
+            player.playerCombatManager.AttemptRiposte(weapon.weaponClass);
+            player.playerCombatManager.AttemptBackstab(weapon.weaponClass);
+
             // CHOOSE WHICH ATTACK TYPE TO DO (RUNNING, ROLLING, ETC.)
             if (player.playerNetwork.networkIsSprinting.Value)
                 DoRunningAttack(player, weapon);

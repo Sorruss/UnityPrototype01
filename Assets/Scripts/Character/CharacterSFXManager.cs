@@ -61,6 +61,18 @@ namespace FG
             PlayAudioClip(SFXManager.instance.GetRandomSFX(ref attackGrunts));
         }
 
+        // POSTURE BREAK
+        public virtual void PlayPostureBreakSoundFX()
+        {
+            PlayAudioClip(SFXManager.instance.postureBreakSFX);
+        }
+
+        // RIPOSTE
+        public virtual void PlayCriticalStrikeSoundFX()
+        {
+            PlayAudioClip(SFXManager.instance.criticalStrikeSFX);
+        }
+
         // --------------
         // WEAPON RELATED
         public virtual void PlayWeaponBlockFX()

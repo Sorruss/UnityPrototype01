@@ -4,7 +4,7 @@ namespace FG
 {
     public class CharacterStatsManager : MonoBehaviour
     {
-        private CharacterManager character;
+        protected CharacterManager character;
 
         [Header("Stamina - Stamina Recovery")]
         [SerializeField] private float staminaRecoverRate = 0.1f;
@@ -62,6 +62,11 @@ namespace FG
 
         }
 
+        protected virtual void FixedUpdate()
+        {
+            
+        }
+
         // -----------------------------
         // CONVERTERS FROM LEVEL TO STAT
         public int GetMaxStaminaOfEnduranceLevel(int endurance)
@@ -74,6 +79,16 @@ namespace FG
         {
             int maxVitality = vitality * 10;
             return maxVitality;
+        }
+
+        // -------------
+        // HEATLH DAMAGE
+        public void DamageHelth(float damage)
+        {
+            if (damage > character.characterNetwork.networkCurrentHealth.Value)
+                damage = character.characterNetwork.networkCurrentHealth.Value;
+
+            character.characterNetwork.networkCurrentHealth.Value -= damage;
         }
 
         // -------------
@@ -146,6 +161,7 @@ namespace FG
         {
             totalPoiseDamage -= poiseToDeduct;
             poiseResetTimer = poiseResetTime;
+            character.characterCombatManager.lastPoiseDamageTaken = poiseToDeduct;
         }
 
         public int GetPoiseLeft()

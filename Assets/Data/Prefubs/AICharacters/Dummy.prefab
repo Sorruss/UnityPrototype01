@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 8770232186266597746}
   - component: {fileID: -1286414212495780953}
   - component: {fileID: -7170559448669572277}
-  - component: {fileID: 5894431964656010582}
+  - component: {fileID: -3646811548091956359}
   - component: {fileID: 8678878190428201284}
   - component: {fileID: 6761083307075427689}
   - component: {fileID: 7307870544635914890}
@@ -519,6 +519,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
   characterNetwork: {fileID: 0}
   characterSFXManager: {fileID: 0}
   characterController: {fileID: 0}
@@ -531,8 +532,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   aiCombatManager: {fileID: 0}
-  aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterStatsManager: {fileID: 0}
   aiCharacterAnimatorManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterName: Dummy
   currentState: {fileID: 0}
   idleState: {fileID: 11400000, guid: 4b41a4c1546724e4493e3bfdc4822630, type: 2}
@@ -570,9 +572,15 @@ MonoBehaviour:
     m_InternalValue: 0
   networkIsSprinting:
     m_InternalValue: 0
+  networkIsWalking:
+    m_InternalValue: 0
   networkIsJumping:
     m_InternalValue: 0
   networkIsRolling:
+    m_InternalValue: 0
+  networkIsBlocking:
+    m_InternalValue: 0
+  networkIsAttacking:
     m_InternalValue: 0
   networkIsDead:
     m_InternalValue: 0
@@ -582,6 +590,10 @@ MonoBehaviour:
     m_InternalValue: 1
   networkIsInvincible:
     m_InternalValue: 0
+  networkIsRipostable:
+    m_InternalValue: 0
+  networkIsBeingRiposted:
+    m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
   networkTargetNetworkObejectID:
@@ -590,6 +602,10 @@ MonoBehaviour:
     m_InternalValue: 5
   networkVitality:
     m_InternalValue: 7
+  networkStrength:
+    m_InternalValue: 4
+  networkStrengthModifier:
+    m_InternalValue: 0
   networkMaxHealth:
     m_InternalValue: 0
   networkCurrentHealth:
@@ -655,13 +671,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.DummyCombatManager
   lockOnTransform: {fileID: 0}
-  currentAttackTypeBeingUsed: 0
-  currentWeaponItemBeingUsed: {fileID: 0}
   staminaNeededForCurrentAction: 0
-  lastAttackAnimationPerfomed: 
   currentTarget: {fileID: 0}
+  riposteDistance: 0.7
+  pendingCriticalDamage: 0
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
+  lastAttackAnimationPerfomed: 
+  currentAttackTypeBeingUsed: 0
+  currentWeaponItemBeingUsed: {fileID: 0}
+  lastPoiseDamageTaken: 0
   targetDirection: {x: 0, y: 0, z: 0}
   angleToTarget: 0
   distanceToTarget: 0
@@ -674,6 +693,7 @@ MonoBehaviour:
   LeftHandWeaponScriptable: {fileID: 0}
   RightHandWeaponScriptable: {fileID: 11400000, guid: f9a7f436c24f9c54394416b60ffb3162, type: 2}
   baseDamage: 20
+  basePoiseDamage: 40
   Attack01DamageModifier: 1
   Attack02DamageModifier: 1.2
 --- !u!114 &-7170559448669572277
@@ -690,7 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterUIManager
   characterHeathBar: {fileID: 2389980849364263394}
   showHealthBarOnDamage: 1
---- !u!114 &5894431964656010582
+--- !u!114 &-3646811548091956359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -699,15 +719,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 1716552696387414296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 242f1e4cd2ad9074d92d0a3f22eb39fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e53c3acfeb9c88488ddae380cd35510, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterStatsManager
-  staminaRecoverRate: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterStatsManager
+  staminaRecoverRate: 0.1
   staminaRecoverValue: 2
-  staminaRecoverDelay: 2
+  staminaRecoverDelay: 1
   sprintStaminaCost: 2
   dodgeStaminaCost: 20
   jumpStaminaCost: 10
+  blockDamageAbsorbtionPhysical: 0
+  blockDamageAbsorbtionMagic: 0
+  blockDamageAbsorbtionFire: 0
+  blockDamageAbsorbtionLightning: 0
+  blockDamageAbsorbtionHoly: 0
+  stability: 0
+  armorDamageAbsorbtionPhysical: 0
+  armorDamageAbsorbtionMagic: 0
+  armorDamageAbsorbtionFire: 0
+  armorDamageAbsorbtionLightning: 0
+  armorDamageAbsorbtionHoly: 0
+  armorPoisonResistance: 0
+  armorRotResistance: 0
+  armorBleedResistance: 0
+  armorFrostResistance: 0
+  armorMadnessResistance: 0
+  armorSleepResistance: 0
+  armorCurseResistance: 0
+  poiseResetTimer: 0
+  poiseResetTime: 8
+  totalPoiseDamage: 0
+  basePoiseOffense: 0
+  bonusAttackingPoiseOffense: 0
+  ignorePosture: 0
+  maxPosture: 150
+  currentPosture: 0
+  postureRegenPerSecond: 15
+  postureRegenTime: 8
+  postureRegenTimer: 0
 --- !u!114 &8678878190428201284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +772,7 @@ MonoBehaviour:
   applyRootMotion: 0
   locomotionSmoothTime: 0.1
   actionSmoothTime: 0.2
+  lastUsedDamageAnimation: 
   hit_front_medium_01: hit_front_medium_01
   hit_front_medium_02: hit_front_medium_02
   hit_back_medium_01: hit_back_medium_01
@@ -731,11 +781,22 @@ MonoBehaviour:
   hit_left_medium_02: hit_left_medium_02
   hit_right_medium_01: hit_right_medium_01
   hit_right_medium_02: hit_right_medium_02
-  lastUsedDamageAnimation: 
   HitFrontMedium: []
   HitBackMedium: []
   HitLeftMedium: []
   HitRightMedium: []
+  hit_front_ping_01: hit_front_ping_01
+  hit_front_ping_02: hit_front_ping_02
+  hit_back_ping_01: hit_back_ping_01
+  hit_back_ping_02: hit_back_ping_02
+  hit_left_ping_01: hit_left_ping_01
+  hit_left_ping_02: hit_left_ping_02
+  hit_right_ping_01: hit_right_ping_01
+  hit_right_ping_02: hit_right_ping_02
+  HitFrontPing: []
+  HitBackPing: []
+  HitLeftPing: []
+  HitRightPing: []
 --- !u!114 &6761083307075427689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,7 +809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a3d1b29b59c2f48aba327633aa14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterEffectsManager
+  activeStaticEffects: []
   bloodSplashVFX: {fileID: 0}
+  criticalBloodSplashVFX: {fileID: 0}
 --- !u!114 &7307870544635914890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +912,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

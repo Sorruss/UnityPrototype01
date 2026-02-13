@@ -7,8 +7,9 @@ namespace FG
     {
         // MANAGERS
         [HideInInspector] public AICharacterCombatManager aiCombatManager;
-        [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
+        [HideInInspector] public AICharacterStatsManager aiCharacterStatsManager;
         [HideInInspector] public AICharacterAnimatorManager aiCharacterAnimatorManager;
+        [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
         [Header("Config")]
         public string aiCharacterName;
@@ -35,8 +36,9 @@ namespace FG
 
             // COMPONENTS INITIALIZATION
             aiCombatManager = GetComponent<AICharacterCombatManager>();
-            aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
+            aiCharacterStatsManager = GetComponent<AICharacterStatsManager>();
             aiCharacterAnimatorManager = GetComponent<AICharacterAnimatorManager>();
+            aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
         }
 
         protected override void Update()
@@ -71,7 +73,7 @@ namespace FG
 
             // HEALTH
             characterNetwork.networkMaxHealth.Value = 
-                characterStatsManager.GetMaxHealthOfVitalityLevel(characterNetwork.networkVitality.Value);
+                characterStatsManager.GetMaxHealthOfVitalityLevel(20);
             characterNetwork.networkCurrentHealth.Value = characterNetwork.networkMaxHealth.Value;
 
             CheckHealth(0.0f, characterNetwork.networkCurrentHealth.Value);

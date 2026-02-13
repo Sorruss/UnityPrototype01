@@ -9,16 +9,18 @@ namespace FG
 
         [Header("VFX")]
         public GameObject bloodSplashVFX;
+        public GameObject criticalBloodSplashVFX;
 
         [Header("Instant Effects")]
-        [SerializeField] public TakeHealthDamageEffect healthDamageEffect;
-        [SerializeField] public TakeHealthDamageBlockedEffect healthDamageBlockedEffect;
-        [SerializeField] public TakeStaminaDamageEffect staminaDamageEffect;
+        public TakeHealthDamageEffect healthDamageEffect;
+        public TakeHealthDamageBlockedEffect healthDamageBlockedEffect;
+        public TakeStaminaDamageEffect staminaDamageEffect;
+        public TakeCriticalDamageEffect criticalDamageEffect;
         [Space]
         [SerializeField] private List<InstantEffect> instantEffects;
 
         [Header("Static Effects")]
-        [SerializeField] public TwoHandingStaticEffect twoHandingEffect;
+        public TwoHandingStaticEffect twoHandingEffect;
         [Space]
         [SerializeField] private List<StaticEffect> staticEffects;
 

@@ -200,6 +200,26 @@ namespace FG
                 applyRootMotion);
         }
 
+        public void PerformInstantAnimationAction(
+            string actionName,
+            bool isPerformingAction,
+            bool applyRootMotion = true,
+            bool canRotate = false,
+            bool canMove = false)
+        {
+            character.isPerfomingAction = isPerformingAction;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
+            character.animator.Play(actionName);
+
+            character.characterNetwork.NotifyServerOfAnimatorInstantActionServerRpc(
+                NetworkManager.Singleton.LocalClientId,
+                actionName,
+                applyRootMotion);
+        }
+
         public void PerformAttackAnimationAction(
             string actionName,
             bool isPerformingAction,

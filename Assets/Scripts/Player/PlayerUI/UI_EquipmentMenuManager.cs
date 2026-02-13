@@ -538,7 +538,7 @@ namespace FG
             {
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_01:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.LeftHandWeaponScriptables[0] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.LeftHandWeaponScriptables[0] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 0)
                     {
@@ -553,7 +553,7 @@ namespace FG
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_02:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.LeftHandWeaponScriptables[1] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.LeftHandWeaponScriptables[1] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 1)
                     {
@@ -568,7 +568,7 @@ namespace FG
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_03:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.LeftHandWeaponScriptables[2] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.LeftHandWeaponScriptables[2] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 2)
                     {
@@ -583,7 +583,7 @@ namespace FG
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_01:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.RightHandWeaponScriptables[0] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.RightHandWeaponScriptables[0] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.RightHandWeaponIndex == 0)
                     {
@@ -598,7 +598,7 @@ namespace FG
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_02:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.RightHandWeaponScriptables[1] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.RightHandWeaponScriptables[1] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.RightHandWeaponIndex == 1)
                     {
@@ -613,7 +613,7 @@ namespace FG
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_03:
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
-                    player.playerInventoryManager.RightHandWeaponScriptables[2] = ItemDatabase.instance.unarmedWeapon;
+                    player.playerInventoryManager.RightHandWeaponScriptables[2] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
                     if (player.playerInventoryManager.RightHandWeaponIndex == 2)
                     {

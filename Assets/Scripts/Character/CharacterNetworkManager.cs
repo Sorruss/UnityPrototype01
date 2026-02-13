@@ -88,6 +88,14 @@ namespace FG
             new(false,
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> networkIsRipostable =
+            new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> networkIsBeingCriticallyDamaged =
+            new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
 
         // LOCK ON.
         [Header("LOCK ON")]
@@ -147,6 +155,11 @@ namespace FG
             gameObject.SetActive(newValue);
         }
 
+        public void OnIsDeadChanged(bool oldValue, bool newValue)
+        {
+            character.animator.SetBool("IsDead", newValue);
+        }
+
         public virtual void OnIsBlockingChanged(bool oldValue, bool newValue)
         {
             character.animator.SetBool("IsBlocking", newValue);
@@ -183,7 +196,7 @@ namespace FG
             character.animator.SetBool("IsChargingAttack", newValue);
         }
 
-        // ANIMATOR ACTIONS RPCs.
+        // ANIMATOR ACTION RPCs.
         [ServerRpc]
         public void NotifyServerOfAnimatorActionServerRpc(ulong clientId, string actionName, bool applyRootMotion = true)
         {
@@ -206,6 +219,31 @@ namespace FG
         {
             character.characterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(actionName, character.characterAnimatorManager.actionSmoothTime);
+        }
+
+        // ANIMATOR ACTION RPCs but instant (Play instead of CrossFade).
+        [ServerRpc]
+        public void NotifyServerOfAnimatorInstantActionServerRpc(ulong clientId, string actionName, bool applyRootMotion = true)
+        {
+            if (IsServer)
+            {
+                NotifyClientsOfAnimatorInstantActionClientRpc(clientId, actionName, applyRootMotion);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyClientsOfAnimatorInstantActionClientRpc(ulong clientId, string actionName, bool applyRootMotion)
+        {
+            if (NetworkManager.Singleton.LocalClientId != clientId)
+            {
+                ApplyAnimatorInstantAction(actionName, applyRootMotion);
+            }
+        }
+
+        private void ApplyAnimatorInstantAction(string actionName, bool applyRootMotion)
+        {
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
+            character.animator.Play(actionName);
         }
 
         // ANIMATOR ATTACK ACTIONS RPCs.
@@ -447,6 +485,184 @@ namespace FG
 
             // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
             damageReceiver.characterEffectsManager.ApplyInstantEffect(healthDamageEffect);
+        }
+
+        // NOTIFY RIPOSTE
+        [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+        public void NotifyClientOfRiposteServerRpc(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            if (IsServer)
+            {
+                NotifyClientOfRiposteClientRpc(
+                    damageDealerID,
+                    damageReceiverID,
+                    weaponID,
+                    physicalDamage,
+                    magicDamage,
+                    fireDamage,
+                    lightningDamage,
+                    holyDamage);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyClientOfRiposteClientRpc(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            ApplyRiposte(
+                damageDealerID,
+                damageReceiverID,
+                weaponID,
+                physicalDamage,
+                magicDamage,
+                fireDamage,
+                lightningDamage,
+                holyDamage);
+        }
+
+        private void ApplyRiposte(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            // FIND NECESSARY ENTITIES.
+            CharacterManager damageDealer = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damageDealerID]
+                .gameObject.GetComponent<CharacterManager>();
+            CharacterManager damageReceiver = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damageReceiverID]
+                .gameObject.GetComponent<CharacterManager>();
+
+            // CREATE TAKEHEALTHDAMAGEEFFECT AND CONFIGURE IT.
+            TakeCriticalDamageEffect criticalDamageEffect = Instantiate(EffectsManager.instance.criticalDamageEffect);
+            WeaponMeleeItem meleeWeapon = ItemDatabase.instance.GetWeaponItemByID(weaponID) as WeaponMeleeItem;
+
+            criticalDamageEffect.damageCauser = damageDealer;
+
+            criticalDamageEffect.physicalDamage = physicalDamage;
+            criticalDamageEffect.magicDamage = magicDamage;
+            criticalDamageEffect.fireDamage = fireDamage;
+            criticalDamageEffect.lightningDamage = lightningDamage;
+            criticalDamageEffect.holyDamage = holyDamage;
+
+            criticalDamageEffect.physicalDamage *= meleeWeapon.riposteMultiplier;
+            criticalDamageEffect.magicDamage *= meleeWeapon.riposteMultiplier;
+            criticalDamageEffect.fireDamage *= meleeWeapon.riposteMultiplier;
+            criticalDamageEffect.lightningDamage *= meleeWeapon.riposteMultiplier;
+            criticalDamageEffect.holyDamage *= meleeWeapon.riposteMultiplier;
+
+            criticalDamageEffect.manuallySelectDamageAnimation = true;
+            criticalDamageEffect.damageAnimationName = UtilityManager.instance.GetRiposteVictimAnimationBasedOnWeaponClass(meleeWeapon.weaponClass);
+
+            // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
+            damageReceiver.characterEffectsManager.ApplyInstantEffect(criticalDamageEffect);
+        }
+
+        // NOTIFY BACKSTAB
+        [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+        public void NotifyClientOfBackstabServerRpc(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            if (IsServer)
+            {
+                NotifyClientOfBackstabClientRpc(
+                    damageDealerID,
+                    damageReceiverID,
+                    weaponID,
+                    physicalDamage,
+                    magicDamage,
+                    fireDamage,
+                    lightningDamage,
+                    holyDamage);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyClientOfBackstabClientRpc(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            ApplyBackstab(
+                damageDealerID,
+                damageReceiverID,
+                weaponID,
+                physicalDamage,
+                magicDamage,
+                fireDamage,
+                lightningDamage,
+                holyDamage);
+        }
+
+        private void ApplyBackstab(
+            ulong damageDealerID,
+            ulong damageReceiverID,
+            int weaponID,
+            float physicalDamage,
+            float magicDamage,
+            float fireDamage,
+            float lightningDamage,
+            float holyDamage)
+        {
+            // FIND NECESSARY ENTITIES.
+            CharacterManager damageDealer = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damageDealerID]
+                .gameObject.GetComponent<CharacterManager>();
+            CharacterManager damageReceiver = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damageReceiverID]
+                .gameObject.GetComponent<CharacterManager>();
+
+            // CREATE TAKEHEALTHDAMAGEEFFECT AND CONFIGURE IT.
+            TakeCriticalDamageEffect criticalDamageEffect = Instantiate(EffectsManager.instance.criticalDamageEffect);
+            WeaponMeleeItem meleeWeapon = ItemDatabase.instance.GetWeaponItemByID(weaponID) as WeaponMeleeItem;
+
+            criticalDamageEffect.damageCauser = damageDealer;
+
+            criticalDamageEffect.physicalDamage = physicalDamage;
+            criticalDamageEffect.magicDamage = magicDamage;
+            criticalDamageEffect.fireDamage = fireDamage;
+            criticalDamageEffect.lightningDamage = lightningDamage;
+            criticalDamageEffect.holyDamage = holyDamage;
+
+            criticalDamageEffect.physicalDamage *= meleeWeapon.backstabMultiplier;
+            criticalDamageEffect.magicDamage *= meleeWeapon.backstabMultiplier;
+            criticalDamageEffect.fireDamage *= meleeWeapon.backstabMultiplier;
+            criticalDamageEffect.lightningDamage *= meleeWeapon.backstabMultiplier;
+            criticalDamageEffect.holyDamage *= meleeWeapon.backstabMultiplier;
+
+            criticalDamageEffect.manuallySelectDamageAnimation = true;
+            criticalDamageEffect.damageAnimationName = UtilityManager.instance.GetBackstabVictimAnimationBasedOnWeaponClass(meleeWeapon.weaponClass);
+
+            // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
+            damageReceiver.characterEffectsManager.ApplyInstantEffect(criticalDamageEffect);
         }
     }
 }

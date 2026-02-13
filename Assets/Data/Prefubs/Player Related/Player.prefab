@@ -3408,6 +3408,7 @@ MonoBehaviour:
   playerLocomotion: {fileID: 0}
   playerCombatManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
+  playerBodyManager: {fileID: 0}
   playerNetwork: {fileID: 0}
   playerSFXManager: {fileID: 0}
 --- !u!114 &2189645501233158540
@@ -3450,10 +3451,10 @@ MonoBehaviour:
   LeftHandWeaponScriptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   RightHandWeaponScriptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   TwoHandedWeaponScriptable: {fileID: 0}
-  LeftHandWeaponSciptables:
-  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
-  - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
-  - {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
+  LeftHandWeaponScriptables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   RightHandWeaponScriptables:
   - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   - {fileID: 11400000, guid: cc0a9d4bb8168904f85aa9fea2078e7f, type: 2}
@@ -3464,6 +3465,7 @@ MonoBehaviour:
   ChestArmorScriptable: {fileID: 0}
   HandArmorScriptable: {fileID: 0}
   LegArmorScriptable: {fileID: 0}
+  itemsInInventory: []
 --- !u!114 &-6896822798822141059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3553,6 +3555,7 @@ MonoBehaviour:
   FemaleArmorRightLegParent: {fileID: 0}
   femaleArmorRightLegs: []
   debugEquipArmor: 0
+  debugChangeGender: 0
 --- !u!114 &7241501903264518259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3566,13 +3569,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerCombatManager
   lockOnTransform: {fileID: 0}
-  currentAttackTypeBeingUsed: 0
-  currentWeaponItemBeingUsed: {fileID: 0}
   staminaNeededForCurrentAction: 0
-  lastAttackAnimationPerfomed: 
   currentTarget: {fileID: 0}
+  riposteDistance: 0.7
+  pendingCriticalDamage: 0
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
+  lastAttackAnimationPerfomed: 
+  currentAttackTypeBeingUsed: 0
+  currentWeaponItemBeingUsed: {fileID: 0}
+  lastPoiseDamageTaken: 0
   CanDoComboMainHand: 0
   CanDoComboOffHand: 0
   CanBlock: 1
@@ -3732,6 +3738,10 @@ MonoBehaviour:
     m_InternalValue: 1
   networkIsInvincible:
     m_InternalValue: 0
+  networkIsRipostable:
+    m_InternalValue: 0
+  networkIsBeingRiposted:
+    m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
   networkTargetNetworkObejectID:
@@ -3863,6 +3873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerEffectsManager
   activeStaticEffects: []
   bloodSplashVFX: {fileID: 0}
+  criticalBloodSplashVFX: {fileID: 0}
   instantEffect: {fileID: 11400000, guid: e06967e9ce02b6f45b2f661a02a65185, type: 2}
   takeEffect: 0
 --- !u!114 &-5777034168776332150
@@ -3973,7 +3984,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

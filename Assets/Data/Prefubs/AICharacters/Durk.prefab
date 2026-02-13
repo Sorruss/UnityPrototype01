@@ -557,7 +557,7 @@ PrefabInstance:
       addedObject: {fileID: -1883681211687242447}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8986958147089635138}
+      addedObject: {fileID: -2823760083745891881}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1369200742906466121}
@@ -1256,6 +1256,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
   characterNetwork: {fileID: 0}
   characterSFXManager: {fileID: 0}
   characterController: {fileID: 0}
@@ -1268,8 +1269,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   aiCombatManager: {fileID: 0}
-  aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterStatsManager: {fileID: 0}
   aiCharacterAnimatorManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterName: Durk, The Main And Only Boss
   currentState: {fileID: 0}
   idleState: {fileID: 11400000, guid: 940cebe440710344d930dc17dad7cc4d, type: 2}
@@ -1325,9 +1327,15 @@ MonoBehaviour:
     m_InternalValue: 0
   networkIsSprinting:
     m_InternalValue: 0
+  networkIsWalking:
+    m_InternalValue: 0
   networkIsJumping:
     m_InternalValue: 0
   networkIsRolling:
+    m_InternalValue: 0
+  networkIsBlocking:
+    m_InternalValue: 0
+  networkIsAttacking:
     m_InternalValue: 0
   networkIsDead:
     m_InternalValue: 0
@@ -1337,6 +1345,10 @@ MonoBehaviour:
     m_InternalValue: 1
   networkIsInvincible:
     m_InternalValue: 0
+  networkIsRipostable:
+    m_InternalValue: 0
+  networkIsBeingCriticallyDamaged:
+    m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
   networkTargetNetworkObejectID:
@@ -1345,6 +1357,10 @@ MonoBehaviour:
     m_InternalValue: 5
   networkVitality:
     m_InternalValue: 7
+  networkStrength:
+    m_InternalValue: 4
+  networkStrengthModifier:
+    m_InternalValue: 0
   networkMaxHealth:
     m_InternalValue: 200
   networkCurrentHealth:
@@ -1410,13 +1426,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.DurkCombatManager
   lockOnTransform: {fileID: 0}
-  currentAttackTypeBeingUsed: 0
-  currentWeaponItemBeingUsed: {fileID: 0}
   staminaNeededForCurrentAction: 0
-  lastAttackAnimationPerfomed: 
   currentTarget: {fileID: 0}
+  riposteDistance: 0.7
+  pendingCriticalDamage: 0
+  isBackstabable: 0
+  backstabDistance: 0.7
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
+  lastAttackAnimationPerfomed: 
+  currentAttackTypeBeingUsed: 0
+  currentWeaponItemBeingUsed: {fileID: 0}
+  lastPoiseDamageTaken: 0
   targetDirection: {x: 0, y: 0, z: 0}
   angleToTarget: 0
   distanceToTarget: 0
@@ -1427,6 +1448,7 @@ MonoBehaviour:
   actionRecoveryTime: 0
   doPivot: 1
   baseDamage: 5
+  basePoiseDamage: 40
   attack_01_modifier: 1
   attack_02_modifier: 1.2
   attack_03_modifier: 1.5
@@ -1450,7 +1472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterUIManager
   characterHeathBar: {fileID: 8232531907593523939}
   showHealthBarOnDamage: 0
---- !u!114 &8986958147089635138
+--- !u!114 &-2823760083745891881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1459,15 +1481,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 8800166971466407635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 242f1e4cd2ad9074d92d0a3f22eb39fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e53c3acfeb9c88488ddae380cd35510, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterStatsManager
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterStatsManager
   staminaRecoverRate: 0.1
   staminaRecoverValue: 2
   staminaRecoverDelay: 1
   sprintStaminaCost: 2
   dodgeStaminaCost: 20
   jumpStaminaCost: 10
+  blockDamageAbsorbtionPhysical: 0
+  blockDamageAbsorbtionMagic: 0
+  blockDamageAbsorbtionFire: 0
+  blockDamageAbsorbtionLightning: 0
+  blockDamageAbsorbtionHoly: 0
+  stability: 0
+  armorDamageAbsorbtionPhysical: 0
+  armorDamageAbsorbtionMagic: 0
+  armorDamageAbsorbtionFire: 0
+  armorDamageAbsorbtionLightning: 0
+  armorDamageAbsorbtionHoly: 0
+  armorPoisonResistance: 0
+  armorRotResistance: 0
+  armorBleedResistance: 0
+  armorFrostResistance: 0
+  armorMadnessResistance: 0
+  armorSleepResistance: 0
+  armorCurseResistance: 0
+  poiseResetTimer: 0
+  poiseResetTime: 8
+  totalPoiseDamage: 0
+  basePoiseOffense: 0
+  bonusAttackingPoiseOffense: 0
+  ignorePosture: 1
+  maxPosture: 150
+  currentPosture: 0
+  postureRegenPerSecond: 15
+  postureRegenTime: 8
+  postureRegenTimer: 0
 --- !u!114 &1369200742906466121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,6 +1534,7 @@ MonoBehaviour:
   applyRootMotion: 0
   locomotionSmoothTime: 0.1
   actionSmoothTime: 0.2
+  lastUsedDamageAnimation: 
   hit_front_medium_01: hit_front_medium_01
   hit_front_medium_02: hit_front_medium_02
   hit_back_medium_01: hit_back_medium_01
@@ -1491,11 +1543,22 @@ MonoBehaviour:
   hit_left_medium_02: hit_left_medium_02
   hit_right_medium_01: hit_right_medium_01
   hit_right_medium_02: hit_right_medium_02
-  lastUsedDamageAnimation: 
   HitFrontMedium: []
   HitBackMedium: []
   HitLeftMedium: []
   HitRightMedium: []
+  hit_front_ping_01: hit_front_ping_01
+  hit_front_ping_02: hit_front_ping_02
+  hit_back_ping_01: hit_back_ping_01
+  hit_back_ping_02: hit_back_ping_02
+  hit_left_ping_01: hit_left_ping_01
+  hit_left_ping_02: hit_left_ping_02
+  hit_right_ping_01: hit_right_ping_01
+  hit_right_ping_02: hit_right_ping_02
+  HitFrontPing: []
+  HitBackPing: []
+  HitLeftPing: []
+  HitRightPing: []
 --- !u!114 &3128524032968219755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,7 +1571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a3d1b29b59c2f48aba327633aa14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterEffectsManager
+  activeStaticEffects: []
   bloodSplashVFX: {fileID: 0}
+  criticalBloodSplashVFX: {fileID: 0}
 --- !u!114 &4585435218504410871
 MonoBehaviour:
   m_ObjectHideFlags: 0

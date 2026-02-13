@@ -12,6 +12,7 @@ namespace FG
 
         [Header("VFX")]
         [SerializeField] private GameObject bloodSplashVFX;
+        [SerializeField] private GameObject criticalBloodSplashVFX;
 
         private void Awake()
         {
@@ -50,14 +51,20 @@ namespace FG
 
         // --------
         // VISUALFX
-        public void PlayBloodSplashVFX(Vector3 spawnPoint, float angleDirection)
+        public void PlayBloodSplashVFX(Vector3 spawnPoint)
         {
             if (bloodSplashVFX == null)
-            {
                 bloodSplashVFX = EffectsManager.instance.bloodSplashVFX;
-            }
 
             GameObject bloodSplash = Instantiate(bloodSplashVFX, spawnPoint, Quaternion.identity);
+        }
+
+        public void PlayCriticalBloodSplashVFX(Vector3 spawnPoint)
+        {
+            if (criticalBloodSplashVFX == null)
+                criticalBloodSplashVFX = EffectsManager.instance.criticalBloodSplashVFX;
+
+            GameObject criticalBloodSplash = Instantiate(criticalBloodSplashVFX, spawnPoint, Quaternion.identity);
         }
     }
 }

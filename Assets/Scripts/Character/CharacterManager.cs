@@ -79,7 +79,10 @@ namespace FG
 
             characterNetwork.OnIsActiveChanged(false, characterNetwork.networkIsActive.Value);
             characterNetwork.networkIsActive.OnValueChanged += characterNetwork.OnIsActiveChanged;
-        
+
+            characterNetwork.OnIsDeadChanged(false, characterNetwork.networkIsDead.Value);
+            characterNetwork.networkIsDead.OnValueChanged += characterNetwork.OnIsDeadChanged;
+
             characterNetwork.OnIsBlockingChanged(false, characterNetwork.networkIsBlocking.Value);
             characterNetwork.networkIsBlocking.OnValueChanged += characterNetwork.OnIsBlockingChanged;
         }
@@ -90,6 +93,7 @@ namespace FG
 
             characterNetwork.networkIsMoving.OnValueChanged -= characterNetwork.OnIsMovingChanged;
             characterNetwork.networkIsActive.OnValueChanged -= characterNetwork.OnIsActiveChanged;
+            characterNetwork.networkIsDead.OnValueChanged -= characterNetwork.OnIsDeadChanged;
             characterNetwork.networkIsBlocking.OnValueChanged -= characterNetwork.OnIsBlockingChanged;
         }
 

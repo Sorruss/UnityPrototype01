@@ -27,11 +27,13 @@ namespace FG
             DontDestroyOnLoad(gameObject);
         }
 
+        // -------
         // GETTERS
         public LayerMask GetCharacterMasks() => characterMasks;
 
         public LayerMask GetEnvironmentMasks() => environmentMasks;
 
+        // ----------------
         // HELPER FUNCTIONS
         public bool CanCharacterAttackThisTargetTeam(CharacterTeam attacker, CharacterTeam target)
         {
@@ -72,6 +74,80 @@ namespace FG
                 damageIntensity = DamageIntensity.Colossal;
 
             return damageIntensity;
+        }
+    
+        // RIPOSTE
+        public Vector3 GetRipostePositionBasedOnWeaponClass(WeaponClass weaponClass)
+        {
+            Vector3 position = new Vector3(0.11f, 0.0f, 0.7f);
+
+            // ADJUST IT FOR WEAPONS IF NEEDED
+            switch (weaponClass)
+            {
+                case WeaponClass.STRAIGHT_SWORD:
+                    break;
+                case WeaponClass.SHIELD:
+                    break;
+                case WeaponClass.FIST:
+                    break;
+            }
+
+            return position;
+        }
+
+        public string GetRiposteVictimAnimationBasedOnWeaponClass(WeaponClass weaponClass)
+        {
+            string riposteVictimAnimation = null;
+
+            switch (weaponClass)
+            {
+                case WeaponClass.STRAIGHT_SWORD:
+                    riposteVictimAnimation = "Riposte_Sword_Victim_01";
+                    break;
+                case WeaponClass.SHIELD:
+                    break;
+                case WeaponClass.FIST:
+                    break;
+            }
+
+            return riposteVictimAnimation;
+        }
+
+        // BACKSTAB
+        public Vector3 GetBackstabPositionBasedOnWeaponClass(WeaponClass weaponClass)
+        {
+            Vector3 position = new Vector3(0.12f, 0.0f, 0.74f);
+
+            // ADJUST IT FOR WEAPONS IF NEEDED
+            switch (weaponClass)
+            {
+                case WeaponClass.STRAIGHT_SWORD:
+                    break;
+                case WeaponClass.SHIELD:
+                    break;
+                case WeaponClass.FIST:
+                    break;
+            }
+
+            return position;
+        }
+
+        public string GetBackstabVictimAnimationBasedOnWeaponClass(WeaponClass weaponClass)
+        {
+            string riposteVictimAnimation = null;
+
+            switch (weaponClass)
+            {
+                case WeaponClass.STRAIGHT_SWORD:
+                    riposteVictimAnimation = "Backstab_Sword_Victim_01";
+                    break;
+                case WeaponClass.SHIELD:
+                    break;
+                case WeaponClass.FIST:
+                    break;
+            }
+
+            return riposteVictimAnimation;
         }
     }
 }

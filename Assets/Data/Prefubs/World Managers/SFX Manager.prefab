@@ -260,6 +260,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
   guardBrokenSFX:
   - {fileID: 8300000, guid: 3bfe27ab06cb8d24691c98cd405151c6, type: 3}
+  postureBreakSFX: {fileID: 8300000, guid: ba277b8f42d600045ab3a34c724eeb3e, type: 3}
+  criticalStrikeSFX: {fileID: 8300000, guid: c397515dd729efd4ca19d3fb21cca29d, type: 3}
+  itemPickUpSFX: {fileID: 8300000, guid: 5fe0d8f4a884cde448b62f59c3816468, type: 3}
   audioSourceBossFightIntro: {fileID: 4133847054656831106}
   audioSourceBossFightLoop: {fileID: 3220256230885826135}
   bossFightMusicFadeOut: 0.75

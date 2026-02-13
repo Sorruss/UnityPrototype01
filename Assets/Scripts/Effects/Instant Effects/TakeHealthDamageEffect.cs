@@ -6,7 +6,7 @@ namespace FG
     public class TakeHealthDamageEffect : InstantEffect
     {
         [Header("Total Damage")]
-        [SerializeField] private float totalDamage;
+        [SerializeField] protected float totalDamage;
 
         [Header("Damage")]
         public float physicalDamage;
@@ -25,12 +25,12 @@ namespace FG
         public float hitAngle;
 
         [Header("Animation")]
-        [SerializeField] private bool playDamageAnimation = true;
-        [SerializeField] private bool manuallySelectDamageAnimation = false;
-        [SerializeField] private string damageAnimationName;
+        [SerializeField] protected bool playDamageAnimation = true;
+        public bool manuallySelectDamageAnimation = false;
+        public string damageAnimationName;
 
         [Header("Sound FX")]
-        [SerializeField] private bool toPlaySFX = true;
+        [SerializeField] protected bool toPlaySFX = true;
 
         public override void ApplyInstantEffect(ref CharacterManager character)
         {
@@ -72,9 +72,12 @@ namespace FG
 
                 PlayDamageAnimation(ref character);
             }
+
+            // IT'S AT THE BOTTOM SO THE ANIMATION OF IT TAKES THE PRIORITY OVER OTHERS
+            DecreasePosture(ref character);
         }
 
-        private void DecreaseHealth(ref CharacterManager character)
+        protected virtual void DecreaseHealth(ref CharacterManager character)
         {
             if (damageCauser != null)
             {
@@ -89,10 +92,10 @@ namespace FG
                 totalDamage = 1.0f;
 
             DebugManager.instance.DamageReceiveLog(totalDamage);
-            character.characterNetwork.networkCurrentHealth.Value -= totalDamage;
+            character.characterStatsManager.DamageHelth(totalDamage);
         }
 
-        private void DecreasePoise(ref CharacterManager character)
+        protected virtual void DecreasePoise(ref CharacterManager character)
         {
             // DEDUCT POISE
             character.characterStatsManager.DeductPoise(poiseDamage);
@@ -102,12 +105,29 @@ namespace FG
                 poiseIsBroken = true;
         }
 
-        private void PlayVFX(ref CharacterManager character)
+        protected virtual void DecreasePosture(ref CharacterManager character)
         {
-            character.characterEffectsManager.PlayBloodSplashVFX(contactPoint, hitAngle);
+            AICharacterManager aiCharacter = character as AICharacterManager;
+
+            if (aiCharacter == null)
+                return;
+
+            aiCharacter.aiCharacterStatsManager.DamagePosture(poiseDamage);
+
+            if (aiCharacter.aiCharacterStatsManager.currentPosture > 0)
+                return;
+
+            // RPC INSTANT ANIMATION & SFX
+            aiCharacter.aiCharacterAnimatorManager.PerformInstantAnimationAction("Posture_Break_01", true);
+            aiCharacter.characterSFXManager.PlayPostureBreakSoundFX();
         }
 
-        private void PlaySFX(ref CharacterManager character)
+        protected virtual void PlayVFX(ref CharacterManager character)
+        {
+            character.characterEffectsManager.PlayBloodSplashVFX(contactPoint);
+        }
+
+        protected virtual void PlaySFX(ref CharacterManager character)
         {
             // PHYSICAL SFX DAMAGE
             character.characterSFXManager.PlayAudioClip(SFXManager.instance.GetRandomSFX(ref SFXManager.instance.physicalDamageSFX), 0.5f);
@@ -118,7 +138,7 @@ namespace FG
             // PLAY OTHER ELEMENTAL DAMAGE SFX IF SUCH PROPERTIES ON EFFECT
         }
 
-        private void PlayDamageAnimation(ref CharacterManager character)
+        protected virtual void PlayDamageAnimation(ref CharacterManager character)
         {
             HitDirection hitDirection = HitDirection.FRONT;
 
