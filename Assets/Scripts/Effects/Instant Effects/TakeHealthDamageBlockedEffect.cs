@@ -37,10 +37,10 @@ namespace FG
         public float hitAngle;
 
         [Header("Animation")]
-        [SerializeField] private bool playDamageBlockedAnimation = true;
+        [SerializeField] protected bool playDamageBlockedAnimation = true;
 
         [Header("Sound FX")]
-        [SerializeField] private bool toPlaySFX = true;
+        [SerializeField] protected bool toPlaySFX = true;
 
         public override void ApplyInstantEffect(ref CharacterManager character)
         {

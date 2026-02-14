@@ -26,12 +26,13 @@ namespace FG
         [SerializeField] private bool isInteracting = false;
 
         [Header("Action Flags - Bumpers")]
-        [SerializeField] private bool isRTActionActive = false;
-        [SerializeField] private bool isHoldingRT = false;
-
-        [Header("Action Flags - Triggers")]
         [SerializeField] private bool isRBActionActive = false;
         [SerializeField] private bool isLBActionActive = false;
+
+        [Header("Action Flags - Triggers")]
+        [SerializeField] private bool isRTActionActive = false;
+        [SerializeField] private bool isHoldingRT = false;
+        [SerializeField] private bool isLTActionActive = false;
 
         [Header("Action Flags - Two Handing")]
         [SerializeField] private bool isTryingToTwoHandWeapon = false;
@@ -102,11 +103,13 @@ namespace FG
             HandleJumpInput();
             // INTERACTION
             HandleInteractionInput();
-            // ACTIONS
+            // ACTIONS - BUMPERS
             HandleRBActionInput();
+            HandleLBActionInput();
+            // ACTIONS - TRIGGERS
             HandleRTActionInput();
             HandleRTHoldActionInput();
-            HandleLBActionInput();
+            HandleLTActionInput();
             // TWO HANDING
             HandleTwoHandingWeaponInput();
             // LOCK ON STUFF
@@ -230,6 +233,8 @@ namespace FG
             playerInput.Default.RightTriggerHold.performed += _ => isHoldingRT = true;
             playerInput.Default.RightTriggerHold.canceled += _ => isHoldingRT = false;
 
+            playerInput.Default.LeftTrigger.performed += _ => isLTActionActive = true;
+
             // TWO HANDING
             playerInput.Default.Button_North_Hold.performed += _ => isTryingToTwoHandWeapon = true;
             playerInput.Default.Button_North_Hold.canceled += _ => isTryingToTwoHandWeapon = false;
@@ -308,6 +313,7 @@ namespace FG
 
         // ------------------------
         // ACTION HANDLER FUNCTIONS
+        // BUMPERS
         private void HandleRBActionInput()
         {
             if (isRBActionActive)
@@ -339,6 +345,36 @@ namespace FG
             }
         }
 
+        private void HandleLBActionInput()
+        {
+            if (isLBActionActive)
+            {
+                // DISABLE LOOPING.
+                isLBActionActive = false;
+
+                if (player.playerNetwork.networkIsTwoHanding.Value)
+                {
+                    player.playerNetwork.SetCurrentActiveHand(true);
+
+                    // DO TWO HANDING WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.TwoHandedWeaponScriptable.OH_LB_Action,
+                        player.playerInventoryManager.TwoHandedWeaponScriptable);
+                }
+                else
+                {
+                    // INFORM THAT CLIENT IS USING LEFT HAND WEAPON ACTION.
+                    player.playerNetwork.SetCurrentActiveHand(false);
+
+                    // DO LEFT HAND WEAPON ACTION.
+                    player.playerCombatManager.TryToPerformWeaponAction(
+                        player.playerInventoryManager.LeftHandWeaponScriptable.OH_LB_Action,
+                        player.playerInventoryManager.LeftHandWeaponScriptable);
+                }
+            }
+        }
+
+        // TRIGGERS
         private void HandleRTActionInput()
         {
             if (isRTActionActive)
@@ -374,32 +410,13 @@ namespace FG
             }
         }
 
-        private void HandleLBActionInput()
+        private void HandleLTActionInput()
         {
-            if (isLBActionActive)
+            if (isLTActionActive)
             {
-                // DISABLE LOOPING.
-                isLBActionActive = false;
+                isLTActionActive = false;
 
-                if (player.playerNetwork.networkIsTwoHanding.Value)
-                {
-                    player.playerNetwork.SetCurrentActiveHand(true);
 
-                    // DO TWO HANDING WEAPON ACTION.
-                    player.playerCombatManager.TryToPerformWeaponAction(
-                        player.playerInventoryManager.TwoHandedWeaponScriptable.OH_LB_Action,
-                        player.playerInventoryManager.TwoHandedWeaponScriptable);
-                }
-                else
-                {
-                    // INFORM THAT CLIENT IS USING LEFT HAND WEAPON ACTION.
-                    player.playerNetwork.SetCurrentActiveHand(false);
-
-                    // DO LEFT HAND WEAPON ACTION.
-                    player.playerCombatManager.TryToPerformWeaponAction(
-                        player.playerInventoryManager.LeftHandWeaponScriptable.OH_LB_Action,
-                        player.playerInventoryManager.LeftHandWeaponScriptable);
-                }
             }
         }
 

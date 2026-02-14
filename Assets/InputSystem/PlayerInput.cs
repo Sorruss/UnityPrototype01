@@ -239,6 +239,15 @@ namespace FG
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LeftTrigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f14efd7-7e98-417f-9b76-e2b3f334db93"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""DPadLeft"",
                     ""type"": ""Button"",
                     ""id"": ""8715f23e-22c1-45ca-8744-9a4ab2967781"",
@@ -502,6 +511,28 @@ namespace FG
                     ""processors"": """",
                     ""groups"": "";Controller"",
                     ""action"": ""RightTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c779afd9-9e62-4046-b326-4303e9799dc3"",
+                    ""path"": ""<Mouse>/forwardButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""LeftTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cd7e062-2d74-4ace-867b-33c2e27f4ca9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""LeftTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -989,6 +1020,7 @@ namespace FG
             m_Default_RightTrigger = m_Default.FindAction("RightTrigger", throwIfNotFound: true);
             m_Default_RightTriggerQueue = m_Default.FindAction("RightTriggerQueue", throwIfNotFound: true);
             m_Default_RightTriggerHold = m_Default.FindAction("RightTriggerHold", throwIfNotFound: true);
+            m_Default_LeftTrigger = m_Default.FindAction("LeftTrigger", throwIfNotFound: true);
             m_Default_DPadLeft = m_Default.FindAction("DPadLeft", throwIfNotFound: true);
             m_Default_DPadLeftTwoHandWeapon = m_Default.FindAction("DPadLeftTwoHandWeapon", throwIfNotFound: true);
             m_Default_DPadRight = m_Default.FindAction("DPadRight", throwIfNotFound: true);
@@ -1095,6 +1127,7 @@ namespace FG
         private readonly InputAction m_Default_RightTrigger;
         private readonly InputAction m_Default_RightTriggerQueue;
         private readonly InputAction m_Default_RightTriggerHold;
+        private readonly InputAction m_Default_LeftTrigger;
         private readonly InputAction m_Default_DPadLeft;
         private readonly InputAction m_Default_DPadLeftTwoHandWeapon;
         private readonly InputAction m_Default_DPadRight;
@@ -1175,6 +1208,10 @@ namespace FG
             /// Provides access to the underlying input action "Default/RightTriggerHold".
             /// </summary>
             public InputAction @RightTriggerHold => m_Wrapper.m_Default_RightTriggerHold;
+            /// <summary>
+            /// Provides access to the underlying input action "Default/LeftTrigger".
+            /// </summary>
+            public InputAction @LeftTrigger => m_Wrapper.m_Default_LeftTrigger;
             /// <summary>
             /// Provides access to the underlying input action "Default/DPadLeft".
             /// </summary>
@@ -1269,6 +1306,9 @@ namespace FG
                 @RightTriggerHold.started += instance.OnRightTriggerHold;
                 @RightTriggerHold.performed += instance.OnRightTriggerHold;
                 @RightTriggerHold.canceled += instance.OnRightTriggerHold;
+                @LeftTrigger.started += instance.OnLeftTrigger;
+                @LeftTrigger.performed += instance.OnLeftTrigger;
+                @LeftTrigger.canceled += instance.OnLeftTrigger;
                 @DPadLeft.started += instance.OnDPadLeft;
                 @DPadLeft.performed += instance.OnDPadLeft;
                 @DPadLeft.canceled += instance.OnDPadLeft;
@@ -1343,6 +1383,9 @@ namespace FG
                 @RightTriggerHold.started -= instance.OnRightTriggerHold;
                 @RightTriggerHold.performed -= instance.OnRightTriggerHold;
                 @RightTriggerHold.canceled -= instance.OnRightTriggerHold;
+                @LeftTrigger.started -= instance.OnLeftTrigger;
+                @LeftTrigger.performed -= instance.OnLeftTrigger;
+                @LeftTrigger.canceled -= instance.OnLeftTrigger;
                 @DPadLeft.started -= instance.OnDPadLeft;
                 @DPadLeft.performed -= instance.OnDPadLeft;
                 @DPadLeft.canceled -= instance.OnDPadLeft;
@@ -1643,6 +1686,13 @@ namespace FG
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnRightTriggerHold(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "LeftTrigger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnLeftTrigger(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "DPadLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

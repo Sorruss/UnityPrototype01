@@ -25,7 +25,8 @@ namespace FG
         public AudioClip postureBreakSFX;
 
         [Header("SFX - Critical Strike")]
-        public AudioClip criticalStrikeSFX;
+        public AudioClip criticalStrikeSFX_01;
+        public AudioClip criticalStrikeSFX_02;
 
         [Header("SFX - Item Pick Up")]
         public AudioClip itemPickUpSFX;

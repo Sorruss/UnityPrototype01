@@ -261,7 +261,8 @@ MonoBehaviour:
   guardBrokenSFX:
   - {fileID: 8300000, guid: 3bfe27ab06cb8d24691c98cd405151c6, type: 3}
   postureBreakSFX: {fileID: 8300000, guid: ba277b8f42d600045ab3a34c724eeb3e, type: 3}
-  criticalStrikeSFX: {fileID: 8300000, guid: c397515dd729efd4ca19d3fb21cca29d, type: 3}
+  criticalStrikeSFX_01: {fileID: 8300000, guid: c397515dd729efd4ca19d3fb21cca29d, type: 3}
+  criticalStrikeSFX_02: {fileID: 8300000, guid: 380cbb7291fd890418f4f50b58f71434, type: 3}
   itemPickUpSFX: {fileID: 8300000, guid: 5fe0d8f4a884cde448b62f59c3816468, type: 3}
   audioSourceBossFightIntro: {fileID: 4133847054656831106}
   audioSourceBossFightLoop: {fileID: 3220256230885826135}

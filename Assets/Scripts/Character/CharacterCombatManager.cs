@@ -167,7 +167,7 @@ namespace FG
         public void ApplyPendingCriticalDamage()
         {
             // SFX
-            character.characterSFXManager.PlayCriticalStrikeSoundFX();
+            character.characterSFXManager.PlayCriticalStrikeSoundFX_01();
 
             // VFX
             character.characterEffectsManager.PlayCriticalBloodSplashVFX(character.characterCombatManager.lockOnTransform.position);
@@ -224,7 +224,7 @@ namespace FG
                 // IF THE ANGLE IS NOT RIGHT -> RETURN
                 Vector3 distanceToCharacter = character.transform.position - potentialTargetCharacter.transform.position;
                 float angleToTarget = Vector3.SignedAngle(potentialTargetCharacter.transform.forward, distanceToCharacter, Vector3.up);
-                Debug.Log(angleToTarget);
+                
                 if (angleToTarget >= 0 && angleToTarget < 145 ||     // RIGHT SIDE
                     angleToTarget <= 0 && angleToTarget > -145)      // LEFT SIDE
                     return;

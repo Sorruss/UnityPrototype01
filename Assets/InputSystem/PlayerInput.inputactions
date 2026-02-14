@@ -151,6 +151,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LeftTrigger",
+                    "type": "Button",
+                    "id": "9f14efd7-7e98-417f-9b76-e2b3f334db93",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DPadLeft",
                     "type": "Button",
                     "id": "8715f23e-22c1-45ca-8744-9a4ab2967781",
@@ -414,6 +423,28 @@
                     "processors": "",
                     "groups": ";Controller",
                     "action": "RightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c779afd9-9e62-4046-b326-4303e9799dc3",
+                    "path": "<Mouse>/forwardButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "LeftTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cd7e062-2d74-4ace-867b-33c2e27f4ca9",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "LeftTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

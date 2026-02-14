@@ -104,7 +104,7 @@ namespace FG
             Gizmos.DrawSphere(transform.position, groundCheckSphereRadius);
         }
 
-        // -----------
+        // ------------
         // SUPP METHODS
         private void HandleIsGrounded()
         {
@@ -164,14 +164,9 @@ namespace FG
                 // Do aerial death animation if in air.
                 // Loose souls.
 
-                if (!manuallySelectDeathAnimation)
-                {
+                // DEATH ANIMATION
+                if (!manuallySelectDeathAnimation && !characterNetwork.networkIsBeingCriticallyDamaged.Value)
                     characterAnimatorManager.PerformAnimationAction("Death_01", true);
-                }
-                else
-                {
-                    // Play manually selected one.
-                }
             }
 
             // Play SFX death sound.

@@ -344,10 +344,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.InteractableBonfire
   ShowTopMostFoldoutHeaderGroup: 1
-  collider: {fileID: 7279345395518356477}
+  interactableCollider: {fileID: 7279345395518356477}
   interactableText: Rest
   onlyHostAllowedToInteract: 1
-  destroyOnInteraction: 0
+  playSoundFromInteractable: 1
+  audioSource: {fileID: 0}
+  interactedSoundFX: {fileID: 0}
   bonfireID: 0
   unactivatedPopUpText: Activate Bonfire
   objectsToActivateOnActivated:
@@ -565,6 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865650476136804139}
+  - component: {fileID: 3832101705936910035}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -591,6 +594,27 @@ Transform:
   - {fileID: 6146078851996142604}
   m_Father: {fileID: 2027459157897466160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3832101705936910035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542818341841507877}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.71, y: 1.14, z: 1.63}
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!1 &7097134861824568450
 GameObject:
   m_ObjectHideFlags: 0

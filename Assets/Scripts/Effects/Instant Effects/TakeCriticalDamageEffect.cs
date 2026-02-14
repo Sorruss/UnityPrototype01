@@ -15,8 +15,6 @@ namespace FG
             if (character.characterNetwork.networkIsInvincible.Value)
                 return;
 
-            base.ApplyInstantEffect(ref character);
-
             // ----------------------------------------------------
             // SAFEGUARD IF THIS CLIENT IS NOT AN OWNER
             if (!character.IsOwner)

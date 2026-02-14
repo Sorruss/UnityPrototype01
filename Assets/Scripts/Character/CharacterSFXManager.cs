@@ -68,9 +68,14 @@ namespace FG
         }
 
         // RIPOSTE
-        public virtual void PlayCriticalStrikeSoundFX()
+        public virtual void PlayCriticalStrikeSoundFX_01()
         {
-            PlayAudioClip(SFXManager.instance.criticalStrikeSFX);
+            PlayAudioClip(SFXManager.instance.criticalStrikeSFX_01);
+        }
+
+        public virtual void PlayCriticalStrikeSoundFX_02()
+        {
+            PlayAudioClip(SFXManager.instance.criticalStrikeSFX_02);
         }
 
         // --------------
