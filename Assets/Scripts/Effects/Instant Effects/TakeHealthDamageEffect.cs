@@ -92,7 +92,7 @@ namespace FG
                 totalDamage = 1.0f;
 
             DebugManager.instance.DamageReceiveLog(totalDamage);
-            character.characterStatsManager.DamageHelth(totalDamage);
+            character.characterStatsManager.DamageHealth(totalDamage);
         }
 
         protected virtual void DecreasePoise(ref CharacterManager character)

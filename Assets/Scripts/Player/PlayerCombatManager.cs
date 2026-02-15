@@ -196,6 +196,67 @@ namespace FG
             player.playerAnimatorManager.PerformInstantAnimationAction("Backstab_01", true);
         }
 
+        // -----
+        // PARRY
+        public WeaponItem GetWeaponToUseWeaponArt()
+        {
+            // THE IDEA OF BELOW MADNESS -> LEFT WEAPON WEAPON ART TAKES PRIORITY IF IT'S PRESENT
+            // OTHERWISE WE LOOK FOR RIGHT ONE
+            if (player.playerInventoryManager.LeftHandWeaponScriptable == null)
+            {
+                // NO LEFT WEAPON
+                if (player.playerInventoryManager.RightHandWeaponScriptable == null)
+                {
+                    // NO RIGHT WEAPON
+                    return null; // NO WEAPON ART
+                }
+                else
+                {
+                    // YES RIGHT WEAPON
+                    if (player.playerInventoryManager.RightHandWeaponScriptable.OH_LT_WeaponArt == null)
+                    {
+                        // NO WEAPON ART
+                        return null;
+                    }
+
+                    // YES WEAPON ART
+                    player.playerNetwork.SetCurrentActiveHand(true);
+                    player.playerNetwork.networkCurrentWeaponInUseID.Value = player.playerInventoryManager.RightHandWeaponScriptable.ID;
+                    return player.playerInventoryManager.RightHandWeaponScriptable;
+                }
+            }
+            else
+            {
+                // YES LEFT WEAPON
+                if (player.playerInventoryManager.LeftHandWeaponScriptable.OH_LT_WeaponArt == null)
+                {
+                    // NO WEAPON ART -> CHECK RIGHT HAND
+                    if (player.playerInventoryManager.RightHandWeaponScriptable == null)
+                    {
+                        // NO RIGHT WEAPON
+                        return null;
+                    }
+
+                    // YES RIGHT WEAPON
+                    if (player.playerInventoryManager.RightHandWeaponScriptable.OH_LT_WeaponArt == null)
+                    {
+                        // NO WEAPON ART
+                        return null;
+                    }
+
+                    // YES WEAPON ART
+                    player.playerNetwork.SetCurrentActiveHand(true);
+                    player.playerNetwork.networkCurrentWeaponInUseID.Value = player.playerInventoryManager.RightHandWeaponScriptable.ID;
+                    return player.playerInventoryManager.RightHandWeaponScriptable;
+                }
+
+                // YES WEAPON ART
+                player.playerNetwork.SetCurrentActiveHand(false);
+                player.playerNetwork.networkCurrentWeaponInUseID.Value = player.playerInventoryManager.LeftHandWeaponScriptable.ID;
+                return player.playerInventoryManager.LeftHandWeaponScriptable;
+            }
+        }
+
         // ---------------------------------
         // ACTION ANIMATIONS - STAMINA DRAIN
         public void TryToDrainStaminaBasedOnAttackType()

@@ -83,7 +83,7 @@ namespace FG
 
         // -------------
         // HEATLH DAMAGE
-        public void DamageHelth(float damage)
+        public void DamageHealth(float damage)
         {
             if (damage > character.characterNetwork.networkCurrentHealth.Value)
                 damage = character.characterNetwork.networkCurrentHealth.Value;

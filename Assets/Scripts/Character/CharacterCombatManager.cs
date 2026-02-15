@@ -173,7 +173,7 @@ namespace FG
             character.characterEffectsManager.PlayCriticalBloodSplashVFX(character.characterCombatManager.lockOnTransform.position);
 
             // DAMAGE HEALTH
-            character.characterStatsManager.DamageHelth(pendingCriticalDamage);
+            character.characterStatsManager.DamageHealth(pendingCriticalDamage);
         }
 
         // --------
@@ -282,6 +282,22 @@ namespace FG
                 return;
 
             character.characterNetwork.networkIsRipostable.Value = true;
+        }
+
+        // ANIMATION EVENTS - IS PARRYING
+        public void EnableIsParrying()
+        {
+            if (character.IsOwner)
+                character.characterNetwork.networkIsParrying.Value = true;
+
+            character.characterSFXManager.PlayAudioClip(
+                SFXManager.instance.GetRandomSFX(ref character.characterCombatManager.currentWeaponItemBeingUsed.whooshesSoundFX));
+        }
+
+        public void DisableIsParrying()
+        {
+            if (character.IsOwner)
+                character.characterNetwork.networkIsParrying.Value = false;
         }
 
         // ANIMATION EVENTS - ROLL ATTACK

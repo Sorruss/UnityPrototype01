@@ -12,12 +12,28 @@ namespace FG
 
         public virtual void PerformWeaponArt(PlayerManager player)
         {
-
+            if (!CanPerformThisWeaponArt(player))
+                return;
         }
 
-        public virtual bool CanPerformThisWeaponArt(PlayerManager player)
+        protected virtual bool CanPerformThisWeaponArt(PlayerManager player)
         {
             return false;
+        }
+
+        protected virtual void DeductHealth(PlayerManager player)
+        {
+            player.playerStatsManager.DamageHealth(healthTakes);
+        }
+
+        protected virtual void DeductStamina(PlayerManager player)
+        {
+            player.playerStatsManager.TryDecreaseStamina(staminaTakes);
+        }
+
+        protected virtual void DeductFocus(PlayerManager player)
+        {
+
         }
     }
 }

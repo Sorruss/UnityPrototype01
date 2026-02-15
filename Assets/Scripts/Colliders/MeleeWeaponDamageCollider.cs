@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 
 namespace FG
@@ -46,8 +45,34 @@ namespace FG
             hitAngle = Vector3.SignedAngle(vectorToDamageDealer, damageTarget.transform.forward, Vector3.up);
 
             // APPLY MODIFIERS AND SEND REQUEST TO DAMAGE TARGET.
+            if (CheckIfParrying(ref damageTarget))
+                return;
+
             CheckIfBlocking(ref damageTarget);
             DamageTarget(ref damageTarget);
+        }
+
+        protected virtual bool CheckIfParrying(ref CharacterManager target)
+        {
+            // CHECKS
+            if (!target.characterNetwork.networkIsParrying.Value)
+                return false;
+
+            if (collidedIDs.Contains(target.NetworkObjectId))
+                return false;
+
+            if (damageDealer == null)
+                return false;
+
+            // PARRY LOGIC
+            damageDealer.characterAnimatorManager.PerformInstantAnimationAction("Parry_Victim_01", true);
+            target.characterAnimatorManager.PerformInstantAnimationAction("Parry_Land_01", true);
+
+            // ENDING
+            collidedIDs.Add(target.NetworkObjectId);
+            DisableCollider();
+
+            return true;
         }
 
         protected override void CheckIfBlocking(ref CharacterManager target)

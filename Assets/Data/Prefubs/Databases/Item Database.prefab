@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc0a9d4bb8168904f85aa9fea2078e7f, type: 2}
   - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
   - {fileID: 11400000, guid: c6605bb2b6e209541a1d442d3fe14403, type: 2}
+  - {fileID: 11400000, guid: 923ec18e26a2b4e42a1ceadc7bd4b784, type: 2}
   headArmorItems:
   - {fileID: 11400000, guid: 40d0a2afc101f8b41aa783a41957c264, type: 2}
   - {fileID: 11400000, guid: 679ef8d2de529474b9d8863241bfdd52, type: 2}
@@ -63,3 +64,5 @@ MonoBehaviour:
   legArmorItems:
   - {fileID: 11400000, guid: 3fb54cb4c74b27f49a5f9fb3c199fed2, type: 2}
   - {fileID: 11400000, guid: 67ffbcea23ce9ef4aae75c05b21253da, type: 2}
+  weaponArts:
+  - {fileID: 11400000, guid: beab42f0184bbaa4bbe7adcff6614d8d, type: 2}

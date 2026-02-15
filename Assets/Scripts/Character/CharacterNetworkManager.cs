@@ -96,6 +96,10 @@ namespace FG
             new(false,
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> networkIsParrying =
+            new(false,
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
 
         // LOCK ON.
         [Header("LOCK ON")]
@@ -574,6 +578,9 @@ namespace FG
 
             // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
             damageReceiver.characterEffectsManager.ApplyInstantEffect(criticalDamageEffect);
+
+            if (damageReceiver.IsOwner)
+                damageReceiver.characterNetwork.networkIsInvincible.Value = true;
         }
 
         // NOTIFY BACKSTAB
@@ -663,6 +670,9 @@ namespace FG
 
             // APPLY CREATED & CONFIGURED EFFECT ON RECEIVER PLAYER.
             damageReceiver.characterEffectsManager.ApplyInstantEffect(criticalDamageEffect);
+
+            if (damageReceiver.IsOwner)
+                damageReceiver.characterNetwork.networkIsInvincible.Value = true;
         }
     }
 }

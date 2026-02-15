@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 namespace FG
 {
@@ -180,6 +179,7 @@ namespace FG
             // UPDATE THIS
             if (player == null)
                 player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            
             RefreshAllIcons();
 
             // ACTIVATE THIS
@@ -194,6 +194,7 @@ namespace FG
             equipmentMenu.SetActive(false);
             isEquipmentMenuOpen = false;
             CloseInventoryMenu();
+            UnselectLastEquipmentSlotButton();
             PlayerUIManager.instance.EnableCursor(false);
         }
 
@@ -218,6 +219,14 @@ namespace FG
 
             lastSelectedEquipmentSlotButton.Select();
             lastSelectedEquipmentSlotButton.OnSelect(null);
+        }
+
+        public void UnselectLastEquipmentSlotButton()
+        {
+            if (lastSelectedEquipmentSlotButton == null)
+                return;
+
+            lastSelectedEquipmentSlotButton.OnDeselect(null);
         }
 
         // ----------------------
@@ -400,84 +409,128 @@ namespace FG
             switch (selectedSlotType)
             {
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_01:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[0].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[0]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.LeftHandWeaponScriptables[0] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 0)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkLeftHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_02:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[1].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[1]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.LeftHandWeaponScriptables[1] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 1)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkLeftHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_03:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[2].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[2]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.LeftHandWeaponScriptables[2] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.LeftHandWeaponIndex == 2)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkLeftHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_01:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[0].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[0]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.RightHandWeaponScriptables[0] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.RightHandWeaponIndex == 0)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkRightHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_02:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[1].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[1]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.RightHandWeaponScriptables[1] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.RightHandWeaponIndex == 1)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkRightHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_03:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[2].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[2]);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT WEAPON W/THIS ONE
                     player.playerInventoryManager.RightHandWeaponScriptables[2] = item as WeaponItem;
 
+                    // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                     if (player.playerInventoryManager.RightHandWeaponIndex == 2)
-                    {
-                        // IF PLAYER CURRENTLY USING THIS SLOT, WE NEED TO LOAD MODEL IN
                         player.playerNetwork.networkRightHandWeaponID.Value = item.ID;
-                    }
 
                     // REFRESH EQUIPMENT ICONS
                     RefreshWeaponQuickSlotIcons();
                     break;
                 case EquipmentSlotType.HEAD_ARMOR:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.HeadArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.HeadArmorScriptable);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT ARMOR W/THIS ONE
                     player.playerInventoryManager.HeadArmorScriptable = item as HeadArmorItem;
 
@@ -489,6 +542,14 @@ namespace FG
                     RefreshArmorIcons();
                     break;
                 case EquipmentSlotType.CHEST_ARMOR:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.ChestArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.ChestArmorScriptable);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT ARMOR W/THIS ONE
                     player.playerInventoryManager.ChestArmorScriptable = item as ChestArmorItem;
 
@@ -500,6 +561,14 @@ namespace FG
                     RefreshArmorIcons();
                     break;
                 case EquipmentSlotType.HAND_ARMOR:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.HandArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.HandArmorScriptable);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT ARMOR W/THIS ONE
                     player.playerInventoryManager.HandArmorScriptable = item as HandArmorItem;
 
@@ -511,6 +580,14 @@ namespace FG
                     RefreshArmorIcons();
                     break;
                 case EquipmentSlotType.LEG_ARMOR:
+                    // 1. REMOVE ITEM WE WANT TO EQUIP FROM INVENTORY
+                    player.playerInventoryManager.RemoveItemFromInventory(item);
+
+                    // 2. ADD ITEM THAT WAS EQUIPPED TO INVENTORY
+                    if (player.playerInventoryManager.LegArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LegArmorScriptable);
+
+                    // 3. WHAT'S BELOW
                     // WE NEED TO EXCHANGE HIS CURRENT ARMOR W/THIS ONE
                     player.playerInventoryManager.LegArmorScriptable = item as LegArmorItem;
 
@@ -537,6 +614,10 @@ namespace FG
             switch (selectedSlotType)
             {
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_01:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[0].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[0]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.LeftHandWeaponScriptables[0] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -552,6 +633,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_02:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[1].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[1]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.LeftHandWeaponScriptables[1] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -567,6 +652,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_LEFT_03:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.LeftHandWeaponScriptables[2].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LeftHandWeaponScriptables[2]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.LeftHandWeaponScriptables[2] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -582,6 +671,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_01:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[0].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[0]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.RightHandWeaponScriptables[0] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -597,6 +690,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_02:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[1].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[1]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.RightHandWeaponScriptables[1] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -612,6 +709,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.WEAPON_QUICKSLOT_RIGHT_03:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.RightHandWeaponScriptables[2].ID != ItemDatabase.instance.unarmedWeapon.ID)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.RightHandWeaponScriptables[2]);
+
                     // WE NEED TO SET UNARMED AS IS PER TRADITION
                     player.playerInventoryManager.RightHandWeaponScriptables[2] = Instantiate(ItemDatabase.instance.unarmedWeapon);
 
@@ -627,6 +728,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.HEAD_ARMOR:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.HeadArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.HeadArmorScriptable);
+
                     // WE NEED TO REMOVE THIS ARMOR
                     player.playerEquipmentManager.EquipHeadArmor(null);
 
@@ -635,6 +740,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.CHEST_ARMOR:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.ChestArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.ChestArmorScriptable);
+
                     // WE NEED TO REMOVE THIS ARMOR
                     player.playerEquipmentManager.EquipChestArmor(null);
 
@@ -643,6 +752,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.HAND_ARMOR:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.HandArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.HandArmorScriptable);
+
                     // WE NEED TO REMOVE THIS ARMOR
                     player.playerEquipmentManager.EquipHandArmor(null);
 
@@ -651,6 +764,10 @@ namespace FG
 
                     break;
                 case EquipmentSlotType.LEG_ARMOR:
+                    // NEED TO ADD THE ITEM BACK TO THE INVENTORY
+                    if (player.playerInventoryManager.LegArmorScriptable != null)
+                        player.playerInventoryManager.AddItemToInventory(player.playerInventoryManager.LegArmorScriptable);
+
                     // WE NEED TO REMOVE THIS ARMOR
                     player.playerEquipmentManager.EquipLegArmor(null);
 

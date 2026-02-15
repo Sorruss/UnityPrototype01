@@ -30,6 +30,9 @@ namespace FG
         [Header("Leg Pieces")]
         [SerializeField] private List<LegArmorItem> legArmorItems = new();
 
+        [Header("Weapon Arts")]
+        [SerializeField] private List<WeaponArtItem> weaponArts = new();
+
         // -----------------------
         // LOCAL VARIABLES SECTION
         // ID KEYS
@@ -38,6 +41,7 @@ namespace FG
         private readonly int chestArmorIDKey = 30000;
         private readonly int handArmorIDKey = 40000;
         private readonly int legArmorIDKey = 50000;
+        private readonly int weaponArtIDKey = 60000;
 
         private void Awake()
         {
@@ -79,6 +83,10 @@ namespace FG
             // LEG ARMOR
             for (int i = 0; i < legArmorItems.Count; ++i)
                 legArmorItems[i].ID = legArmorIDKey + i;
+
+            // WEAPON ARTS
+            for (int i = 0; i < weaponArts.Count; ++i)
+                weaponArts[i].ID = weaponArtIDKey + i;
         }
 
         // -------
@@ -122,6 +130,11 @@ namespace FG
         public LegArmorItem GetLegArmorItemByID(int id)
         {
             return legArmorItems.FirstOrDefault(legArmorItem => legArmorItem.ID == id);
+        }
+
+        public WeaponArtItem GetWeaponArtByID(int id)
+        {
+            return weaponArts.FirstOrDefault(weaponArt => weaponArt.ID == id);
         }
     }
 }

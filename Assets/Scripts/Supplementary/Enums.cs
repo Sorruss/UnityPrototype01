@@ -66,6 +66,7 @@ namespace FG
         STRAIGHT_SWORD = 1,
         SHIELD,
         FIST,
+        LIGHT_SHIELD,
     }
 
     public enum EquipmentModelType          // FOR PROPER ARMOR INSTANTIATION

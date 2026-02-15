@@ -113,7 +113,7 @@ namespace FG
                 totalDamage = 1.0f;
 
             DebugManager.instance.DamageBlockedReceiveLog(totalDamage);
-            character.characterStatsManager.DamageHelth(totalDamage);
+            character.characterStatsManager.DamageHealth(totalDamage);
         }
 
         private void DecreaseStamina(ref CharacterManager character)

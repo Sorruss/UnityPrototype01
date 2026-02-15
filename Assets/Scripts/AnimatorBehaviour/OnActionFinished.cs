@@ -20,6 +20,7 @@ namespace FG
 
             // COMBAT STUFF
             character.characterCombatManager.DisableCanDoCombo();
+            character.characterCombatManager.DisableIsParrying();
             character.characterCombatManager.DontAllowToDoRollAttack();
             character.characterCombatManager.DontAllowToDoBackstepAttack();
 

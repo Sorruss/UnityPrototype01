@@ -416,7 +416,18 @@ namespace FG
             {
                 isLTActionActive = false;
 
+                // CHECKS
+                if (player.isPerfomingAction)
+                    return;
 
+                if (player.playerNetwork.networkIsDead.Value)
+                    return;
+
+                WeaponItem weapon = player.playerCombatManager.GetWeaponToUseWeaponArt();
+                if (weapon == null)
+                    return;
+
+                weapon.OH_LT_WeaponArt.PerformWeaponArt(player);
             }
         }
 

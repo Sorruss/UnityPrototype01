@@ -68,11 +68,12 @@ namespace FG
         public float backstepAttackStaminaCostModifier = 0.8f;
 
         [Header("Actions - Bumpers")]
-        public WeaponAction OH_RB_Action; // ONE HANDED RIGHT BUMPER ACTION
-        public WeaponAction OH_LB_Action; // ONE HANDED LEFT BUMPER ACTION
+        public WeaponAction OH_RB_Action;           // ONE HANDED RIGHT BUMPER ACTION
+        public WeaponAction OH_LB_Action;           // ONE HANDED LEFT BUMPER ACTION
 
         [Header("Actions - Triggers")]
-        public WeaponAction OH_RT_Action; // ONE HANDED RIGHT TRIGGER ACTION
+        public WeaponAction OH_RT_Action;           // ONE HANDED RIGHT TRIGGER ACTION
+        public WeaponArtItem OH_LT_WeaponArt;       // WEAPON ART (LEFT TRIGGER ACTION)
 
         [Header("Sounds")]
         public AudioClip[] whooshesSoundFX;

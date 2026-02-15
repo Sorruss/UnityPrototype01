@@ -43,6 +43,7 @@ namespace FG
         public void RemoveItemFromInventory(Item item)
         {
             itemsInInventory.Remove(item);
+            Helpers.CleanUpListFromNULLs(ref itemsInInventory);
         }
     }
 }
