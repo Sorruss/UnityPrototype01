@@ -45,7 +45,7 @@ namespace FG
             }
             else
             {
-                Destroy(instance);
+                Destroy(gameObject);
             }
         }
 

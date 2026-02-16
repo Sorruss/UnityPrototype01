@@ -19,11 +19,11 @@ namespace FG
             if (player.IsOwner)
             {
                 // Updates health values if it's New Game. Otherwise, those values would be overwritten whem importing save data.
-                player.characterNetwork.networkMaxHealth.Value = GetMaxHealthOfVitalityLevel(player.characterNetwork.networkVitality.Value);
+                player.characterNetwork.networkMaxHealth.Value = UtilityManager.instance.GetMaxHealthOfVitalityLevel(player.characterNetwork.networkVitality.Value);
                 player.characterNetwork.networkCurrentHealth.Value = player.characterNetwork.networkMaxHealth.Value;
 
                 // Updates stamina values if it's New Game. Otherwise, those values would be overwritten whem importing save data.
-                player.characterNetwork.networkMaxStamina.Value = GetMaxStaminaOfEnduranceLevel(player.characterNetwork.networkEndurance.Value);
+                player.characterNetwork.networkMaxStamina.Value = UtilityManager.instance.GetMaxStaminaOfEnduranceLevel(player.characterNetwork.networkEndurance.Value);
                 player.characterNetwork.networkCurrentStamina.Value = player.characterNetwork.networkMaxStamina.Value;
             }
         }

@@ -416,10 +416,10 @@ GameObject:
   - component: {fileID: 1484555288959318345}
   - component: {fileID: 5295387080512016554}
   - component: {fileID: 3553019518033098702}
-  - component: {fileID: 839957283574589860}
+  - component: {fileID: 8780231251535454501}
   - component: {fileID: -7928755553758844174}
-  - component: {fileID: 8642818391615806926}
   - component: {fileID: 8770232186266597746}
+  - component: {fileID: 2197411406757362899}
   - component: {fileID: -1286414212495780953}
   - component: {fileID: -7170559448669572277}
   - component: {fileID: -3646811548091956359}
@@ -525,24 +525,27 @@ MonoBehaviour:
   characterController: {fileID: 0}
   characterUIManager: {fileID: 0}
   animator: {fileID: 0}
-  isPerfomingAction: 0
   characterTeam: 1
+  isPerfomingAction: 0
   groundCheckSphereRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   aiCombatManager: {fileID: 0}
+  aiCharacterNetwork: {fileID: 0}
   aiCharacterStatsManager: {fileID: 0}
   aiCharacterAnimatorManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterName: Dummy
+  vitalityLevel: 20
   currentState: {fileID: 0}
   idleState: {fileID: 11400000, guid: 4b41a4c1546724e4493e3bfdc4822630, type: 2}
   pursueTargetState: {fileID: 11400000, guid: 68560afe81d22f847b8dae8202bc6837, type: 2}
   combatStanceState: {fileID: 11400000, guid: 9f333fd393afe604ba281f83ef267eda, type: 2}
   attackState: {fileID: 11400000, guid: 4b10ade022cbc864fbe3b4f912ff839c, type: 2}
   navMeshAgent: {fileID: 0}
---- !u!114 &839957283574589860
+--- !u!114 &8780231251535454501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,9 +554,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1716552696387414296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17257eea60ffe8243acb51f04420b7a1, type: 3}
+  m_Script: {fileID: 11500000, guid: b6dcceda1756fc64e9089b64b32188a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterNetworkManager
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterNetworkManager
   ShowTopMostFoldoutHeaderGroup: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
@@ -592,7 +595,9 @@ MonoBehaviour:
     m_InternalValue: 0
   networkIsRipostable:
     m_InternalValue: 0
-  networkIsBeingRiposted:
+  networkIsBeingCriticallyDamaged:
+    m_InternalValue: 0
+  networkIsParrying:
     m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
@@ -634,18 +639,6 @@ MonoBehaviour:
   canRotate: 1
   canMove: 1
   rotationSpeed: 0.2
---- !u!114 &8642818391615806926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716552696387414296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcfd1b7ccd3097418e1f3ba702df3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterInventoryManager
 --- !u!114 &8770232186266597746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +651,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2400bb96901b8334da29c6ff16c392a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterEquipmentManager
+--- !u!114 &2197411406757362899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716552696387414296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d15c03e30fc0f429073f656afbb79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterInventoryManager
+  doesDropItemOnDeath: 1
+  itemsItCanDrop:
+  - {fileID: 11400000, guid: 61febb5dc42211f4f9ba4e4a91c8c4b0, type: 2}
+  - {fileID: 11400000, guid: b63649a4c4c08d64fa0434cd1090d6cb, type: 2}
+  - {fileID: 11400000, guid: 923ec18e26a2b4e42a1ceadc7bd4b784, type: 2}
+  - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
+  chanceToDrop: 1
 --- !u!114 &-1286414212495780953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,8 +685,12 @@ MonoBehaviour:
   lockOnTransform: {fileID: 0}
   staminaNeededForCurrentAction: 0
   currentTarget: {fileID: 0}
-  riposteDistance: 0.7
   pendingCriticalDamage: 0
+  riposteDistance: 0.7
+  riposteTargetPosition: {fileID: 0}
+  isBackstabable: 1
+  backstabDistance: 0.7
+  backstabTargetPosition: {fileID: 0}
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
   lastAttackAnimationPerfomed: 
@@ -749,10 +765,10 @@ MonoBehaviour:
   poiseResetTimer: 0
   poiseResetTime: 8
   totalPoiseDamage: 0
-  basePoiseOffense: 0
+  basePoiseOffense: 35
   bonusAttackingPoiseOffense: 0
   ignorePosture: 0
-  maxPosture: 150
+  maxPosture: 80
   currentPosture: 0
   postureRegenPerSecond: 15
   postureRegenTime: 8

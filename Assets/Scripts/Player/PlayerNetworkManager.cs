@@ -1,7 +1,6 @@
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace FG
 {
@@ -91,19 +90,6 @@ namespace FG
         public void OnIsMaleChanged(bool oldValue, bool newValue)
         {
             player.playerBodyManager.SwapGender(newValue);
-        }
-
-        // STATS
-        public void OnEnduranceValueChanged(int prevEndurance, int newEndurance)
-        {
-            networkMaxStamina.Value = player.playerStatsManager.GetMaxStaminaOfEnduranceLevel(newEndurance);
-            networkCurrentStamina.Value = networkMaxStamina.Value;
-        }
-
-        public void OnVitalityValueChanged(int prevVitality, int newVitality)
-        {
-            networkMaxHealth.Value = player.playerStatsManager.GetMaxHealthOfVitalityLevel(newVitality);
-            networkCurrentHealth.Value = networkMaxHealth.Value;
         }
 
         // WEAPON INFORMATION
@@ -350,7 +336,11 @@ namespace FG
             WeaponItem weapon = ItemDatabase.instance.GetWeaponItemByID(weaponId);
             WeaponAction action = ActionDatabase.instance.GetWeaponActionByID(actionId);
 
-            player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderOH);
+            if (player.playerNetwork.networkIsTwoHanding.Value)
+                player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderTH);
+            else
+                player.playerAnimatorManager.UpdateAnimatorOverrider(weapon.animatorOverriderOH);
+            
             action.TryToPerformAction(player, weapon);
         }
     }

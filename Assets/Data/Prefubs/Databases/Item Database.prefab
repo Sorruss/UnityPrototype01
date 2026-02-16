@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemDatabase
   unarmedWeapon: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  interactableItemPickUp: {fileID: 3578406170392142777, guid: f6747b063b6d3cb44b099f5b0f699ee4, type: 3}
   weaponItems:
   - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   - {fileID: 11400000, guid: cc0a9d4bb8168904f85aa9fea2078e7f, type: 2}

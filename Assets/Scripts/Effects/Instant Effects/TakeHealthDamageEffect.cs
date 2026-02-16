@@ -91,7 +91,6 @@ namespace FG
             if (totalDamage <= 0.0f)
                 totalDamage = 1.0f;
 
-            DebugManager.instance.DamageReceiveLog(totalDamage);
             character.characterStatsManager.DamageHealth(totalDamage);
         }
 
@@ -140,6 +139,9 @@ namespace FG
 
         protected virtual void PlayDamageAnimation(ref CharacterManager character)
         {
+            if (character.characterNetwork.networkIsRipostable.Value)
+                return;
+
             HitDirection hitDirection = HitDirection.FRONT;
 
             #region DETERMINE THE SIDE HIT WAS TAKEN FROM

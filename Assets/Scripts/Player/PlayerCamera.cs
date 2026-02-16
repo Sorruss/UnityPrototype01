@@ -201,6 +201,10 @@ namespace FG
                 if (character.transform.root == player.transform.root)
                     continue;
 
+                // THE SAME TEAM
+                if (!UtilityManager.instance.CanThisTeamDamageThisTeam(player.characterTeam, character.characterTeam))
+                    continue;
+
                 // GET ANGLE TO TARGET AND CHECK
                 Vector3 directionToTarget = character.transform.position - player.transform.position;
                 float angleToTarget = Vector3.Angle(directionToTarget, cameraObject.transform.forward);
@@ -345,10 +349,10 @@ namespace FG
             if (lockOnSwitchCoroutine != null)
                 StopCoroutine(lockOnSwitchCoroutine);
 
-            lockOnSwitchCoroutine = StartCoroutine(WaitAndTrySwitchLockOnTargetEnumerator());
+            lockOnSwitchCoroutine = StartCoroutine(WaitAndTrySwitchLockOnTargetCoroutine());
         }
 
-        private IEnumerator WaitAndTrySwitchLockOnTargetEnumerator()
+        private IEnumerator WaitAndTrySwitchLockOnTargetCoroutine()
         {
             // WAITING UNTIL PLAYER FINISHES AN ACTION
             while (player.isPerfomingAction)

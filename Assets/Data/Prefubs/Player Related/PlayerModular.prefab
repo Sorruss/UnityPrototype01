@@ -71062,6 +71062,12 @@ MonoBehaviour:
     m_InternalValue: 1
   networkIsInvincible:
     m_InternalValue: 0
+  networkIsRipostable:
+    m_InternalValue: 0
+  networkIsBeingCriticallyDamaged:
+    m_InternalValue: 0
+  networkIsParrying:
+    m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
   networkTargetNetworkObejectID:
@@ -71260,13 +71266,13 @@ MonoBehaviour:
   RightHandWeaponScriptable: {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   TwoHandedWeaponScriptable: {fileID: 0}
   LeftHandWeaponScriptables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   RightHandWeaponScriptables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
+  - {fileID: 11400000, guid: a6907672c543c9a43b31519fb99fcc9a, type: 2}
   LeftHandWeaponIndex: 0
   RightHandWeaponIndex: 0
   HeadArmorScriptable: {fileID: 0}
@@ -71377,13 +71383,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerCombatManager
   lockOnTransform: {fileID: 0}
-  currentAttackTypeBeingUsed: 0
-  currentWeaponItemBeingUsed: {fileID: 0}
   staminaNeededForCurrentAction: 0
-  lastAttackAnimationPerfomed: 
   currentTarget: {fileID: 0}
+  pendingCriticalDamage: 0
+  riposteDistance: 0.7
+  riposteTargetPosition: {fileID: 0}
+  isBackstabable: 1
+  backstabDistance: 0.7
+  backstabTargetPosition: {fileID: 0}
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
+  lastAttackAnimationPerfomed: 
+  currentAttackTypeBeingUsed: 0
+  currentWeaponItemBeingUsed: {fileID: 0}
+  lastPoiseDamageTaken: 0
   CanDoComboMainHand: 0
   CanDoComboOffHand: 0
   CanBlock: 1
@@ -71441,7 +71454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerBodyManager
   BodyFeatureHair: {fileID: 6426595749249606196}
-  AllMaleParts: {fileID: 0}
+  AllMaleParts: {fileID: 3048131444120957446}
   BodyFeatureMaleHead: {fileID: 8827182762109145013}
   MaleBody:
   - {fileID: 7406822173356512263}
@@ -71458,7 +71471,7 @@ MonoBehaviour:
   - {fileID: 7204055285272240281}
   BodyFeatureMaleEyebrows: {fileID: 6611956550219463387}
   BodyFeatureFacialHair: {fileID: 7462548804038154016}
-  AllFemaleParts: {fileID: 0}
+  AllFemaleParts: {fileID: 1103091586477236187}
   BodyFeatureFemaleHead: {fileID: 804962107202271328}
   FemaleBody:
   - {fileID: 3872990382174294742}
@@ -71488,6 +71501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FG.PlayerEffectsManager
   activeStaticEffects: []
   bloodSplashVFX: {fileID: 0}
+  criticalBloodSplashVFX: {fileID: 0}
   instantEffect: {fileID: 0}
   takeEffect: 0
 --- !u!114 &7527398401881637431
@@ -71550,8 +71564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22faf39438f503e479eb1b17589020b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterUIManager
-  characterHeathBar: {fileID: 0}
-  showHealthBarOnDamage: 0
+  characterHeathBar: {fileID: 5313454243804319668}
+  showHealthBarOnDamage: 1
 --- !u!143 &6070704085419736245
 CharacterController:
   m_ObjectHideFlags: 0
@@ -75766,6 +75780,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5268506749166432496, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
+      propertyPath: scaleWidthWithMaxValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8600597112260405483, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
       propertyPath: m_Name
       value: Character UI
@@ -75784,3 +75802,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3641003044122998855, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
   m_PrefabInstance: {fileID: 45124516035149636}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5313454243804319668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5268506749166432496, guid: 59ad3461aef9d654aa29523a5ddbccb4, type: 3}
+  m_PrefabInstance: {fileID: 45124516035149636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2492aca34356364dbf3c0a5a986f0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FG.UI_Character_HeathBar

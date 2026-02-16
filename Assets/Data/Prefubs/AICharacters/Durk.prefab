@@ -539,16 +539,16 @@ PrefabInstance:
       addedObject: {fileID: -165312672506224138}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9193702139639898453}
+      addedObject: {fileID: 249224983317644214}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 520710495115620676}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7760284304719697128}
+      addedObject: {fileID: 1538033688166657594}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1538033688166657594}
+      addedObject: {fileID: -3711887947828227254}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc44fa77f59d17f428603fe944be54d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6236520520618887811}
@@ -1262,15 +1262,17 @@ MonoBehaviour:
   characterController: {fileID: 0}
   characterUIManager: {fileID: 0}
   animator: {fileID: 0}
-  isPerfomingAction: 0
   characterTeam: 1
+  isPerfomingAction: 0
   groundCheckSphereRadius: 0.4
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   aiCombatManager: {fileID: 0}
+  aiCharacterNetwork: {fileID: 0}
   aiCharacterStatsManager: {fileID: 0}
   aiCharacterAnimatorManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterName: Durk, The Main And Only Boss
   currentState: {fileID: 0}
@@ -1297,7 +1299,7 @@ MonoBehaviour:
   relatedFogWalls: []
   durkCombatManager: {fileID: 0}
   durkSFXManager: {fileID: 0}
---- !u!114 &9193702139639898453
+--- !u!114 &249224983317644214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1306,9 +1308,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8800166971466407635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17257eea60ffe8243acb51f04420b7a1, type: 3}
+  m_Script: {fileID: 11500000, guid: b6dcceda1756fc64e9089b64b32188a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterNetworkManager
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterNetworkManager
   ShowTopMostFoldoutHeaderGroup: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
@@ -1349,6 +1351,8 @@ MonoBehaviour:
     m_InternalValue: 0
   networkIsBeingCriticallyDamaged:
     m_InternalValue: 0
+  networkIsParrying:
+    m_InternalValue: 0
   networkIsLockedOn:
     m_InternalValue: 0
   networkTargetNetworkObejectID:
@@ -1362,9 +1366,9 @@ MonoBehaviour:
   networkStrengthModifier:
     m_InternalValue: 0
   networkMaxHealth:
-    m_InternalValue: 200
+    m_InternalValue: 0
   networkCurrentHealth:
-    m_InternalValue: 200
+    m_InternalValue: 0
   networkMaxStamina:
     m_InternalValue: 0
   networkCurrentStamina:
@@ -1389,18 +1393,6 @@ MonoBehaviour:
   canRotate: 1
   canMove: 1
   rotationSpeed: 0.2
---- !u!114 &7760284304719697128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8800166971466407635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcfd1b7ccd3097418e1f3ba702df3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FG.CharacterInventoryManager
 --- !u!114 &1538033688166657594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,6 +1405,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2400bb96901b8334da29c6ff16c392a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterEquipmentManager
+--- !u!114 &-3711887947828227254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800166971466407635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d15c03e30fc0f429073f656afbb79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FG.AICharacterInventoryManager
+  doesDropItemOnDeath: 0
+  itemsItCanDrop: []
+  chanceToDrop: 0.1
 --- !u!114 &-6236520520618887811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,10 +1435,12 @@ MonoBehaviour:
   lockOnTransform: {fileID: 0}
   staminaNeededForCurrentAction: 0
   currentTarget: {fileID: 0}
-  riposteDistance: 0.7
   pendingCriticalDamage: 0
+  riposteDistance: 0.7
+  riposteTargetPosition: {fileID: 0}
   isBackstabable: 0
   backstabDistance: 0.7
+  backstabTargetPosition: {fileID: 0}
   isAllowedToDoRollAttack: 0
   isAllowedToDoBackstepAttack: 0
   lastAttackAnimationPerfomed: 
@@ -1511,7 +1520,7 @@ MonoBehaviour:
   poiseResetTimer: 0
   poiseResetTime: 8
   totalPoiseDamage: 0
-  basePoiseOffense: 0
+  basePoiseOffense: 80
   bonusAttackingPoiseOffense: 0
   ignorePosture: 1
   maxPosture: 150

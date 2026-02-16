@@ -133,6 +133,9 @@ namespace FG
 
             BossDefeated();
 
+            // DISABLE DAMAGE COLLIDERS
+            characterCombatManager.DisableAllDamageColliders();
+
             // Play SFX death sound.
             characterSFXManager.PlayAudioClip(SFXManager.instance.GetRandomSFX(ref characterSFXManager.deathGrunts));
 

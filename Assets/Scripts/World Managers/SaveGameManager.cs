@@ -111,6 +111,18 @@ namespace FG
             return saveFileManager.LoadFile();
         }
 
+        public CharacterSaveData GetDefaultCharacterData()
+        {
+            CharacterSaveData characterSaveData = new CharacterSaveData();
+            characterSaveData.vitalityLevel = 10;
+            characterSaveData.enduranceLevel = 10;
+            characterSaveData.strengthLevel = 5;
+            characterSaveData.currentHealth = UtilityManager.instance.GetMaxHealthOfVitalityLevel(characterSaveData.vitalityLevel);
+            characterSaveData.currentStamina = UtilityManager.instance.GetMaxStaminaOfEnduranceLevel(characterSaveData.enduranceLevel);
+
+            return characterSaveData;
+        }
+
         // OTHER FUNCTIONALITY.
         public void LoadWorldScene(int sceneBuildIndex)
         {

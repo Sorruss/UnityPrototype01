@@ -57,10 +57,10 @@ namespace FG
         public int rightHandWeaponQuickSlotIndex;
 
         // ARMOR
-        public int headArmorID;
-        public int chestArmorID;
-        public int handArmorID;
-        public int legArmorID;
+        public int headArmorID = -1;
+        public int chestArmorID = -1;
+        public int handArmorID = -1;
+        public int legArmorID = -1;
 
         // WORLD ITEMS
         public SerializableDictionary<int, bool> worldItemsIDs;     // INT - ID, BOOL - IF WAS PICKED UP

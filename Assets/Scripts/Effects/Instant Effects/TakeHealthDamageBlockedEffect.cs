@@ -112,7 +112,6 @@ namespace FG
             if (totalDamage <= 0.0f)
                 totalDamage = 1.0f;
 
-            DebugManager.instance.DamageBlockedReceiveLog(totalDamage);
             character.characterStatsManager.DamageHealth(totalDamage);
         }
 

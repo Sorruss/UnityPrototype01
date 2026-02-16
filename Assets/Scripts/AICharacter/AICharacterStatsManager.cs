@@ -4,6 +4,8 @@ namespace FG
 {
     public class AICharacterStatsManager : CharacterStatsManager
     {
+        private AICharacterManager aiCharacter;
+
         [Header("Posture")]
         [SerializeField] private bool ignorePosture = false;
         [SerializeField] private int maxPosture = 150;
@@ -15,10 +17,18 @@ namespace FG
 
         // ------------
         // UNITY EVENTS
+        protected override void Awake()
+        {
+            base.Awake();
+
+            aiCharacter = GetComponent<AICharacterManager>();
+        }
+        
         protected override void Start()
         {
             base.Start();
 
+            // POSTURE
             currentPosture = maxPosture;
         }
 
@@ -80,11 +90,18 @@ namespace FG
                     UtilityManager.instance.GetDamageIntensityBasedOnPoiseDamage(
                         character.characterCombatManager.lastPoiseDamageTaken);
 
-                // SO IT FEELS BETTER
+                // THE TIMES WHEN WE DON'T NEED TO MAKE CHARACTER RIPOSTABLE
+                // WHEN IT'S A HUGE ASS ATTACK WHICH THROWS CHARACTER INTO THE AIR
+                // SO IT PLAYS THE NICE ANIMATION INSTEAD OF BEING STUGGERED
                 if (lastDamageIntensity == DamageIntensity.Colossal)
                     currentPosture = 1;
 
+                // WHEN CHARACTER IS ALREADY BEING RIPOSTED AND TAKES DAMAGE
                 if (character.characterNetwork.networkIsBeingCriticallyDamaged.Value)
+                    currentPosture = 1;
+
+                // WHEN CHARACTER IS RIPOSTABLE AND TAKES DAMAGE
+                if (character.characterNetwork.networkIsRipostable.Value)
                     currentPosture = 1;
             }
         }

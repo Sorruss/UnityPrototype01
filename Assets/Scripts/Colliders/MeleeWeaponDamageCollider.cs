@@ -39,6 +39,12 @@ namespace FG
             if (damageTarget.NetworkObjectId == damageDealer.NetworkObjectId)
                 return;
 
+            if (damageTarget.characterNetwork.networkIsInvincible.Value)
+                return;
+
+            if (!UtilityManager.instance.CanThisTeamDamageThisTeam(damageDealer.characterTeam, damageTarget.characterTeam))
+                return;
+
             // REQUIRED INFORMATION.
             contactPoint = damageTarget.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             Vector3 vectorToDamageDealer = damageDealer.transform.position - damageTarget.transform.position;
@@ -64,14 +70,15 @@ namespace FG
             if (damageDealer == null)
                 return false;
 
+            if (!target.IsOwner)
+                return false;
+
             // PARRY LOGIC
-            damageDealer.characterAnimatorManager.PerformInstantAnimationAction("Parry_Victim_01", true);
+            target.characterNetwork.NotifyClientOfBeingParriedServerRpc(damageDealer.NetworkObjectId);
             target.characterAnimatorManager.PerformInstantAnimationAction("Parry_Land_01", true);
 
             // ENDING
             collidedIDs.Add(target.NetworkObjectId);
-            DisableCollider();
-
             return true;
         }
 

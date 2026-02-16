@@ -67,28 +67,15 @@ namespace FG
             
         }
 
-        // -----------------------------
-        // CONVERTERS FROM LEVEL TO STAT
-        public int GetMaxStaminaOfEnduranceLevel(int endurance)
-        {
-            int maxStamina = endurance * 10;
-            return maxStamina;
-        }
-
-        public int GetMaxHealthOfVitalityLevel(int vitality)
-        {
-            int maxVitality = vitality * 10;
-            return maxVitality;
-        }
-
         // -------------
-        // HEATLH DAMAGE
+        // HEALTH DAMAGE
         public void DamageHealth(float damage)
         {
             if (damage > character.characterNetwork.networkCurrentHealth.Value)
                 damage = character.characterNetwork.networkCurrentHealth.Value;
 
-            character.characterNetwork.networkCurrentHealth.Value -= damage;
+            if (character.IsOwner)
+                character.characterNetwork.networkCurrentHealth.Value -= damage;
         }
 
         // -------------

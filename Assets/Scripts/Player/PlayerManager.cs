@@ -46,7 +46,6 @@ namespace FG
 
             playerLocomotion.HandleAllMovement();
             playerStatsManager.RecoverStamina();
-            playerStatsManager.HandlePoiseReset();
         }
 
         protected override void LateUpdate()
@@ -66,6 +65,7 @@ namespace FG
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnectedCallback;
 
@@ -88,10 +88,14 @@ namespace FG
             SetupUI_Health();
 
             // PLAYER INFORMATION
+            playerNetwork.OnIsMaleChanged(false, playerNetwork.networkIsMale.Value);
             playerNetwork.networkIsMale.OnValueChanged += playerNetwork.OnIsMaleChanged;
 
             // CHANGE WIELDING WEAPON UPON ID CHANGE
+            playerNetwork.OnLeftHandWeaponIDChanged(0, playerNetwork.networkLeftHandWeaponID.Value);
             playerNetwork.networkLeftHandWeaponID.OnValueChanged += playerNetwork.OnLeftHandWeaponIDChanged;
+            
+            playerNetwork.OnRightHandWeaponIDChanged(0, playerNetwork.networkRightHandWeaponID.Value);
             playerNetwork.networkRightHandWeaponID.OnValueChanged += playerNetwork.OnRightHandWeaponIDChanged;
 
             // LOCK ON
@@ -109,15 +113,22 @@ namespace FG
             playerNetwork.networkIsTwoHandingRightWeapon.OnValueChanged += playerNetwork.OnIsTwoHandingRightWeaponChanged;
 
             // ARMOR
+            playerNetwork.OnArmorLegginsIDChanged(0, playerNetwork.networkArmorLegginsID.Value);
             playerNetwork.networkArmorHelmetID.OnValueChanged += playerNetwork.OnArmorHelmetIDChanged;
+            
+            playerNetwork.OnArmorChestplateIDChanged(0, playerNetwork.networkArmorChestplateID.Value);
             playerNetwork.networkArmorChestplateID.OnValueChanged += playerNetwork.OnArmorChestplateIDChanged;
+            
+            playerNetwork.OnArmorGauntletsIDChanged(0, playerNetwork.networkArmorGauntletsID.Value);
             playerNetwork.networkArmorGauntletsID.OnValueChanged += playerNetwork.OnArmorGauntletsIDChanged;
+            
+            playerNetwork.OnArmorHelmetIDChanged(0, playerNetwork.networkArmorHelmetID.Value);
             playerNetwork.networkArmorLegginsID.OnValueChanged += playerNetwork.OnArmorLegginsIDChanged;
 
-            // TODO: IF THE OWNER IS A CLIENT (NOT A SERVER), WE NEED TO LOAD HIS DATA
+            // IF THE OWNER IS A CLIENT (NOT A SERVER), WE NEED TO LOAD HIS DATA
             if (IsOwner && !IsServer)
             {
-                //ImportSaveData(SaveGameManager.instance.GetCurrentCharacterData());
+                ImportSaveData(SaveGameManager.instance.GetDefaultCharacterData());
             }
         }
 
@@ -175,6 +186,7 @@ namespace FG
         }
 
         // NETWORK CALLBACKS
+        // IT'S NEEDED SO THE NEWLY JOINED PLAYER LOADS UP OTHER PLAYERS VALUES TO SYNC
         private void OnClientConnectedCallback(ulong clientID)
         {
             GameSessionManager.instance.AddPlayerToList(this);
@@ -187,7 +199,7 @@ namespace FG
             {
                 if (player == this)
                     continue;
-                
+
                 player.UpdateThisPlayerNetworkValues();
             }
         }
@@ -272,11 +284,11 @@ namespace FG
             PlayerCamera.instance.AdjustPositionToPlayers();
 
             // Setting up HEALTH values
-            characterNetwork.networkMaxHealth.Value = playerStatsManager.GetMaxHealthOfVitalityLevel(saveData.vitalityLevel);
+            characterNetwork.networkMaxHealth.Value = UtilityManager.instance.GetMaxHealthOfVitalityLevel(saveData.vitalityLevel);
             characterNetwork.networkCurrentHealth.Value = saveData.currentHealth;
 
             // Setting up STAMINA values
-            characterNetwork.networkMaxStamina.Value = playerStatsManager.GetMaxStaminaOfEnduranceLevel(saveData.enduranceLevel);
+            characterNetwork.networkMaxStamina.Value = UtilityManager.instance.GetMaxStaminaOfEnduranceLevel(saveData.enduranceLevel);
             characterNetwork.networkCurrentStamina.Value = saveData.currentStamina;
 
             // Weapons quick slots

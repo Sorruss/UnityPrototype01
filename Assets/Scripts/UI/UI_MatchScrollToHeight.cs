@@ -16,7 +16,7 @@ namespace FG
 
         private void Update()
         {
-            if (LoadGameMenu.instance.deleteSaveSlotPopUpActive)
+            if (LoadGameMenu.instance != null && LoadGameMenu.instance.deleteSaveSlotPopUpActive)
                 return;
 
             currentlySelected = EventSystem.current.currentSelectedGameObject;

@@ -33,21 +33,35 @@ namespace FG
 
         public LayerMask GetEnvironmentMasks() => environmentMasks;
 
+        // -----------------------------
+        // CONVERTERS FROM LEVEL TO STAT
+        public int GetMaxStaminaOfEnduranceLevel(int endurance)
+        {
+            int maxStamina = endurance * 10;
+            return maxStamina;
+        }
+
+        public int GetMaxHealthOfVitalityLevel(int vitality)
+        {
+            int maxVitality = vitality * 10;
+            return maxVitality;
+        }
+
         // ----------------
         // HELPER FUNCTIONS
-        public bool CanCharacterAttackThisTargetTeam(CharacterTeam attacker, CharacterTeam target)
+        public bool CanThisTeamDamageThisTeam(CharacterTeam character1, CharacterTeam character2)
         {
-            if (attacker == CharacterTeam.Team01)
+            if (character1 == CharacterTeam.Team01)
             {
-                switch (target)
+                switch (character2)
                 {
                     case CharacterTeam.Team01: return false;
                     case CharacterTeam.Team02: return true;
                 }
             }
-            else if (attacker == CharacterTeam.Team02)
+            else if (character1 == CharacterTeam.Team02)
             {
-                switch (target)
+                switch (character2)
                 {
                     case CharacterTeam.Team01: return true;
                     case CharacterTeam.Team02: return false;

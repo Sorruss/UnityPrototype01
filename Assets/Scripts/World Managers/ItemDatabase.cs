@@ -14,6 +14,7 @@ namespace FG
         // EDITOR VIEWABLE DATA SECTION
         [Header("Special Items")]
         public WeaponMeleeItem unarmedWeapon;
+        public GameObject interactableItemPickUp;
 
         [Header("Weapons")]
         [SerializeField] private List<WeaponItem> weaponItems = new();

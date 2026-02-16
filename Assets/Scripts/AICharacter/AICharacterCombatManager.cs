@@ -44,7 +44,7 @@ namespace FG
                 if (target == aiCharacter)  // SELF-TARGET PREVENTION
                     continue;
 
-                if (!UtilityManager.instance.CanCharacterAttackThisTargetTeam(aiCharacter.characterTeam, target.characterTeam)) // SAME GROUP DAMAGE PREVENTION
+                if (!UtilityManager.instance.CanThisTeamDamageThisTeam(aiCharacter.characterTeam, target.characterTeam)) // SAME GROUP DAMAGE PREVENTION
                     continue;
 
                 Vector3 targetDirection = target.transform.position - aiCharacter.transform.position;

@@ -25,7 +25,7 @@ namespace FG
 
         [HideInInspector] public static LoadGameMenu instance;
 
-        private void Start()
+        private void Awake()
         {
             if (instance == null)
             {
@@ -33,9 +33,12 @@ namespace FG
             }
             else
             {
-                Destroy(instance);
+                Destroy(gameObject);
             }
+        }
 
+        private void Start()
+        {
             saveFileManager = new();
             characterSaveDatas = new CharacterSaveData[SaveGameManager.instance.characterSaveSlots];
             characterSaveSlots = new GameObject[characterSaveDatas.Length];

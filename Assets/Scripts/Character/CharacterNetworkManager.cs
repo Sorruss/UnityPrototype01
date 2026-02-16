@@ -159,7 +159,7 @@ namespace FG
             gameObject.SetActive(newValue);
         }
 
-        public void OnIsDeadChanged(bool oldValue, bool newValue)
+        public virtual void OnIsDeadChanged(bool oldValue, bool newValue)
         {
             character.animator.SetBool("IsDead", newValue);
         }
@@ -192,6 +192,19 @@ namespace FG
             {
                 character.characterCombatManager.currentTarget = null;
             }
+        }
+
+        // STATS
+        public void OnEnduranceValueChanged(int prevEndurance, int newEndurance)
+        {
+            networkMaxStamina.Value = UtilityManager.instance.GetMaxStaminaOfEnduranceLevel(newEndurance);
+            networkCurrentStamina.Value = networkMaxStamina.Value;
+        }
+
+        public void OnVitalityValueChanged(int prevVitality, int newVitality)
+        {
+            networkMaxHealth.Value = UtilityManager.instance.GetMaxHealthOfVitalityLevel(newVitality);
+            networkCurrentHealth.Value = networkMaxHealth.Value;
         }
 
         // STATES LISTENERS.
@@ -673,6 +686,33 @@ namespace FG
 
             if (damageReceiver.IsOwner)
                 damageReceiver.characterNetwork.networkIsInvincible.Value = true;
+        }
+
+        [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+        public void NotifyClientOfBeingParriedServerRpc(ulong damageDealerID)
+        {
+            if (IsServer)
+                NotifyClientOfBeingParriedClientRpc(damageDealerID);
+        }
+
+        [ClientRpc]
+        private void NotifyClientOfBeingParriedClientRpc(ulong damageDealerID)
+        {
+            ApplyBeingParried(damageDealerID);
+        }
+
+        private void ApplyBeingParried(ulong damageDealerID)
+        {
+            CharacterManager damageDealer = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damageDealerID]
+                .gameObject.GetComponent<CharacterManager>();
+
+            if (damageDealer == null)
+                return;
+
+            damageDealer.characterCombatManager.DisableAllDamageColliders();
+
+            if (damageDealer.IsOwner)
+                damageDealer.characterAnimatorManager.PerformInstantAnimationAction("Parry_Victim_01", true);
         }
     }
 }

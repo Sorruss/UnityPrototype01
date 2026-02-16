@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,11 +20,11 @@ namespace FG
         [HideInInspector] public CharacterUIManager characterUIManager;
         [HideInInspector] public Animator animator;
 
+        [Header("Identification")]
+        public CharacterTeam characterTeam;
+
         [Header("Flags")]
         public bool isPerfomingAction = false;
-
-        [Header("Identification")]
-        public CharacterTeam characterTeam = CharacterTeam.Team02;
 
         [Header("Ground Check")]
         [SerializeField] private float groundCheckSphereRadius = 0.2f;
@@ -56,6 +57,11 @@ namespace FG
         {
             HandleNetworkVariables();
             HandleIsGrounded();
+
+            if (!IsOwner)
+                return;
+
+            characterStatsManager.HandlePoiseReset();
         }
 
         protected virtual void LateUpdate()
@@ -65,7 +71,7 @@ namespace FG
 
         protected virtual void FixedUpdate()
         {
-
+            
         }
 
         // -------
@@ -157,17 +163,22 @@ namespace FG
         {
             if (IsOwner)
             {
+                // Reset/set all needed flags.
                 characterNetwork.networkCurrentHealth.Value = 0.0f;
                 characterNetwork.networkIsDead.Value = true;
 
-                // Reset all needed flags.
                 // Do aerial death animation if in air.
                 // Loose souls.
 
                 // DEATH ANIMATION
                 if (!manuallySelectDeathAnimation && !characterNetwork.networkIsBeingCriticallyDamaged.Value)
+                {
                     characterAnimatorManager.PerformAnimationAction("Death_01", true);
+                }
             }
+
+            // DISABLE DAMAGE COLLIDERS
+            characterCombatManager.DisableAllDamageColliders();
 
             // Play SFX death sound.
             characterSFXManager.PlayAudioClip(SFXManager.instance.GetRandomSFX(ref characterSFXManager.deathGrunts));

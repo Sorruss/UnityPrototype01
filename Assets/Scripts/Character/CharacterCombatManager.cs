@@ -121,7 +121,7 @@ namespace FG
                     continue;
 
                 // IF CHARACTERS ARE ON THE SAME TEAM -> RETURN
-                if (!UtilityManager.instance.CanCharacterAttackThisTargetTeam(character.characterTeam, potentialTargetCharacter.characterTeam))
+                if (!UtilityManager.instance.CanThisTeamDamageThisTeam(character.characterTeam, potentialTargetCharacter.characterTeam))
                     continue;
 
                 // IF DEAD -> RETURN
@@ -202,7 +202,7 @@ namespace FG
                     continue;
 
                 // IF CHARACTERS ARE ON THE SAME TEAM -> RETURN
-                if (!UtilityManager.instance.CanCharacterAttackThisTargetTeam(character.characterTeam, potentialTargetCharacter.characterTeam))
+                if (!UtilityManager.instance.CanThisTeamDamageThisTeam(character.characterTeam, potentialTargetCharacter.characterTeam))
                     continue;
 
                 // IF DEAD -> RETURN

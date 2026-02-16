@@ -44,6 +44,9 @@ namespace FG
             if (damageTarget == null)
                 return;
 
+            if (damageTarget.characterNetwork.networkIsInvincible.Value)
+                return;
+
             // NEEDED VALUES
             contactPoint = damageTarget.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             Vector3 vectorToThisCollider = transform.position - damageTarget.transform.position;

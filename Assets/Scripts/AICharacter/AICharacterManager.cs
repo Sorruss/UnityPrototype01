@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 
 namespace FG
 {
@@ -7,12 +8,15 @@ namespace FG
     {
         // MANAGERS
         [HideInInspector] public AICharacterCombatManager aiCombatManager;
+        [HideInInspector] public AICharacterNetworkManager aiCharacterNetwork;
         [HideInInspector] public AICharacterStatsManager aiCharacterStatsManager;
         [HideInInspector] public AICharacterAnimatorManager aiCharacterAnimatorManager;
+        [HideInInspector] public AICharacterInventoryManager aiCharacterInventoryManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
         [Header("Config")]
         public string aiCharacterName;
+        [SerializeField] private int vitalityLevel = 20;
 
         [Header("State Machine (Auto)")]
         public AIState currentState;
@@ -36,8 +40,10 @@ namespace FG
 
             // COMPONENTS INITIALIZATION
             aiCombatManager = GetComponent<AICharacterCombatManager>();
+            aiCharacterNetwork = GetComponent<AICharacterNetworkManager>();
             aiCharacterStatsManager = GetComponent<AICharacterStatsManager>();
             aiCharacterAnimatorManager = GetComponent<AICharacterAnimatorManager>();
+            aiCharacterInventoryManager = GetComponent<AICharacterInventoryManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
         }
 
@@ -72,8 +78,9 @@ namespace FG
                 return;
 
             // HEALTH
-            characterNetwork.networkMaxHealth.Value = 
-                characterStatsManager.GetMaxHealthOfVitalityLevel(20);
+            characterNetwork.networkMaxHealth.Initialize(this);
+            characterNetwork.networkMaxHealth.Value = UtilityManager.instance.GetMaxHealthOfVitalityLevel(vitalityLevel);
+            characterNetwork.networkCurrentHealth.Initialize(this);
             characterNetwork.networkCurrentHealth.Value = characterNetwork.networkMaxHealth.Value;
 
             CheckHealth(0.0f, characterNetwork.networkCurrentHealth.Value);
