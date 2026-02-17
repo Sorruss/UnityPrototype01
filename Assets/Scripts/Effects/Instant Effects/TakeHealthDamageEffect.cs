@@ -60,6 +60,9 @@ namespace FG
             if (character.characterNetwork.networkIsDead.Value) // IF DIED -> NO NEED TO DO ANY OTHER STUFF BELOW
                 return;
 
+            if (character.characterNetwork.networkIsInvincible.Value)
+                return;
+
             DecreasePoise(ref character);
 
             if (playDamageAnimation)        // DAMAGE ANIMATION

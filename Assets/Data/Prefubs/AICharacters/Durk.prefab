@@ -46,7 +46,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1.8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1275,6 +1275,7 @@ MonoBehaviour:
   aiCharacterInventoryManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterName: Durk, The Main And Only Boss
+  vitalityLevel: 20
   currentState: {fileID: 0}
   idleState: {fileID: 11400000, guid: 940cebe440710344d930dc17dad7cc4d, type: 2}
   pursueTargetState: {fileID: 11400000, guid: 5e15cb6f826f07548a7c05958c57d6fd, type: 2}
@@ -1286,8 +1287,6 @@ MonoBehaviour:
   sleepingAnimation: Sleeping_01
   shiftToPhase01Animation: ShiftPhase_01
   shiftToPhase01HealthPercentage: 0.5
-  musicIntro: {fileID: 8300000, guid: 226a462758901194f87619f2d6f3031e, type: 3}
-  musicPhase01: {fileID: 8300000, guid: 22fd7ddcfd1f6dc4288541b1065477cc, type: 3}
   sleepState: {fileID: 11400000, guid: ffacad911cb7bf74db91ad2cce4e8144, type: 2}
   combatStanceStatePhase01: {fileID: 11400000, guid: 7e66a6ddf6721d4468e3def5c50b92d9, type: 2}
   isFightActive:
@@ -1297,6 +1296,7 @@ MonoBehaviour:
   hasBeenDefeated:
     m_InternalValue: 0
   relatedFogWalls: []
+  bossAICharacterSFXManager: {fileID: 0}
   durkCombatManager: {fileID: 0}
   durkSFXManager: {fileID: 0}
 --- !u!114 &249224983317644214
@@ -1611,7 +1611,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1e724b6bd06c0734f87d87d9bbd98d9f, type: 3}
   - {fileID: 8300000, guid: 806210faf7151e745a241cbca58e860c, type: 3}
   deathGrunts: []
-  stepHeight: 0.0085
+  stepHeightWalk: 0.0085
+  stepHeightRun: 0.0085
+  stepHeightSprint: 0.0085
   stepSoundsDirt: []
   stepSoundsTiles:
   - {fileID: 8300000, guid: 1e02edf455fe5bf49955093972b4fb1a, type: 3}
@@ -1622,6 +1624,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2606a1f962b21f24095cb5c8f7954d3f, type: 3}
   - {fileID: 8300000, guid: 0c612f31ccde09a4184c836371266c0f, type: 3}
   - {fileID: 8300000, guid: 867aac62effa3994d8cebfc7bda74913, type: 3}
+  phaseShift01SFX: {fileID: 8300000, guid: cd3979258f859464b91be71dd418e01c, type: 3}
+  musicIntro: {fileID: 8300000, guid: 226a462758901194f87619f2d6f3031e, type: 3}
+  musicPhase01: {fileID: 8300000, guid: 22fd7ddcfd1f6dc4288541b1065477cc, type: 3}
   stompHit:
   - {fileID: 8300000, guid: 0b027fadddfff9243b291e781e9e4c1c, type: 3}
   clubWhoosh:

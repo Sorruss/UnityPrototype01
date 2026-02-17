@@ -36,9 +36,16 @@ namespace FG
 
             // ROTATE/PIVOT AI_CHARATER TOWARDS THE TARGET
             if (aiCharacter.aiCombatManager.doPivot && aiCharacter.aiCombatManager.IsAngleOutOfFOV(aiCharacter.aiCombatManager.angleToTarget))
+            {
+                //Debug.Log("CombatStance, Pivoting");
                 aiCharacter.aiCharacterLocomotionManager.PivotTowardsTarget(aiCharacter);
-            else
+            }
+            
+            if (!aiCharacter.isPerfomingAction)
+            {
+                //Debug.Log("CombatStance, Rotating");
                 aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);
+            }
 
             // PATH BUILDING
             aiCharacter.navMeshAgent.SetDestination(aiCharacter.aiCombatManager.currentTarget.transform.position);

@@ -20,10 +20,6 @@ namespace FG
         [SerializeField] private string shiftToPhase01Animation = "ShiftPhase_01";
         [SerializeField] private float shiftToPhase01HealthPercentage = 0.5f;
 
-        [Header("Music")]
-        [SerializeField] private AudioClip musicIntro;
-        [SerializeField] private AudioClip musicPhase01;
-
         [Header("State Machine")]
         public AIStateSleep sleepState;
         public AIStateCombatStance combatStanceStatePhase01;
@@ -39,6 +35,9 @@ namespace FG
         [Header("Fog Walls")]
         [SerializeField] private List<InteractableFogWall> relatedFogWalls = new List<InteractableFogWall>();
 
+        // RELATED COMPONENTS
+        [HideInInspector] public BossAICharacterSFXManager bossAICharacterSFXManager;
+
         // ------
         // EVENTS
         protected override void Awake()
@@ -46,6 +45,7 @@ namespace FG
             base.Awake();
 
             bossIDint = Convert.ToInt32(bossID);
+            bossAICharacterSFXManager = GetComponent<BossAICharacterSFXManager>();
         }
 
         public override void OnNetworkSpawn()
@@ -210,7 +210,9 @@ namespace FG
 
         private void Phase01Shift()
         {
+            characterNetwork.networkIsInvincible.Value = true;
             characterAnimatorManager.PerformAnimationAction(shiftToPhase01Animation, true);
+            bossAICharacterSFXManager.PlayShiftPhase01SoundFX();
             combatStanceState = combatStanceStatePhase01;
             currentState = combatStanceState;
         }
@@ -226,7 +228,7 @@ namespace FG
             }
 
             // MUSIC LOGIC
-            SFXManager.instance.PlayBossFightMusic(musicIntro, musicPhase01);
+            bossAICharacterSFXManager.PlayBossMusic();
 
             // HEALTH BAR LOGIC
             GameObject healthBarInstance = Instantiate(
@@ -248,7 +250,9 @@ namespace FG
             float neededHealthToShiftToPhase01 = characterNetwork.networkMaxHealth.Value * shiftToPhase01HealthPercentage;
             if (newHealth <= neededHealthToShiftToPhase01)
             {
-                Phase01Shift();
+                // SHIFT TO NEXT PHASE IF WE DIDN'T ALREADY
+                if (combatStanceState != combatStanceStatePhase01)
+                    Phase01Shift();
             }
         }
     }

@@ -28,7 +28,7 @@ namespace FG
         public AudioClip criticalStrikeSFX_01;
         public AudioClip criticalStrikeSFX_02;
 
-        [Header("SFX - Item Pick Up")]
+        [Header("SFX - Interactions")]
         public AudioClip itemPickUpSFX;
 
         [Header("Music - Boss Fight")]

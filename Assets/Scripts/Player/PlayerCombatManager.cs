@@ -196,10 +196,18 @@ namespace FG
             player.playerAnimatorManager.PerformInstantAnimationAction("Backstab_01", true);
         }
 
-        // -----
-        // PARRY
+        // ----------
+        // WEAPON ART
         public WeaponItem GetWeaponToUseWeaponArt()
         {
+            // IF WE ARE TWO HANDING A WEAPON AND IT DOES HAVE AN ART -> IT'S GREAT
+            // IF IT DOESN'T -> RETURN NULL
+            if (player.playerNetwork.networkIsTwoHanding.Value)
+            {
+                // IDK WHAT TO DO YET HERE SO LEAVE IT BE FOR NOW
+                return null;
+            }
+
             // THE IDEA OF BELOW MADNESS -> LEFT WEAPON WEAPON ART TAKES PRIORITY IF IT'S PRESENT
             // OTHERWISE WE LOOK FOR RIGHT ONE
             if (player.playerInventoryManager.LeftHandWeaponScriptable == null)

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace FG
 {
-    public class DurkSFXManager : CharacterSFXManager
+    public class DurkSFXManager : BossAICharacterSFXManager
     {
-        [Header("Special Sounds")]
+        [Header("Durk - Special Sounds")]
         [SerializeField] private AudioClip[] stompHit;
         [SerializeField] private AudioClip[] clubWhoosh;
         [SerializeField] private AudioClip[] clubHitGround;

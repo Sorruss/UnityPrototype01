@@ -23,19 +23,25 @@ namespace FG
                 aiCharacter.navMeshAgent.enabled = true;
 
             // ROTATION
-            if (!aiCharacter.isPerfomingAction)
+            // DO PIVOTING IF POSSIBLE
+            if (aiCharacter.aiCombatManager.doPivot && aiCharacter.aiCombatManager.IsAngleOutOfFOV(aiCharacter.aiCombatManager.angleToTarget))
             {
-                // DO PIVOTING IF POSSIBLE
-                if (aiCharacter.aiCombatManager.doPivot && aiCharacter.aiCombatManager.IsAngleOutOfFOV(aiCharacter.aiCombatManager.angleToTarget))
-                    aiCharacter.aiCharacterLocomotionManager.PivotTowardsTarget(aiCharacter);
-
-                // ROTATE AI_CHARATER TOWARDS THE AGENT IF AI_CHARACTER IS MOVING TOWARDS TARGET
-                else if (aiCharacter.characterNetwork.networkIsMoving.Value)
-                    aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
-
-                // ROTATE AI_CHARATER TOWARDS THE TARGET IF AI_CHARACTER IS NEAR TARGET
-                else if (aiCharacter.aiCombatManager.distanceToTarget < aiCharacter.navMeshAgent.stoppingDistance)
-                    aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);
+                //Debug.Log("PursueState, Pivoting");
+                aiCharacter.aiCharacterLocomotionManager.PivotTowardsTarget(aiCharacter);
+            }
+            
+            // ROTATE AI_CHARATER TOWARDS THE AGENT IF AI_CHARACTER IS MOVING TOWARDS TARGET
+            if (!aiCharacter.isPerfomingAction && aiCharacter.characterNetwork.networkIsMoving.Value)
+            {
+                //Debug.Log("PursueState, Rotating (Agent)");
+                aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
+            }
+            
+            // ROTATE AI_CHARATER TOWARDS THE TARGET IF AI_CHARACTER IS NEAR TARGET
+            if (!aiCharacter.isPerfomingAction && aiCharacter.aiCombatManager.distanceToTarget < aiCharacter.navMeshAgent.stoppingDistance)
+            {
+                //Debug.Log("PursueState, Rotating");
+                aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);
             }
 
             // BUILD A PATH TOWARDS THE TARGET AND FOLLOW IT I GUESS

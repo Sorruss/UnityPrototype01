@@ -11,22 +11,26 @@ namespace FG
 
             float angle = aiCharacter.aiCombatManager.angleToTarget;
 
-            if (angle >= 61.0f && angle <= 110.0f)
+            if (angle >= 61.0f && angle <= 125.0f)
             {
                 aiCharacter.aiCharacterAnimatorManager.PerformAnimationAction("turn_R_90", true);
+                return;
             }
-            else if (angle <= -61.0f && angle >= -110.0f)
+            else if (angle <= -61.0f && angle >= -125.0f)
             {
                 aiCharacter.aiCharacterAnimatorManager.PerformAnimationAction("turn_L_90", true);
+                return;
             }
 
-            if (angle >= 145.0f && angle <= 180.0f)
+            if (angle > 125.0f && angle <= 180.0f)
             {
                 aiCharacter.aiCharacterAnimatorManager.PerformAnimationAction("turn_L_180", true);
+                return;
             }
-            else if (angle <= -145.0f && angle >= -180.0f)
+            else if (angle < -125.0f && angle >= -180.0f)
             {
                 aiCharacter.aiCharacterAnimatorManager.PerformAnimationAction("turn_L_180", true);
+                return;
             }
         }
     }

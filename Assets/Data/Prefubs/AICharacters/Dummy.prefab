@@ -669,6 +669,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b63649a4c4c08d64fa0434cd1090d6cb, type: 2}
   - {fileID: 11400000, guid: 923ec18e26a2b4e42a1ceadc7bd4b784, type: 2}
   - {fileID: 11400000, guid: c29911b2d313ae1409cd216105e8f3ee, type: 2}
+  - {fileID: 11400000, guid: d03ef6c2713c35e46951c06bbb48e503, type: 2}
+  - {fileID: 11400000, guid: 3fb54cb4c74b27f49a5f9fb3c199fed2, type: 2}
   chanceToDrop: 1
 --- !u!114 &-1286414212495780953
 MonoBehaviour:
@@ -844,7 +846,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 418c5242b66faba4a90733b44bad38e0, type: 3}
   attackGrunts: []
   deathGrunts: []
-  stepHeight: 0.03
+  stepHeightWalk: 0.03
+  stepHeightRun: 0.03
+  stepHeightSprint: 0.03
   stepSoundsDirt: []
   stepSoundsTiles:
   - {fileID: 8300000, guid: b6545c26e1a237f48bba2a91a59bb2e9, type: 3}

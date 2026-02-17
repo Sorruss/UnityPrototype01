@@ -5,7 +5,7 @@ namespace FG
 {
     public class CharacterSFXManager : MonoBehaviour
     {
-        private AudioSource audioSource;
+        protected AudioSource audioSource;
 
         [Header("Sounds - Grunts")]
         public AudioClip[] damageGrunts;
@@ -13,7 +13,9 @@ namespace FG
         public AudioClip[] deathGrunts;
 
         [Header("Sounds - Steps")]
-        public float stepHeight = 0.05f;
+        public float stepHeightWalk = 0.042f;
+        public float stepHeightRun = 0.0535f;
+        public float stepHeightSprint = 0.0515f;
         public AudioClip[] stepSoundsDirt;
         public AudioClip[] stepSoundsTiles;
 

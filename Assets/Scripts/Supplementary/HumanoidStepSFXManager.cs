@@ -23,12 +23,18 @@ namespace FG
             if (!character.characterNetwork.networkIsMoving.Value)  // IF NOT MOVING THEN WHY BOTHERING
                 return;
 
+            float stepHeight = character.characterSFXManager.stepHeightRun;
+            if (character.characterNetwork.networkIsSprinting.Value)
+                stepHeight = character.characterSFXManager.stepHeightSprint;
+            else if (character.characterNetwork.networkIsWalking.Value)
+                stepHeight = character.characterSFXManager.stepHeightWalk;
+
             RaycastHit hit;     // LOOK IF LEG IS TOUCHING ANYTHING BELOW IT
             bool didStepOnSomething = Physics.Raycast(
                 transform.position, 
                 character.transform.TransformDirection(Vector3.down), 
                 out hit,
-                character.characterSFXManager.stepHeight, 
+                stepHeight, 
                 UtilityManager.instance.GetEnvironmentMasks());
 
             if (didStepOnSomething && hasPlayedStepSFX) // WE ALREADY PLAYED STEP SFX ON THIS GROUND TOUCH

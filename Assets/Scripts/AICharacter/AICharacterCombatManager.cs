@@ -11,8 +11,8 @@ namespace FG
 
         [Header("Detection")]
         [SerializeField] private float viewDetectionRadius = 5.0f;
-        [SerializeField] private float viewMinAngle = -35.0f;
-        [SerializeField] private float viewMaxAngle = 35.0f;
+        public float viewMinAngle = -35.0f;
+        public float viewMaxAngle = 35.0f;
 
         [Header("Combat Radius")]
         public float combatStateRadius = 5.0f;

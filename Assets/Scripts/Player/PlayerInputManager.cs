@@ -282,13 +282,18 @@ namespace FG
         {
             if (isSprinting && !isLBActionActive)
             {
+                player.playerNetwork.networkIsWalking.Value = false;
                 player.playerLocomotion.HandleSprinting();
             }
         }
 
         private void HandleWalkInput()
         {
-            player.playerNetwork.networkIsWalking.Value = isWalking;
+            if (isWalking)
+            {
+                isWalking = false;
+                player.playerNetwork.networkIsWalking.Value = !player.playerNetwork.networkIsWalking.Value;
+            }
         }
 
         private void HandleDodgeInput()

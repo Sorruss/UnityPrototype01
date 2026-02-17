@@ -17,7 +17,7 @@ MonoBehaviour:
   attackWeight: 25
   actionRecoveryTime: 2
   nextComboAttack: {fileID: 0}
-  minimumAttackDistance: 1
-  maximumAttackDistance: 3
+  minimumAttackDistance: 0.2
+  maximumAttackDistance: 1.7
   minimumFOVNeeded: -30
   maximumFOVNeeded: 30

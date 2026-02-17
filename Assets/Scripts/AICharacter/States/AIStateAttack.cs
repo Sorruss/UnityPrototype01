@@ -29,15 +29,15 @@ namespace FG
             // RESET MOVEMENT VALUES TO 0 JUST IN CASE
             aiCharacter.aiCharacterAnimatorManager.UpdateMovementValues(0.0f, 0.0f);
 
-            // ROTATION
-            aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);
-
             // COMBO
             if (canDoCombo && !hasPerformedCombo && currentAttack.nextComboAttack != null)
             {
                 //hasPerformedCombo = true;
                 //currentAttack.nextComboAttack.TryToPerformAttackAction(aiCharacter);
             }
+
+            // ROTATION
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsTarget(aiCharacter);
 
             if (aiCharacter.isPerfomingAction)
                 return this;

@@ -76,6 +76,7 @@ namespace FG
             // PARRY LOGIC
             target.characterNetwork.NotifyClientOfBeingParriedServerRpc(damageDealer.NetworkObjectId);
             target.characterAnimatorManager.PerformInstantAnimationAction("Parry_Land_01", true);
+            target.characterSFXManager.PlayPostureBreakSoundFX();
 
             // ENDING
             collidedIDs.Add(target.NetworkObjectId);

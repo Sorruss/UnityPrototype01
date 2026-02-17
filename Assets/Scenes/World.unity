@@ -3809,6 +3809,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1205841815858500937, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2270510622065140998, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3172330913
@@ -3823,7 +3827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422716776559240207, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.183
+      value: 8.42
       objectReference: {fileID: 0}
     - target: {fileID: 5422716776559240207, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3831,7 +3835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422716776559240207, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.346
+      value: -8.52
       objectReference: {fileID: 0}
     - target: {fileID: 5422716776559240207, guid: 0d96a740d1e93af40aec6ed788ebbadf, type: 3}
       propertyPath: m_LocalRotation.w

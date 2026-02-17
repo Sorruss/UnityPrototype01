@@ -13,7 +13,7 @@ namespace FG
         {
             if (!aiCharacter.aiCharacterLocomotionManager.canRotate)
                 return;
-
+            
             aiCharacter.transform.rotation = aiCharacter.navMeshAgent.transform.rotation;
         }
 
@@ -21,7 +21,7 @@ namespace FG
         {
             if (!aiCharacter.aiCharacterLocomotionManager.canRotate)
                 return;
-
+            
             // CONFIG DIRECTION PROPERLY
             Vector3 direction = aiCharacter.aiCombatManager.targetDirection;
             direction.y = 0.0f;

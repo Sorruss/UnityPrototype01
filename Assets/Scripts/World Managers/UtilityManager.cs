@@ -93,7 +93,7 @@ namespace FG
         // RIPOSTE
         public Vector3 GetRipostePositionBasedOnWeaponClass(WeaponClass weaponClass)
         {
-            Vector3 position = new Vector3(0.11f, 0.0f, 0.7f);
+            Vector3 position = new Vector3(0.08f, 0.0f, 0.7f);
 
             // ADJUST IT FOR WEAPONS IF NEEDED
             switch (weaponClass)
@@ -130,7 +130,7 @@ namespace FG
         // BACKSTAB
         public Vector3 GetBackstabPositionBasedOnWeaponClass(WeaponClass weaponClass)
         {
-            Vector3 position = new Vector3(0.12f, 0.0f, 0.74f);
+            Vector3 position = new Vector3(0.09f, 0.0f, 0.74f);
 
             // ADJUST IT FOR WEAPONS IF NEEDED
             switch (weaponClass)
